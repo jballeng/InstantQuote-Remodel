@@ -1,0 +1,603 @@
+
+.tooltip {
+	position: relative;
+	display:inline-block;
+	color:#fff;
+	background-color:#00833E;
+	width:20px;
+	height:20px;
+	border-radius:100%;
+	font-size:15px;
+	text-align:center;
+	text-decoration:none;
+
+
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*.help {
+    color:#fff;
+    background-color:#00833E;
+    width:20px;
+    height:20px;
+    display:inline-block;
+    border-radius:100%;
+    font-size:15px;
+    text-align:center;
+    text-decoration:none;
+    -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+    box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+}
+*/
+html {
+	height: 100%;
+	margin: 0;
+}
+body {
+	background: #fff;
+	font-family: sans-serif;
+	line-height:1.2;
+	height: 100%;
+	margin: 0;
+    font-family: 'Poppins', sans-serif;
+	text-align: center;
+}
+
+* {box-sizing: border-box;}
+li {
+	float: left;
+}
+/*
+.collapsible {
+  color: #fff;
+  background-color: #00833E;
+  cursor: pointer;
+  padding: 10px 10px;
+  margin-top:20px;
+  width: 100%;
+  border: 1px solid #00000042;
+  text-align: left;
+  outline: none;
+  transition: 0.4s;
+}
+*/
+.active:hover {
+  background-color: #00000042;
+
+}
+
+.content {
+
+	padding: 0 18px;
+	text-align: left;
+  background-color: #00000042;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+/*
+.collapsible:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+)
+  font-size: 8px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+*/
+/*
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-)
+}
+*/
+
+#wrap {
+	padding: 0rem 0rem;
+	margin: 0rem 10rem 0rem 10rem;
+	height:100%;
+	background-color: #fff;
+}
+
+
+#cost-container {padding: 1.5rem 0rem;}
+#mCost {padding-right: 5rem;}
+#manufacturing_cost {padding-right: 5rem;}
+#final {padding-right: 5rem;}
+#multiple {padding-right: 0rem;}
+#sheetSize {padding-right: 5rem;}
+#blankSize {padding-right: 5rem;}
+#addOn {padding-right: 0rem;}
+
+form {display: inline-block; padding: 20px 20px;}
+
+.btn {
+	margin: 5px 0px;
+	background-color: #00833E;
+	color: white;
+	border: 1px solid white;
+	padding: .75em .75em;
+}
+.dimensions{
+	float: left;
+	padding-top: 200px;
+}
+.btn:hover {
+	background-color: white;
+	color: #00833E;
+	border: 1px solid #00833E;
+}
+.findPan{
+	float: right;
+	padding-top: 150px;
+
+}
+.lastStep{
+	float: left;
+	padding-right: 200px;
+	padding-bottom: 100px;
+	padding-top: 50px;
+}
+
+
+p {
+	font-family: Arial;
+}
+
+
+input:invalid{
+	border-color: red;
+}
+
+canvas {
+	height: auto;
+}
+.myCanvas2{
+	float: right;
+}
+
+#errorMessage {color:red;}
+#errorMaterial {color:red;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #00833E;
+}
+/* Style the buttons inside the tab */
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: black;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 100%;
+}
+.tablink:hover {
+  background-color: #777;
+
+}
+/* Style the tab content */
+.tabcontent {
+	color: black;
+	display: none;
+	padding: 100px 20px;
+	height: 100%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+	padding: 15px;
+}
+
+
+.cube-container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+}
+
+#cube {
+  width: 100%;
+  height: 100%;
+  position: center;
+  -webkit-transform-style: preserve-3d;
+  -webkit-animation: rotatecube 10s infinite;
+
+  -moz-transform-style: preserve-3d;
+  -moz-animation: rotatecube 10s infinite;
+}
+
+#cube div {
+  width: 200px;
+  height: 200px;
+  display: block;
+  position: absolute;
+  border: none;
+  line-height: 200px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+@-webkit-keyframes rotatecube {
+  0% { -webkit-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
+  25% { -webkit-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
+  50% { -webkit-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
+  75% { -webkit-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
+  100% { -webkit-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
+}
+
+@-moz-keyframes rotatecube {
+  0% { -moz-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
+  25% { -moz-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
+  50% { -moz-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
+  75% { -moz-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
+  100% { -moz-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
+}
+
+.front {
+  background: rgba(255,0,0,.5);
+}
+
+.back {
+  background: rgba(0,255,0,.5);
+}
+
+.right {
+  background: rgba(0,0,255,.5);
+}
+
+.left {
+  background: rgba(0,255,255,.5);
+}
+
+.top {
+  background: rgba(255,0,255,.5);
+}
+
+.bottom {
+  background: rgba(255,255,0,.5);
+}
+
+#cube .front  {
+  -webkit-transform: rotateY(0deg ) translateZ( 100px );
+  -moz-transform: rotateY( 0deg ) translateZ( 100px );
+}
+#cube .back {
+  -webkit-transform: rotateX( 180deg ) translateZ( 100px );
+  -moz-transform: rotateX( 180deg ) translateZ( 100px );
+}
+#cube .right  {
+  -webkit-transform: rotateY(  90deg ) translateZ( 100px );
+  -moz-transform: rotateY(  90deg ) translateZ( 100px );
+}
+#cube .left   {
+  -webkit-transform: rotateY( -90deg ) translateZ( 100px );
+  -moz-transform: rotateY( -90deg ) translateZ( 100px );
+}
+#cube .top    {
+  -webkit-transform: rotateX(  90deg ) translateZ( 100px );
+  -moz-transform: rotateX(  90deg ) translateZ( 100px );
+}
+#cube .bottom {
+  -webkit-transform: rotateX( -90deg ) translateZ( 100px );
+  -moz-transform: rotateX( -90deg ) translateZ( 100px );
+}
+
+.swiper {display: none}
+img {vertical-align: middle;}
+
+/* swiper container */
+.swiper-container {
+  max-width: 2000px;
+  position: relative;
+  margin: auto;
+  border: 1px solid #ccc;
+  height: 80%;
+  background-color: white;
+  background-image: url(https://www.killarneymetals.com/upload/customAttachment/iq-bg-img1626973901.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* Position the "back button" to the left */
+.prev{
+	left: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+
+.breadcrumb {
+	/*centering*/
+	display: inline-block;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
+	overflow: hidden;
+	border-radius: 5px;
+	/*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
+	counter-reset: flag;
+	margin: 1rem auto 0 auto;
+}
+
+.breadcrumbItem {
+	text-decoration: none;
+	outline: none;
+	display: block;
+	float: left;
+	font-size: 12px;
+	line-height: 36px;
+	color: white;
+	/*need more margin on the left of links to accomodate the numbers*/
+	padding: 0 10px 0 60px;
+	background: #ccc;
+	background: linear-gradient(#666, #333);
+	position: relative;
+}
+/*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
+.breadcrumbItem:first-child {
+	padding-left: 46px;
+	border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
+}
+.breadcrumbItem:first-child:before {
+	left: 14px;
+}
+.breadcrumbItem:last-child {
+	border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
+	padding-right: 20px;
+}
+
+/*hover/active styles*/
+.breadcrumbItem.active, .breadcrumbItem:hover{
+	background: #333;
+	background: linear-gradient(#333, #000);
+	cursor: pointer;
+}
+.breadcrumbItem.active:after, .breadcrumbItem:hover:after {
+	background: #333;
+	background: linear-gradient(135deg, #333, #000);
+}
+
+/*adding the arrows for the breadcrumbs using rotated pseudo elements*/
+.breadcrumbItem:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: -18px; /*half of square's length*/
+	/*same dimension as the line-height of .breadcrumb a */
+	width: 36px;
+	height: 36px;
+	/*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
+	length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
+	if diagonal required = 1; length = 1/1.414 = 0.707*/
+	transform: scale(0.707) rotate(45deg);
+	/*we need to prevent the arrows from getting buried under the next link*/
+	z-index: 1;
+	/*background same as links but the gradient will be rotated to compensate with the transform applied*/
+	background: #666;
+	background: linear-gradient(135deg, #666, #333);
+	/*stylish arrow design using box shadow*/
+	box-shadow:
+		2px -2px 0 2px rgba(0, 0, 0, 0.4),
+		3px -3px 0 2px rgba(255, 255, 255, 0.1);
+	/*
+		5px - for rounded arrows and
+		50px - to prevent hover glitches on the border created using shadows*/
+	border-radius: 0 5px 0 50px;
+}
+/*we dont need an arrow after the last link*/
+.breadcrumbItem:last-child:after {
+	content: none;
+}
+/*we will use the :before element to show numbers*/
+.breadcrumbItem:before {
+	content: counter(flag);
+	counter-increment: flag;
+	/*some styles now*/
+	border-radius: 100%;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	margin: 8px 0;
+	position: absolute;
+	top: 0;
+	left: 30px;
+	background: #444;
+	background: linear-gradient(#444, #222);
+	font-weight: bold;
+}
+
+/* The container */
+.radio-btn-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio-btn-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radio-btn-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-btn-container:hover input ~ .radio-btn-checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-btn-container input:checked ~ .radio-btn-checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radio-btn-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-btn-container input:checked ~ .radio-btn-checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-btn-container .radio-btn-checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+		#wrap {margin: 0;}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	#wrap {margin: 0;}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}

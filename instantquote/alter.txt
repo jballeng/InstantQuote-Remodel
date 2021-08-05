@@ -1,0 +1,2 @@
+ALTER TABLE `ps_product`     ADD COLUMN `is_customized` TINYINT(1) DEFAULT '0' NULL AFTER `lead_time`;
+ALTER TABLE `ps_product`     ADD COLUMN `shape_id` INT NULL AFTER `is_iq_genarated`,    CHANGE `is_customized` `is_iq_genarated` TINYINT(1) DEFAULT '0' NULL ;
