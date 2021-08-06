@@ -1,10 +1,12 @@
 # InstantQuote-Remodel
+Below is a brief screen recording of new module functionality and style.
+https://www.loom.com/share/14f7fc5b950549758378065f190e4195
 
-Purpose:
+# Purpose:
 
 Through development of a better pricing system for the instantquote, a pivot was made changing the needs of this module. This development has become a find your pan application that incorporates the quoting system along with it. We would like to make this module accessible on the home page of killarney metals in the second or third block position to help route customers to their desired pan in a new way. The goal of this is to allow the user to enter their basic needs for a pan then be directed to a selection of our stock pans that match their needs, along with the option to build their own custom pan.
 
-Development:
+# Development:
 
 For the development the original instantquote module was edited rather than making an entirely new module. For the most part nothing was changed in the module, besides adding new javascript, css and tpl files, the other changes and their files are listed below.
 
@@ -23,7 +25,7 @@ CSS and JavaScript:
 -	draw.js and findAPan.css were added into the module for new design and added functionality
 
 
-New JavaScript Functionality:
+# New JavaScript Functionality:
 
 The major addition to this module has been within the draw.js file. All newly developed functionality is included in there and ranges from handling changes in tabs, redirecting to the final page, after completing the form, and the custom quoting. Below is a list of the key functions used. The pricing functionality is currently within this file but will be moved into the KmPanCostProcessor.php file soon to retain as much of the original pricing functionality as possible
 
