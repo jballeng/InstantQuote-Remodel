@@ -93,7 +93,7 @@ class instantquotePriceEngineModuleFrontController extends ModuleFrontController
                 $this->context->smarty->assign('shapeClassData', $shapeClassData);
                 $this->context->smarty->assign(array('material_types' => $material_types_list, 'shapeInputsData' => $shapeInputsData));
                 //$this->setTemplate('instantquote.tpl');
-                $this->smartyOutputContent($this->getTemplatePath() . 'jake.tpl');
+                $this->smartyOutputContent($this->getTemplatePath() . 'findAPan.tpl');
             } else if ($post_methode == 'productSku') {
                 $jsondata = false;
 

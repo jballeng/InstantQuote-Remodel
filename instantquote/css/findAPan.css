@@ -1,5 +1,5 @@
 
-.tooltip {
+.jb_tooltip {
 	position: relative;
 	display:inline-block;
 	color:#fff;
@@ -13,23 +13,25 @@
 
 
 }
-.tooltip .tooltiptext {
+.jb_tooltip .jb_tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 250px;
   background-color: #555;
   color: #fff;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
+
   position: absolute;
   z-index: 1;
-  bottom: 125%;
-  left: 50%;
+  top: -150%;
+  left: 500%;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
 }
-.tooltip .tooltiptext::after {
+/*arrow thingy*/
+.jb_tooltip .jb_tooltiptext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -39,28 +41,13 @@
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-.tooltip:hover .tooltiptext {
+.jb_tooltip:hover .jb_tooltiptext {
   visibility: visible;
   opacity: 1;
 }
 
-/*.help {
-    color:#fff;
-    background-color:#00833E;
-    width:20px;
-    height:20px;
-    display:inline-block;
-    border-radius:100%;
-    font-size:15px;
-    text-align:center;
-    text-decoration:none;
-    -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
-    -moz-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
-    box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
-}
-*/
 html {
-	height: 100%;
+
 	margin: 0;
 }
 body {
@@ -77,20 +64,7 @@ body {
 li {
 	float: left;
 }
-/*
-.collapsible {
-  color: #fff;
-  background-color: #00833E;
-  cursor: pointer;
-  padding: 10px 10px;
-  margin-top:20px;
-  width: 100%;
-  border: 1px solid #00000042;
-  text-align: left;
-  outline: none;
-  transition: 0.4s;
-}
-*/
+
 .active:hover {
   background-color: #00000042;
 
@@ -106,22 +80,8 @@ li {
   transition: max-height 0.3s ease-out;
 }
 
-/*
-.collapsible:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+)
-  font-size: 8px;
-  color: #777;
-  float: right;
-  margin-left: 5px;
-}
-*/
-/*
-.active:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-)
-}
-*/
 
-#wrap {
+#jb_wrap {
 	padding: 0rem 0rem;
 	margin: 0rem 10rem 0rem 10rem;
 	height:100%;
@@ -183,6 +143,7 @@ canvas {
 }
 .myCanvas2{
 	float: right;
+	position: relative;
 }
 
 #errorMessage {color:red;}
@@ -193,6 +154,8 @@ canvas {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #00833E;
+	width: 100%;
+
 }
 /* Style the buttons inside the tab */
 
@@ -209,12 +172,12 @@ canvas {
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: black;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: black;
 }
 /* Style tab links */
 .tablink {
@@ -236,7 +199,7 @@ canvas {
 .tabcontent {
 	color: black;
 	display: none;
-	padding: 100px 20px;
+	padding: 0px 20px;
 	height: 100%;
 }
 
@@ -248,113 +211,17 @@ th, td {
 	padding: 15px;
 }
 
-
-.cube-container {
-  width: 200px;
-  height: 200px;
-  position: relative;
-  -webkit-perspective: 1000px;
-  -moz-perspective: 1000px;
-}
-
-#cube {
-  width: 100%;
-  height: 100%;
-  position: center;
-  -webkit-transform-style: preserve-3d;
-  -webkit-animation: rotatecube 10s infinite;
-
-  -moz-transform-style: preserve-3d;
-  -moz-animation: rotatecube 10s infinite;
-}
-
-#cube div {
-  width: 200px;
-  height: 200px;
-  display: block;
-  position: absolute;
-  border: none;
-  line-height: 200px;
-  text-align: center;
-  font-size: 50px;
-  font-weight: bold;
-}
-
-@-webkit-keyframes rotatecube {
-  0% { -webkit-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
-  25% { -webkit-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
-  50% { -webkit-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
-  75% { -webkit-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
-  100% { -webkit-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
-}
-
-@-moz-keyframes rotatecube {
-  0% { -moz-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
-  25% { -moz-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
-  50% { -moz-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
-  75% { -moz-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
-  100% { -moz-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
-}
-
-.front {
-  background: rgba(255,0,0,.5);
-}
-
-.back {
-  background: rgba(0,255,0,.5);
-}
-
-.right {
-  background: rgba(0,0,255,.5);
-}
-
-.left {
-  background: rgba(0,255,255,.5);
-}
-
-.top {
-  background: rgba(255,0,255,.5);
-}
-
-.bottom {
-  background: rgba(255,255,0,.5);
-}
-
-#cube .front  {
-  -webkit-transform: rotateY(0deg ) translateZ( 100px );
-  -moz-transform: rotateY( 0deg ) translateZ( 100px );
-}
-#cube .back {
-  -webkit-transform: rotateX( 180deg ) translateZ( 100px );
-  -moz-transform: rotateX( 180deg ) translateZ( 100px );
-}
-#cube .right  {
-  -webkit-transform: rotateY(  90deg ) translateZ( 100px );
-  -moz-transform: rotateY(  90deg ) translateZ( 100px );
-}
-#cube .left   {
-  -webkit-transform: rotateY( -90deg ) translateZ( 100px );
-  -moz-transform: rotateY( -90deg ) translateZ( 100px );
-}
-#cube .top    {
-  -webkit-transform: rotateX(  90deg ) translateZ( 100px );
-  -moz-transform: rotateX(  90deg ) translateZ( 100px );
-}
-#cube .bottom {
-  -webkit-transform: rotateX( -90deg ) translateZ( 100px );
-  -moz-transform: rotateX( -90deg ) translateZ( 100px );
-}
-
 .swiper {display: none}
 img {vertical-align: middle;}
 
 /* swiper container */
 .swiper-container {
   max-width: 2000px;
+	height: 600px;
   position: relative;
   margin: auto;
   border: 1px solid #ccc;
-  height: 80%;
+	font-size: 22px;
   background-color: white;
   background-image: url(https://www.killarneymetals.com/upload/customAttachment/iq-bg-img1626973901.jpg);
   background-repeat: no-repeat;
@@ -420,7 +287,7 @@ img {vertical-align: middle;}
 }
 
 
-.breadcrumb {
+.jb_breadcrumb {
 	/*centering*/
 	display: inline-block;
 	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
@@ -429,9 +296,11 @@ img {vertical-align: middle;}
 	/*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
 	counter-reset: flag;
 	margin: 1rem auto 0 auto;
+	color: white;
+
 }
 
-.breadcrumbItem {
+.jb_breadcrumbItem {
 	text-decoration: none;
 	outline: none;
 	display: block;
@@ -441,36 +310,37 @@ img {vertical-align: middle;}
 	color: white;
 	/*need more margin on the left of links to accomodate the numbers*/
 	padding: 0 10px 0 60px;
-	background: #ccc;
-	background: linear-gradient(#666, #333);
+	background: #00833E;
+	background: linear-gradient(#006e34, #00833E);
+	/*background: linear-gradient(#666, #333);*/
 	position: relative;
 }
 /*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
-.breadcrumbItem:first-child {
+.jb_breadcrumbItem:first-child {
 	padding-left: 46px;
 	border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
 }
-.breadcrumbItem:first-child:before {
+.jb_breadcrumbItem:first-child:before {
 	left: 14px;
 }
-.breadcrumbItem:last-child {
+.jb_breadcrumbItem:last-child {
 	border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
 	padding-right: 20px;
 }
 
 /*hover/active styles*/
-.breadcrumbItem.active, .breadcrumbItem:hover{
+.jb_breadcrumbItem.active, .jb_breadcrumbItem:hover{
 	background: #333;
 	background: linear-gradient(#333, #000);
 	cursor: pointer;
 }
-.breadcrumbItem.active:after, .breadcrumbItem:hover:after {
+.jb_breadcrumbItem.active:after, .jb_breadcrumbItem:hover:after {
 	background: #333;
 	background: linear-gradient(135deg, #333, #000);
 }
 
 /*adding the arrows for the breadcrumbs using rotated pseudo elements*/
-.breadcrumbItem:after {
+.jb_breadcrumbItem:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -485,8 +355,9 @@ img {vertical-align: middle;}
 	/*we need to prevent the arrows from getting buried under the next link*/
 	z-index: 1;
 	/*background same as links but the gradient will be rotated to compensate with the transform applied*/
-	background: #666;
-	background: linear-gradient(135deg, #666, #333);
+	background: #00833E;
+	background: linear-gradient(#006e34, #00833E);
+	/*background: linear-gradient(135deg, #666, #333);*/
 	/*stylish arrow design using box shadow*/
 	box-shadow:
 		2px -2px 0 2px rgba(0, 0, 0, 0.4),
@@ -497,11 +368,11 @@ img {vertical-align: middle;}
 	border-radius: 0 5px 0 50px;
 }
 /*we dont need an arrow after the last link*/
-.breadcrumbItem:last-child:after {
+.jb_breadcrumbItem:last-child:after {
 	content: none;
 }
 /*we will use the :before element to show numbers*/
-.breadcrumbItem:before {
+.jb_breadcrumbItem:before {
 	content: counter(flag);
 	counter-increment: flag;
 	/*some styles now*/
@@ -516,6 +387,7 @@ img {vertical-align: middle;}
 	background: #444;
 	background: linear-gradient(#444, #222);
 	font-weight: bold;
+	color: white;
 }
 
 /* The container */
@@ -584,12 +456,12 @@ img {vertical-align: middle;}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-		#wrap {margin: 0;}
+		#jb_wrap {margin: 0;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-	#wrap {margin: 0;}
+	#jb_wrap {margin: 0;}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

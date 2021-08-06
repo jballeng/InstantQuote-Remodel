@@ -23,7 +23,7 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 
-
+//validates the users inputs. form will not be submitted if an error occurs
 function validateForm(length, width, height, diameter, material, thickness){
   var hemWidth = 0.5;
   //BL is the blank or true length needed for sheet sizes
@@ -149,6 +149,7 @@ function showFront(){
     document.getElementById("right").style.display = "inline";
   }
 }
+//ensures that in the event a hole is needed that its diameter cannot be more than the height of the pan
 function validateDiameter(diameter, height){
 
   if(diameter > height){
@@ -334,6 +335,7 @@ function draw(width, length, height, gauge, material){
   ctx.fillText("KM-" + length + "-" + width + "-" + height + "-" + gauge, 875, 800);
 
 }
+//accepts altered values for hole location in order to draw its position to scale in the correct location
 function drawHole(d1, d2, d3, d4, d5, d6, d7){
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
@@ -420,6 +422,7 @@ function drawHole(d1, d2, d3, d4, d5, d6, d7){
     }
   }
 }
+//Seperate from the draw function to draw the height side of the pan
 function drawHeight(x, y){
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
@@ -497,6 +500,7 @@ function download(){
   link.href = document.getElementById("myCanvas").toDataURL();
   return link.click();
 }
+//Accepts user input and chooses the correct sheet size needed for their pan and calculates that cost
 function sheetCost(length, width, height, thickness, material, quantity){
   var hemWidth = 0.5;
   var sheet;
@@ -654,6 +658,7 @@ function sheetCost(length, width, height, thickness, material, quantity){
 
   return material_cost;
 }
+//in the event the user wants one of the powdercoated pans this selects the appropriate cost and adds it to the final cost
 function paint(material, height, length, width, quantity){
   //BL is the blank or true length needed for sheet sizes
   var hemWidth = 0.5;
@@ -681,7 +686,7 @@ function paint(material, height, length, width, quantity){
   }
   return paint;
 }
-
+//determines the blank length of the pan and uses that value and the quantity desired to calculate the manufacturing cost
 function manufacturingCost(quantity, length, height){
   var cost;
   //BL is the blank or true length needed for sheet sizes
@@ -743,8 +748,6 @@ function manufacturingCost(quantity, length, height){
 }
 //Takes the values from manufacturing cost and material cost and creates the final cost
 function finalCost(){
-
-
   var distance = parseFloat(document.forms["mtrl_form"]["distance"].value);
   var d1 = distance*15+300;
   var d7 = distance*15+75;

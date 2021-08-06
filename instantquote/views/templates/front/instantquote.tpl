@@ -14,7 +14,7 @@
     {if $isSingleShape eq true}
 
         <div id="step2">
-            {include file='module:instantquote/views/templates/front/jake.tpl'}
+            {include file='module:instantquote/views/templates/front/findAPan.tpl'}
         </div>
     {else}
 

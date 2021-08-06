@@ -192,7 +192,7 @@ class instantquote extends Module {
     }
 
     public function hookDisplayHeader() {
-        $this->context->controller->addCSS($this->_path . 'css/jake.css');
+        $this->context->controller->addCSS($this->_path . 'css/findAPan.css');
         $this->context->controller->addJS($this->_path . 'js/jquery.validate.js');
 	/* Place your code here. */
 	if(Tools::getValue('module') == "instantquote" && Tools::getValue('controller') == "price"){
