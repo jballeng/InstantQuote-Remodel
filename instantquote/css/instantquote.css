@@ -26,13 +26,10 @@
 
 #material_type_form select{ width:100% }
 #material_qty {
-  width: 96%;
+  width: 100%;
   margin-bottom: 5px;
 }
-#material_type_form .wlbox {
-    background-color: #32845b;
-    color:#fff;
-}
+/*
 #material_type_form .validation-message{
     width:auto;
     border:1px solid red;
@@ -48,9 +45,11 @@
     text-decoration: none;
     width: 150px;
     text-align: left;
+    background: #FFF1EE;
+    border: 1px solid #FFE5DE;
 }
-
-#material_type_form .final-price > span {
+*/
+.final-price > span {
     display: block;
 }
 #spanFinalPrice > span {
@@ -74,13 +73,15 @@
   width: 295px;
 }*/
 
-#material_type_form #warnings {
+#warnings {
     margin: 15px;
 }
 #spanQuantity .error {
-    width: 95%;
+    width: 100%;
 }
-
+.float-left, .fl, .li_fl li, .f_left {
+    float: left;
+}
 .wrapper_iq  .priceStyle span{
     font-size: 15px;
     border:1px solid #ddd;
@@ -92,7 +93,7 @@
     min-width:130px;
 }
 .priceStyle span:last-of-type{ margin-left: -1px;}
-#material_type_form .final-price {
+.final-price {
     float: left;
     margin: 8px 0 0 18px;
     width: 320px !important;
@@ -118,36 +119,60 @@
     display: inline-block;
     vertical-align: top;
 }
-.step2TD2{
 
-}
 #material_type_form .title_block {
     background: none repeat scroll 0 0 #f9f9f9;
     border-bottom: 1px solid #ebebeb;
     font-weight: bold;
     padding: 0.9em 1.333em;
+    font-size: 16px;
+    color:#363636;
+    text-align: left;
 }
 #extraerrors .error {
     width: auto !important;
 }
+form.std fieldset {
+    margin-bottom: 1em;
+    border: 1px solid #EBEBEB;
+}
+#material_type_form select {
+    width: 100%;
+}
+select {
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+    height: 26px;
+    line-height: 26px;
+}
+input{
+  display: inline-block;
+padding: 2px 4px;
+line-height: 20px;
+}
 
-
+#material_type_form .wlbox {
+		top:0;
+		left: 0;
+		background-color: #00833E;
+    color:#fff;
+}
 #material_type_form .wlbox
 {
-    position: absolute;
+
 
     text-align: center;
-    font-size: 10px;
-    width: 75px;
-    height: 50px;
-    padding-top: 5px;
+    font-size: 15px;
+    width: 100px;
+    height: auto;
+
 
     font-weight: bold;
 }
-
 .wrapper_iq  .wlbox input
 {
-    width: 50px;
+
+		width: 75px;
     border: 1px solid #467692;
 }
 
@@ -167,7 +192,7 @@
 /*#spanQuantity input {
   float: right;
 }*/
-/*
+
 .buttons_sec {
     display: inline-block;
     margin-left:10px;
@@ -241,10 +266,10 @@
         float: none;
         overflow: hidden;
     }
-    #material_type_form .section_mob_center {
+    .section_mob_center {
         text-align: center;
     }
-    #material_type_form .section_mob_center .final-price.fl {
+    .section_mob_center .final-price.fl {
         display: inline-block;
         float: none;
         vertical-align: top;

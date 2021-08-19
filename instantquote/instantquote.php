@@ -218,89 +218,74 @@ class instantquote extends Module {
      * Function to add Admin menus for Instant Quote while Install
      * @return boolean
      */
-    public function registerTab() {
-        // Insert Parent Tab
-        $data = array(
-            'class_name' => 'AdminParentInstantQuote',
-            'module' => $this->name,
-            'id_parent' => 0,
-            'position' => 15, 'active' => 1,
-        );
-        $res = Db::getInstance()->insert('tab', $data);
-        $id_tab_parent = Db::getInstance()->Insert_ID();
-        $data_lang = array(
-            'id_tab' => $id_tab_parent,
-            'id_lang' => Configuration::get('PS_LANG_DEFAULT'),
-            'name' => 'Instant Quote'
-        );
-        $res &= Db::getInstance()->insert('tab_lang', $data_lang);
+     public function registerTab() {
+         // Insert Parent Tab
+         $data = array(
+             'class_name' => 'AdminParentInstantQuote',
+             'module' => $this->name,
+             'id_parent' => 0,
+             'position' => 15, 'active' => 1,
+         );
+         $res = Db::getInstance()->insert('tab', $data);
+         $id_tab_parent = Db::getInstance()->Insert_ID();
+         $data_lang = array(
+             'id_tab' => $id_tab_parent,
+             'id_lang' => Configuration::get('PS_LANG_DEFAULT'),
+             'name' => 'Instant Quote'
+         );
+         $res &= Db::getInstance()->insert('tab_lang', $data_lang);
 
-        // Insert Child Tab Material Type
-        $data = array(
-            'class_name' => 'AdminMaterialType',
-            'module' => $this->name,
-            'id_parent' => $id_tab_parent,
-            'position' => 1, 'active' => 1,
-        );
-        $res = Db::getInstance()->insert('tab', $data);
-        $id_tab = Db::getInstance()->Insert_ID();
-        $data_lang = array(
-            'id_tab' => $id_tab,
-            'id_lang' => Configuration::get('PS_LANG_DEFAULT'),
-            'name' => 'Material Type'
-        );
-        $res &= Db::getInstance()->insert('tab_lang', $data_lang);
+         // Insert Child Tab Material Type
+         $data = array(
+             'class_name' => 'AdminMaterialType',
+             'module' => $this->name,
+             'id_parent' => $id_tab_parent,
+             'position' => 1, 'active' => 1,
+         );
+         $res = Db::getInstance()->insert('tab', $data);
+         $id_tab = Db::getInstance()->Insert_ID();
+         $data_lang = array(
+             'id_tab' => $id_tab,
+             'id_lang' => Configuration::get('PS_LANG_DEFAULT'),
+             'name' => 'Material Type'
+         );
+         $res &= Db::getInstance()->insert('tab_lang', $data_lang);
 
-        // Insert Child Tab Material Size
-        $data = array(
-            'class_name' => 'AdminMaterialSize',
-            'module' => $this->name,
-            'id_parent' => $id_tab_parent,
-            'position' => 2, 'active' => 1,
-        );
-        $res = Db::getInstance()->insert('tab', $data);
-        $id_tab = Db::getInstance()->Insert_ID();
-        $data_lang = array(
-            'id_tab' => $id_tab,
-            'id_lang' => Configuration::get('PS_LANG_DEFAULT'),
-            'name' => 'Material Thickness'
-        );
-        $res &= Db::getInstance()->insert('tab_lang', $data_lang);
+         // Insert Child Tab Material Size
+         $data = array(
+             'class_name' => 'AdminMaterialSize',
+             'module' => $this->name,
+             'id_parent' => $id_tab_parent,
+             'position' => 2, 'active' => 1,
+         );
+         $res = Db::getInstance()->insert('tab', $data);
+         $id_tab = Db::getInstance()->Insert_ID();
+         $data_lang = array(
+             'id_tab' => $id_tab,
+             'id_lang' => Configuration::get('PS_LANG_DEFAULT'),
+             'name' => 'Material Thickness'
+         );
+         $res &= Db::getInstance()->insert('tab_lang', $data_lang);
 
-        // Insert Child Tab Shape
-        $data = array(
-            'class_name' => 'AdminShape',
-            'module' => $this->name,
-            'id_parent' => $id_tab_parent,
-            'position' => 3, 'active' => 1,
-        );
-        $res = Db::getInstance()->insert('tab', $data);
-        $id_tab = Db::getInstance()->Insert_ID();
-        $data_lang = array(
-            'id_tab' => $id_tab,
-            'id_lang' => Configuration::get('PS_LANG_DEFAULT'),
-            'name' => 'Shape'
-        );
-        $res &= Db::getInstance()->insert('tab_lang', $data_lang);
-        // Insert Child Tab CRU
+         // Insert Child Tab Shape
+         $data = array(
+             'class_name' => 'AdminShape',
+             'module' => $this->name,
+             'id_parent' => $id_tab_parent,
+             'position' => 3, 'active' => 1,
+         );
+         $res = Db::getInstance()->insert('tab', $data);
+         $id_tab = Db::getInstance()->Insert_ID();
+         $data_lang = array(
+             'id_tab' => $id_tab,
+             'id_lang' => Configuration::get('PS_LANG_DEFAULT'),
+             'name' => 'Shape'
+         );
+         $res &= Db::getInstance()->insert('tab_lang', $data_lang);
 
-        $data = array(
-          'class_name' => 'AdminCru',
-          'module' => $this->name,
-          'id_parent' => $id_tab_parent,
-          'position' => 4, 'active' => 1,
-        );
-        $res = Db::getInstance()->insert('tab', $data);
-        $id_tab = Db::getInstance()->Insert_ID();
-        $data_lang = array(
-          'id_tab' => $id_tab,
-          'id_lang' => Configuration::get('PS_LANG_DEFAULT'),
-          'name'=>'CRU'
-        );
-        $res &= Db::getInstance()->insert('tab_lang', $data_lang);
 
-        return true;
-    }
+         return true;
+     }
 
     /**
      * Function to remove Admin menus for Instant Quote while Uninstall

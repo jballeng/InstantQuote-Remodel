@@ -1,52 +1,29 @@
-
+<!DOCTYPE html>
 <div id="jb_wrap">
 			<h1>Find Your Pan</h1>
 <div class="swiper-container">
 
-			<form action="" id="mtrl_form"  onchange="displayGauge()">
-				<div class="swiper">
+			<form action="" id="material_type_form"  onchange="" class="std" name="material_type_form" method="post">
+				<div id="material_swiper" name="material_swiper" class="swiper">
 				<h3>Material</h3>
 				<p>Please select the material type and gauge before moving on to the next section</p>
 
 
-
-
 <div style="float:left">
 
-
 	<h3>Material Type</h3>
-	<input type="radio" id="A" name="material" value="Aluminum">
-	<label for="A">Aluminum</label><br><br>
 
+<div id="radioDiv" name="radioDiv" class="radioDiv">
+	{foreach from=$material_types item=type}
 
+	<input type="radio" id="{$type.material_type_name}" name="material_type" value="{$type.id_iq_material_type}"
 
-	<input type="radio" id="GS" name="material" value="Galvanized Steel">
-	<label for="GS">Galvanized Steel</label><br><br>
+	>
+					{$type.material_type_name}<br><br>
+	{/foreach}
 
+</div>
 
-
-	<input type="radio" id="SS" name="material" value="Stainless Steel">
-	<label for="SS">Stainless Steel</label><br><br>
-
-
-
-	<input type="radio" id="CRS" name="material" value="Steel(RAW)">
-	<label for="CRS">Steel(RAW)</label><br><br>
-
-
-
-	<input type="radio" id="WCRS" name="material" value="Gloss White Steel(RAW)">
-	<label for="WCRS">Gloss White Steel(RAW)</label><br><br>
-
-
-
-	<input type="radio" id="BCRS" name="material" value="Gloss Black Steel(RAW)">
-	<label for="BCRS">Gloss Black Steel(RAW)</label><br><br>
-
-
-
-	<input type="radio" id="FCRS" name="material" value="Faux Stainless Steel(RAW)">
-	<label for="FCRS">Faux Stainless Steel(RAW)</label><br><br>
 
 
 
@@ -58,22 +35,18 @@
 		<span class="jb_tooltiptext">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum."</span>
 		</div>
 	</h3>
-	<input type="radio" id="14GA" name="gauge" value="14GA">
-	<label for="14GA" id="14">14GA</label><br><br>
-	<input type="radio" id="18GA" name="gauge" value="18GA">
-	<label for="18GA" id="18">18GA</label><br><br>
-	<input type="radio" id="20GA" name="gauge" value="20GA">
-	<label for="20GA" id="20">20GA</label><br><br>
-
-
-
-
+	<br>
+	<select id="material_size_id" name="material_size">
+	<option value="">Please Select</option>
+	</select>
+<br><br>
 <br><br>
 
-<label for="quantity">Quantity</label><br>
-<input type="number" id="quantity" name="quantity" value="1">
+<label for="material_qty">Quantity</label><br>
+<input type="text" id="material_qty" name="material_qty" size="12" maxlength="7" value="1">
 </div>
 			</div>
+
 
 			<div class="swiper">
 			<h3>Pan Design
@@ -81,76 +54,203 @@
 				<span class="jb_tooltiptext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum.</span>
 				</div>
 			</h3>
-			<div style="float:left; padding-right:75px">
+			<div style="float:left; padding-right:75px; padding-bottom:50px">
 				<h3 style="font-size:22px">Front Load or Flat Pan</h3>
 				<label for="flatPan">Flat</label>
 				<input type="radio" id="flatPan" name="pan" onclick="showFront()"><br>
 				<label for="frontPan">Front Load</label>
 				<input type="radio" id="frontPan" name="pan" onclick="showFront()">
 				<br><br>
-			</div>
-
-			<div style="float:right;">
 				<h3 style="font-size:22px">Drain Hole?</h3>
 				<label for="yesHole" style="font-size:22px">Yes</label>
 				<input type="radio" id="yesHole" name="holes" onclick="showMe()"><br>
 				<label for="noHole" style="font-size:22px">No</label>
 				<input type="radio" id="noHole" name="holes" onclick = "showMe()" checked>
 				<br><br>
-				<div id="holes" style="display: none">
-				<label for="holeLocation" id="holeLabel">Select Desired Hole Location</label><br>
-				<select name="holeLocation" id="holeLocation">
-					<option value="none" selected disabled hidden>Please Select</option>
-					<option id="top" value="top">Top</option>
-					<option id="bottom" value="bottom">Bottom</option>
-					<option id="left" value="left">Left</option>
-					<option id="right" value="right">Right</option>
-				</select>
-				<br><br>
-				<label for="distance" id="distance_label">Distance From Left Wall</label><br>
-				<input type="number" id="distance" name="distance"><br>
-				<label for="diameter" id="diam_label" >Enter Hole Diameter:</label><br>
-				<input type="number" id="diameter" name="diameter"><br><br>
+
 			</div>
+
+			<div style="float:right">
+				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/flat.png" id="flatPic" style="display:none" width="600" height="500">
+				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/frontHole.png" id="frontHole" style="display:none" width="600" height="500">
+				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/front.png" id="frontPic" style="display:none"width="600" height="500">
+				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/holePan.png" id="holePan" style="display:none" width="600" height="400">
 		</div>
 	</div>
+	<script>
+
+	function showHole(){
+		if(document.getElementById("yesHole").checked == true){
+			document.getElementById("holes").style.display = "inline";
+
+		}
+		if(document.getElementById("noHole").checked == true){
+			document.getElementById("holes").style.display = "none";
+
+		}
+
+	}
+
+
+	document.getElementById("yesHole").addEventListener("click", showHole);
+	document.getElementById("noHole").addEventListener("click", showHole);
+
+	</script>
 
 		<div class="swiper">
+
 				<h3>Dimensions
 					<div class="jb_tooltip">?
 					<span class="jb_tooltiptext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum.</span>
 					</div>
 				</h3>
-		<div class="dimensions" style="float:left; padding-right:20px">
 
-					<label for="lng">Length (in)</label><br>
-					<input type="number" id="lng" name="lng" size="2" required><br>
 
-				<label for="wid">Width (in)</label><br>
-				<input type="number" id="wid" name="wid" required><br>
-				<label for="hit" >Height (in)</label><br>
-				<input type="number" id="hit" name="hit" required><br>
-				<label for="front_height" id="front" style="display: none">Front Height</label><br>
-				<input type="number" id="front_height" name="front_height" style="display: none"><br>
+				<div class="wlbox" id="lwh" style="float:left">
+					{foreach from=$shapeInputsData item=inputshape}
+					{$inputshape.display_name}<br>
+					<input type="text" class="AttributeInput {str_replace(",", " ",$inputshape.properties)}" id="attribute_{$inputshape.param}" size="10" maxlength="10" value="{if isset($fieldDetails[$inputshape.param])}{$fieldDetails[$inputshape.param]}{/if}" name="{$inputshape.param}">
+					{/foreach}
 
-			</div>
-			<img src="http://localhost/srp-web/modules/instantquote/images/productimages/flat.png" id="flatPic" style="display:none">
-			<img src="http://localhost/srp-web/modules/instantquote/images/productimages/front.png" id="frontPic" style="display:none">
+
+
+					<label for="front_height" id="front" style="display: none">Front Height</label><br>
+					<input type="number" id="front_height" name="front_height" style="display: none">
+					<div id="holes" style="display: none">
+					<label for="holeLocation" id="holeLabel">Hole Location</label><br>
+					<select name="holeLocation" id="holeLocation" style="width:75px">
+						<option value="none" selected disabled hidden>Please Select</option>
+						<option id="upper" value="upper">A</option>
+						<option id="right" value="right">B</option>
+						<option id="lower" value="lower">C</option>
+						<option id="left" value="left">D</option>
+						<option id="bottom" value="bottom">E</option>
+					</select>
+					<label for="distance" id="distance_label">Distance From</label><br>
+					<input type="number" id="distance" name="distance">
+					<label for="distance2" id="distance2_label" style="display: none">Distance From Flange A</label><br>
+						<input type="number" id="distance2" name="distance2" style="display: none"><br>
+					<label for="diameter" id="diam_label" >Hole Diameter:</label><br>
+					<input type="number" id="diameter" name="diameter">
+				</div>
+				</div>
+
+				<script>
+							function flange(){
+								var side = document.forms["material_type_form"]["holeLocation"].value;
+								var label = document.getElementById("distance_label");
+
+
+								if(side == "right" || side == "left"){
+									label.innerHTML = "Distance From Flange A";
+									document.getElementById("distance2_label").style.display = "none";
+									document.getElementById("distance2").style.display = "none";
+								}
+								if(side == "upper" || side == "lower"){
+									label.innerHTML = "Distance From Flange D";
+									document.getElementById("distance2_label").style.display = "none";
+									document.getElementById("distance2").style.display = "none";
+								}
+								if(side == "bottom"){
+									label.innerHTML = "Distance From Flange D";
+									document.getElementById("distance2_label").style.display = "inline";
+									document.getElementById("distance2").style.display = "inline";
+								}
+
+							}
+							document.forms["material_type_form"]["holeLocation"].addEventListener("change", flange);
+
+
+							//setTimeout(validateDimension, 400);
+							//document.getElementById("attribute_L").addEventListener("change", validateDimension);
+							//document.getElementById("attribute_W").addEventListener("change", validateDimension);
+							</script>
+
+
+
+<div style="float:right; padding-left:150px; padding-bottom:150px; display:inline">
+<img src="http://localhost/srp-web/modules/instantquote/images/productimages/flat.png" id="flatPic2" style="display:none" width="600" height="500">
+<img src="http://localhost/srp-web/modules/instantquote/images/productimages/front.png" id="frontPic2" style="display:none" width="600" height="500">
+<img src="http://localhost/srp-web/modules/instantquote/images/productimages/frontHole.png" id="frontHole2" style="display:none" width="600" height="500">
+<img src="http://localhost/srp-web/modules/instantquote/images/productimages/holePan.png" id="holePan2" style="display:none" width="600" height="400">
+</div>
 			</div>
 			<script>
 			function drawFlat(){
-
-				if(document.getElementById("flatPan").checked == true){
-					document.getElementById("flatPic").style.display = "inline";
+				let flat = document.getElementById("flatPan");
+				let front = document.getElementById("frontPan");
+				let yes = document.getElementById("yesHole");
+				let no = document.getElementById("noHole");
+				if(flat.checked == true){
 					document.getElementById("frontPic").style.display = "none";
+					document.getElementById("frontPic2").style.display = "none";
+					document.getElementById("frontHole").style.display = "none";
+					document.getElementById("frontHole2").style.display = "none";
+					document.getElementById("holePan").style.display = "none";
+					document.getElementById("holePan2").style.display = "none";
+					document.getElementById("flatPic").style.display = "inline";
+					document.getElementById("flatPic2").style.display = "inline";
+					if(yes.checked == true){
+						document.getElementById("frontPic").style.display = "none";
+						document.getElementById("frontPic2").style.display = "none";
+						document.getElementById("frontHole").style.display = "none";
+						document.getElementById("frontHole2").style.display = "none";
+						document.getElementById("flatPic2").style.display = "none";
+						document.getElementById("flatPic2").style.display = "none";
+						document.getElementById("flatPic").style.display = "none";
+						document.getElementById("holePan").style.display = "inline";
+						document.getElementById("holePan2").style.display = "inline";
+					}else{
+						document.getElementById("frontPic").style.display = "none";
+						document.getElementById("frontPic2").style.display = "none";
+						document.getElementById("frontHole").style.display = "none";
+						document.getElementById("frontHole2").style.display = "none";
+						document.getElementById("flatPic2").style.display = "none";
+						document.getElementById("holePan").style.display = "none";
+						document.getElementById("holePan2").style.display = "none";
+						document.getElementById("flatPic").style.display = "inline";
+						document.getElementById("flatPic2").style.display = "inline";
+					}
 				}
-				if(document.getElementById("frontPan").checked == true){
+				if(front.checked == true){
 					document.getElementById("frontPic").style.display = "inline";
+					document.getElementById("frontPic2").style.display = "inline";
+					document.getElementById("flatPic2").style.display = "none";
 					document.getElementById("flatPic").style.display = "none";
+					document.getElementById("holePan").style.display = "none";
+					document.getElementById("holePan2").style.display = "none";
+					document.getElementById("frontHole").style.display = "none";
+					document.getElementById("frontHole2").style.display = "none";
+					if(yes.checked == true){
+						document.getElementById("frontPic").style.display = "none";
+						document.getElementById("frontPic2").style.display = "none";
+						document.getElementById("flatPic2").style.display = "none";
+						document.getElementById("flatPic").style.display = "none";
+						document.getElementById("holePan").style.display = "none";
+						document.getElementById("holePan2").style.display = "none";
+						document.getElementById("frontHole").style.display = "inline";
+						document.getElementById("frontHole2").style.display = "inline";
+
+					}else{
+						document.getElementById("frontPic").style.display = "inline";
+						document.getElementById("frontPic2").style.display = "inline";
+						document.getElementById("flatPic2").style.display = "none";
+						document.getElementById("flatPic").style.display = "none";
+						document.getElementById("holePan").style.display = "none";
+						document.getElementById("holePan2").style.display = "none";
+
+
+						document.getElementById("frontHole").style.display = "none";
+						document.getElementById("frontHole2").style.display = "none";
+					}
 				}
+
 			}
 			document.getElementById("flatPan").addEventListener("change", drawFlat);
 			document.getElementById("frontPan").addEventListener("change", drawFlat);
+			document.getElementById("yesHole").addEventListener("change", drawFlat);
+			document.getElementById("noHole").addEventListener("change", drawFlat);
+
 
 			</script>
 			<div id="swiper" class="swiper">
@@ -159,7 +259,9 @@
 				<div class="jb_tooltip">?
 				<span class="jb_tooltiptext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum.</span>
 				</div>
+
 			</h3>
+
 				<input type="checkbox" id="DPF1" value="5.97">
 				<label for="DPF1">Drain Pan Fitting - 1" NPT-PVC</label><br><br>
 				<input type="checkbox" id="DPF2" value="9.69">
@@ -173,11 +275,24 @@
 				<input type="checkbox" id="avPad" value="49.49">
 				<label for="avPad">Anti-Vibration Pad with Adhesive - 30" x 32"</label><br><br>
 			</div>
-<div class="findPan">
-				<button class="btn" type="button" onclick="finalCost()">Find Your Pan</button><br>
+
+
+			<div class="findPan">
+				<button class="btn" type="button" id="submit"onclick="finalCost()">Find Your Pan</button><br>
 			</div>
 			</div>
-</form>
+
+			<div class="iq-cart-section">
+			<span class="button_sec">
+			<input type="hidden" id="ajax"  value="true" name="ajax">
+			<input type="hidden" id="shapeId"  value="{$shapeClassData.id_iq_shape}" name="shapeId">
+			<input type="hidden" id="shapeNameHiden"  value="{$shapeClassData.display_name}" name="shapeName">
+			<input type="hidden" id="productWeight"  value="0" name="shapeName">
+			<input type="hidden" id="methode"  value="price_engine" name="methode">
+			</span>
+			<div id="extraerrors"></div>
+			<div id="warnings"></div>
+			</div>
 		</div>
 			<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 			<a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -191,11 +306,9 @@
 </div>
 <br><br>
 
+</form>
 </center>
-<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 </div>
 <script>
 slideIndex = 1;
@@ -209,85 +322,59 @@ slideIndex = 1;
 					<button class="tablinks" onclick="openTab(event, 'custom')" style="color:white">Custom Quote</button>
 					<button class="tablinks" onclick="openTab(event, 'faq')" style="color:white">FAQ</button>
 				</div>
+				<div id="custom" class="tabcontent">
+					<div class="clr"> </div>
+					<div class="section_mob_center">
+					<div class="final-price fl final-price-custom">
+					<span id="spansku" style="display:none" class="priceStyle">
+					<span class="label-price-sec">SKU </span>
+
+					<span class="span-price-sec" id="spanskuValue"></span>
+					</span>
+					<div class="clearfix"></div>
+					<span id="spanFinalPrice" style="display:none">
+					<span class="label-price-sec">Price per unit </span>
+
+					<span class="span-price-sec">
+							<span id="display_price"></span>
+							<span id="discounted_display_price" class="hide"></span>
+					</span>
+
+					</span>
+					</div>
+					<span class="buttons_sec" >
+					<!-- <input type="button" id="add_material"  value="Get Price" name="add_material"> -->
+					<div id="spanstockcheck" style="font-size: 12px;font-weight: bold;height: 4px;"></div>
+
+					<input type="button" id="addtocart"  class="exclusive_large btn" value="Add to Cart" name="addtocart" style="display:none">
+
+
+					</span>
+					</div>
+
+
+
+						<canvas id="myCanvas" class="myCanvas" width="1000" height="1000" style="top:0">
+							<p>canvas not supported boooo </p>
+						</canvas>
+
+
+				</div>
 				<div id="faq" class="tabcontent">
 					<h1>Testing</h1>
 
 				</div>
-				<div id="custom" class="tabcontent">
 
-
-
-					<div>
-						<p id="cost-container">
-
-
-
-							<span id="addOn"></span><br><br>
-
-
-						</p>
-						<canvas id="myCanvas" class="myCanvas" width="1000" height="1000" style="top:0">
-							<p>canvas not supported boooo </p>
-						</canvas>
-						<h5 id="final" style="float:left">Sale Price: </h5>
-					</div>
-				</div>
 				<img id="flPan" src="http://localhost/srp-web/modules/instantquote/images/productimages/flPan.png" width="250" height="250" style="display: none">
 					<img id="panD" src="http://localhost/srp-web/modules/instantquote/images/productimages/pan.png" width="250" height="250" style="display: none">
 					<img id="km" src="http://localhost/srp-web/modules/instantquote/images/productimages/km2.png" width="1000" height="1000" style="display:none">
 					<img id="pow" src="http://localhost/srp-web/modules/instantquote/images/productimages/powdercoat.png" style="display:none">
 				<div id="suggested" class="tabcontent">
-					<h2>Product Match</h2>
-
-					<p>suggested products populated based on the input of customers needs</p>
-
-					<table style="width:100%">
-						<tr>
-							<th colspan="3">Suggested Products</th>
-						</tr>
-						<tr>
-							<td>
-								<p>x difference same material</p>
-								<img src="http://localhost/srp-web/modules/instantquote/images/productimages/pan1.jpg" width="100" length="100"><br>
-
-								<p>Stock Price: <strong>$200.00</strong></p>
-								<button  id="addtocart"  class="btn btn-secondary py-2  btn-spin" name="addtocart" type="button">
-										<i class="fto-glyph icon_btn"></i><span>Add to cart</span>
-								</button>
-							</td>
-							<td>
-								<p>x difference different material</p>
-								<img src="http://localhost/srp-web/modules/instantquote/images/productimages/pan2.jpg" width="100" length="100">
-
-								<p>Stock Price: <strong>$150.00</strong></p>
-								<ul>
-									<li>Reason 1</li><br>
-									<li>Reason 2</li><br>
-									<li>Reason 3</li>
-								</ul><br>
-								<button  id="addtocart"  class="btn btn-secondary py-2  btn-spin" name="addtocart" type="button">
-										<i class="fto-glyph icon_btn"></i><span>Add to cart</span>
-								</button>
-							</td>
-							<td>
-								<p>x difference different material</p>
-								<img src="http://localhost/srp-web/modules/instantquote/images/productimages/pan3.jpg" width="100" length="100">
-
-								<p>Stock Price: <strong>$99.99</strong></p>
-								<ul>
-									<li>Reason 1</li><br>
-									<li>Reason 2</li><br>
-									<li>Reason 3</li>
-								</ul><br>
-								<button  id="addtocart"  class="btn btn-secondary py-2  btn-spin" name="addtocart" type="button">
-										<i class="fto-glyph icon_btn"></i><span>Add to cart</span>
-								</button>
-							</td>
-						</tr>
-					</table>
-					<h2>Fill remaining white space with products</h2>
+					<div id="iq_suggested_product" class="px-3 pt-3">
+					</div>
 				</div>
 			</div>
+
 <script>
 function openTab(evt, tabName){
   var i, tabcontent, tablinks;

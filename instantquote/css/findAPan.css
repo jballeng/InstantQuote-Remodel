@@ -1,4 +1,28 @@
-
+#warnings {
+    margin: 15px;
+}
+#warnings .warning {
+    margin: 0 0 18px;
+}
+#extraerrors .error {
+    width: auto !important;
+}
+#material_type_form .validation-message{
+    width:auto;
+    border:1px solid red;
+    border-radius: 5px;
+    padding:5px;
+}
+#material_type_form .error {
+    color: red;
+    font-size: larger;
+    font-weight: bold;
+    margin: 10px 0 0;
+    padding: 2px 5px;
+    text-decoration: none;
+    width: 150px;
+    text-align: left;
+}
 .jb_tooltip {
 	position: relative;
 	display:inline-block;
@@ -46,6 +70,21 @@
   opacity: 1;
 }
 
+/*.help {
+    color:#fff;
+    background-color:#00833E;
+    width:20px;
+    height:20px;
+    display:inline-block;
+    border-radius:100%;
+    font-size:15px;
+    text-align:center;
+    text-decoration:none;
+    -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+    box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+}
+*/
 html {
 
 	margin: 0;
@@ -64,7 +103,20 @@ body {
 li {
 	float: left;
 }
-
+/*
+.collapsible {
+  color: #fff;
+  background-color: #00833E;
+  cursor: pointer;
+  padding: 10px 10px;
+  margin-top:20px;
+  width: 100%;
+  border: 1px solid #00000042;
+  text-align: left;
+  outline: none;
+  transition: 0.4s;
+}
+*/
 .active:hover {
   background-color: #00000042;
 
@@ -80,6 +132,20 @@ li {
   transition: max-height 0.3s ease-out;
 }
 
+/*
+.collapsible:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+)
+  font-size: 8px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+*/
+/*
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-)
+}
+*/
 
 #jb_wrap {
 	padding: 0rem 0rem;
@@ -209,6 +275,103 @@ table, th, td {
 }
 th, td {
 	padding: 15px;
+}
+
+
+.cube-container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+}
+
+#cube {
+  width: 100%;
+  height: 100%;
+  position: center;
+  -webkit-transform-style: preserve-3d;
+  -webkit-animation: rotatecube 10s infinite;
+
+  -moz-transform-style: preserve-3d;
+  -moz-animation: rotatecube 10s infinite;
+}
+
+#cube div {
+  width: 200px;
+  height: 200px;
+  display: block;
+  position: absolute;
+  border: none;
+  line-height: 200px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+@-webkit-keyframes rotatecube {
+  0% { -webkit-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
+  25% { -webkit-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
+  50% { -webkit-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
+  75% { -webkit-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
+  100% { -webkit-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
+}
+
+@-moz-keyframes rotatecube {
+  0% { -moz-transform: rotateX(0deg) rotateY(360deg) rotateZ(90deg); }
+  25% { -moz-transform: rotateX(90deg) rotateY(270deg) rotateZ(180deg); }
+  50% { -moz-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
+  75% { -moz-transform: rotateX(270deg) rotateY(90deg) rotateZ(360deg); }
+  100% { -moz-transform: rotateX(360deg) rotateY(0deg) rotateZ(270deg); }
+}
+
+.front {
+  background: rgba(255,0,0,.5);
+}
+
+.back {
+  background: rgba(0,255,0,.5);
+}
+
+.right {
+  background: rgba(0,0,255,.5);
+}
+
+.left {
+  background: rgba(0,255,255,.5);
+}
+
+.top {
+  background: rgba(255,0,255,.5);
+}
+
+.bottom {
+  background: rgba(255,255,0,.5);
+}
+
+#cube .front  {
+  -webkit-transform: rotateY(0deg ) translateZ( 100px );
+  -moz-transform: rotateY( 0deg ) translateZ( 100px );
+}
+#cube .back {
+  -webkit-transform: rotateX( 180deg ) translateZ( 100px );
+  -moz-transform: rotateX( 180deg ) translateZ( 100px );
+}
+#cube .right  {
+  -webkit-transform: rotateY(  90deg ) translateZ( 100px );
+  -moz-transform: rotateY(  90deg ) translateZ( 100px );
+}
+#cube .left   {
+  -webkit-transform: rotateY( -90deg ) translateZ( 100px );
+  -moz-transform: rotateY( -90deg ) translateZ( 100px );
+}
+#cube .top    {
+  -webkit-transform: rotateX(  90deg ) translateZ( 100px );
+  -moz-transform: rotateX(  90deg ) translateZ( 100px );
+}
+#cube .bottom {
+  -webkit-transform: rotateX( -90deg ) translateZ( 100px );
+  -moz-transform: rotateX( -90deg ) translateZ( 100px );
 }
 
 .swiper {display: none}

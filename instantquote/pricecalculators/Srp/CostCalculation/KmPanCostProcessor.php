@@ -32,7 +32,7 @@ class KmPanCostProcessor {
      *      */
     private $W;
     /*
-     * Hight of the Material
+     * Height of the Material
      * @param type : float
      *      */
     private $H;
@@ -190,6 +190,7 @@ class KmPanCostProcessor {
      * */
     private $_swapFields = array();
 
+
     /*
 
      * constructor will accept the parameter  and set all private variables
@@ -233,6 +234,8 @@ class KmPanCostProcessor {
                 // $this->_swapFields[$this->heigthField] = $this->lengthField;
             }
         }
+
+
     }
 
     /*
@@ -690,14 +693,15 @@ class KmPanCostProcessor {
 
 
         $materialCost = $this->getMaterialCost();
+        $manufacturingCost = $this->getManufacturingCost();
         $labourCost = $this->getLabourCost();
         $setUpCost = $this->getSetUpCost();
         $aditionalCost = ($this->L >= $this->_maxLength) ? $this->_aditionalCost : 0;
 
 
         //adding all cost together.
-        $totalMaterial = $materialCost + $labourCost + $setUpCost + $aditionalCost;
-
+        $totalMaterial = $materialCost + $manufacturingCost;
+/*
         $marginCost = $this->getMargin();
         if (!empty($marginCost)) {
             $total = ($totalMaterial / (1 - $marginCost));
@@ -706,6 +710,9 @@ class KmPanCostProcessor {
             return $total;
         }
         return false;
+        */
+        $total = $totalMaterial;
+        return $total;
     }
 
     /*
@@ -746,15 +753,136 @@ class KmPanCostProcessor {
      * @return material cost
      */
 
+     /*
+     * Material cost function has been updated due to a change in our pricing formula
+     * notes below detail the changes and what the significant values are
+     * minor changes to database and back office will be required
+     */
     private function getMaterialCost() {
+        $quan = $this->materialQty;
+        $thick = $this->getMaterialAttribute('thickness');
+        /*
+        * cru is the industry standard material cost for various metals
+        * it is a per ton dollar amount divided by 2000 to get the per pound cost
+        * going forward this value will need to be added to the back office as it changes monthly
+        * it may be easier to add it to the material type table since the gauge does not alter its price
+        */
+        $cru = $this->getSingleMaterialPrice();
+        /*
+        * bl and bw refer to blank length and blank width
+        * with the new pricing structure these values are used to calculate the sheet used
+        * the cost of the sheet is the new material cost
+        */
+        $bl = (2 * $this->H + $this->L + 1) + 1;
+        $bw = (2 * $this->H + $this->W + 1) + 1;
+        //stainless steel has different sheet sizes compared to other materials
+        if($this->materialType == 1){
+          if($bl <= 36 && $bw <= 30){
+            $sheet_cost = 36 * 30 * $thick * 0.284;
+          }
+          elseif($bl <= 40 && $bw <= 36){
+            $sheet_cost = 40 * 36 * $thick * 0.284;
+          }
+          elseif($bl <= 48 && $bw <= 48){
+            $sheet_cost = 48 * 48 * $thick * 0.284;
+          }
+        elseif($bl <= 60 && $bw <= 36){
+          $sheet_cost = 60 * 36 * $thick * 0.284;
+        }
+        elseif($bl <= 120 && $bw <= 36){
+          $sheet_cost = 120 * 36 * $thick * 0.284;
+        }
+      }else{
+        if($bl <= 24 && $bw <= 24){
+          $sheet_cost = 24 * 24 * $thick * 0.284;
+        }
+        elseif($bl <=48 && $bw <= 24){
+          $sheet_cost = 48 * 24 * $thick * 0.284;
+        }
+        elseif($bl <=48 && $bw <= 48){
+          $sheet_cost = 48 * 48 * $thick * 0.284;
+        }
+        elseif($bl <= 120 && $bw <= 48){
+          $sheet_cost = 120 * 48 * $thick * 0.284;
+        }
+        elseif($bl <= 120 && $bw <= 60){
+          $sheet_cost = 120 * 60 + $thick * 0.284;
+        }
+      }
+      // updated formula to handle the cost of material
+        $materialCost = $sheet_cost * (($cru/2000) * 1.25) * 1.3;
+        $totalMaterialCost = $materialCost * $quan;
 
-
-        $M = $this->getSingleMaterialPrice();
-        $surfaceArea = (($this->L + (2 * $this->H ) + 2) * ($this->W + (2 * $this->H) + 2));
-        $materialCost = $surfaceArea * $M;
-
-        return $materialCost;
+        return $totalMaterialCost;
     }
+
+    /*
+    * New function to get the price of manufacting Pans
+    * in the new pricing structure manufacturing cost is a fixed set of prices
+    * these are based off the overall size of the pan as well as quantity
+    * I am only using blank length for the size assuming it will accept
+    * the correct value if length and width are switched
+    * if not this can be easily adjusted
+    */
+
+    private function getManufacturingCost(){
+      $bl = (2 * $this->H + $this->L + 1) + 1;
+      $quantity = $this->materialQty;
+      if($bl <= 48){
+        if($quantity == 1){
+          $cost = 148.68;
+        }
+        elseif($quantity > 1 && $quantity < 5){
+          $cost = 86.28;
+        }
+        elseif($quantity < 10){
+          $cost = 48.85;
+        }
+        elseif($quantity < 25){
+          $cost = 36.37;
+        }
+        elseif($quantity < 50){
+          $cost = 28.88;
+        }
+        elseif($quantity < 75){
+          $cost = 25.74;
+        }
+        elseif($quantity < 100){
+          $cost = 24.93;
+        }
+        elseif($quantity >= 100){
+          $cost = 24.12;
+        }
+      }else{
+        if($quantity == 1){
+          $cost = 164.43;
+        }
+        elseif($quantity > 1 && $quantity < 5){
+          $cost = 102.03;
+        }
+        elseif($quantity < 10){
+          $cost = 64.60;
+        }
+        elseif($quantity < 25){
+          $cost = 52.12;
+        }
+        elseif($quantity < 50){
+          $cost = 44.63;
+        }
+        elseif($quantity < 75){
+          $cost = 41.25;
+        }
+        elseif($quantity < 100){
+          $cost = 40.45;
+        }
+        elseif($quantity >= 100){
+          $cost = 39.48;
+        }
+      }
+      $total_cost = $cost * $quantity;
+      return $total_cost;
+    }
+
 
     /*
 

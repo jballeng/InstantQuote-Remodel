@@ -44,6 +44,7 @@ var relProSwiper = {};
               }
 
           });
+
           setTimeout(function(){materialChange();}, 400);
           $('#nextStep2').on("click", function () {
               var shapeId = $('input:radio[name=shapeType]:checked').val();
@@ -57,12 +58,12 @@ var relProSwiper = {};
                   }
               });
           });
-          $("#material_type_form").validate();
+          //$("#material_type_form").validate();
           $('body').on('click', '#backtomaterials', function () {
               $('#step2').show();
           });
           function materialChange(mSizeId) {
-              var material_type_id = $('#material_type_id').val();
+              var material_type_id = $('input:radio[name=material_type]:checked').val();
               var shapeId = $("#shapeId").val();
               $("#material_size_id").html($("<option></option>").attr("value", "").text("Please Select"));
               $.ajax({
@@ -73,7 +74,7 @@ var relProSwiper = {};
 
                       obj = $.parseJSON(res);
                       if (obj.status == 'error') {
-                          console.log("Error");
+
                       } else {
                           var itemlist = obj.data;
                           $.each(itemlist, function (index, item) {
@@ -95,6 +96,7 @@ var relProSwiper = {};
               var l = $('#attribute_L').val();
               var h = $('#attribute_H').val();
               var w = $('#attribute_W').val();
+
               if (suggesteProdAjax != null) {
                   suggesteProdAjax.abort();
               }
@@ -104,7 +106,9 @@ var relProSwiper = {};
                   type: 'post',
                   data: {ajax:true,length:l,height:h,width:w},
                   success: function (res) {
+
                       obj = $.parseJSON(res);
+
                       if(obj.status) {
 
                           $('#iq_suggested_product').html(obj.preview);
@@ -118,11 +122,14 @@ var relProSwiper = {};
           }
 
           priceAjax = null;
-          function getPrice() {
 
+          function getPrice() {
               var formdata = $('#material_type_form').serialize();
 
+
+
               if (priceAjax != null) {
+
                   priceAjax.abort();
               }
 
@@ -144,15 +151,19 @@ var relProSwiper = {};
 
 
                       if (obj.warnings) {
+
                           $.each(obj.warnings, function (index, item) {
                               $('#warnings').append('<div class="warning">' + item + '</div>');
+
                           });
                       }
 
                       if (obj.commends) {
+
                           $.each(obj.commends, function (index1, item1) {
 
                               if (item1.swap) {
+
                                   $.each(item1.swap.arg, function (index, item) {
                                       var indexVal = $('[name="' + index + '"]').val();
                                       var itemVal = $('[name="' + item + '"]').val();
@@ -178,14 +189,19 @@ var relProSwiper = {};
 
 
                       if (obj.isError == true) {
+
                           if (obj.fieldErrors) {
+
                               $.each(obj.fieldErrors, function (index, item) {
+
                                   $('[name="' + index + '"]').after('<div class="error">' + item + '</div>');
                               });
                           }
 
                           if (obj.errors) {
+
                               $.each(obj.errors, function (index, item) {
+
                                   $('#extraerrors').append('<div class="error">' + item + '</div>');
                               });
                           }
@@ -207,9 +223,8 @@ var relProSwiper = {};
                           $('#addtocart').show();
                           $('#spanFinalPrice').show();
                           $('#spansku').show();
-                          var c = document.getElementById("myCanvas");
-                          var ctx = c.getContext("2d");
-                          ctx.fillText(result_data.sku, 700, 800);
+
+
                       }
                   }
               });
@@ -220,14 +235,16 @@ var relProSwiper = {};
           var timer = 0;
           function validate() {
               var formValidated = true;
-              $("#material_type_form input:text,#material_type_form select").each(function (index) {
+              $("#material_type_form input:text,#material_swiper select, #material_swiper input:radio").each(function (index) {
                   if (!$(this).val()) {
                       formValidated = false;
+
                       return false;
                   }
               });
               if (formValidated) {
                   allInputGiven = true;
+
               }
 
               if (allInputGiven) {
@@ -237,8 +254,10 @@ var relProSwiper = {};
                       clearTimeout(timer);
 
                   timer = setTimeout(function () {
+
                       getPrice();
-                  }, 250);
+                  }, 0);
+
               }
           }
 
@@ -246,11 +265,12 @@ var relProSwiper = {};
           $('body').on("keyup", '#material_type_form input', function () {
               $("#material_type_form")
               if( $('#attribute_W').val() &&  $('#attribute_L').val()&&  $('#attribute_H').val() && $('#attribute_W').val()>0 && $('#attribute_H').val()>0 && $('#attribute_L').val()>0) {
+
                   getProductSuggetion();
               }
               validate();
           });
-          $('body').on("change", '#material_type_form select', function () {
+          $('body').on("change", '#material_swiper select', function () {
               validate();
           });
 
@@ -268,7 +288,7 @@ var relProSwiper = {};
 
                       obj = $.parseJSON(res);
                       if (obj.status == 'error') {
-                          //console.log("Error");
+                          
                           $('#extraerrors').append('<div class="error">Some technical issue occurred, Please try after sometime ...</div>');
                           $("#extraerrors").show();
                       } else {
@@ -293,12 +313,12 @@ var relProSwiper = {};
 
 
           //material type
-          var materialTypeID = $('#material_type_id').val();
+          var materialTypeID = $("#radioDiv input[type='radio']:checked").val();
           if (materialTypeID != "") {
               materialChange(skuMaterialSizeId);
           }
 
-          $('body').on('change', '#material_type_id', function () {
+          $('body').on('change', '#radioDiv', function () {
               materialChange();
           });
       });
