@@ -10,9 +10,12 @@ Through development of a better pricing system for the instantquote, a pivot was
 
 For the development the original instantquote module was edited rather than making an entirely new module. For the most part nothing was changed in the module, besides adding new javascript, css and tpl files, the other changes and their files are listed below.
 
+KmPanCostProcessor.php
+- getMaterialCost() has been altered with the new pricing structure. The value within the database material_price need to be added to the back office. Pricing is now coming from a value that will be changing monthly. line 761
+- a new function getManufacturingCost() has been added to reflect the new manufacturing costs. line 828 
 instantquote.php
 -	In hookDisplayHeader() a call the new CSS and JavaScript was added (lines 195 and 208)
--	There is a new tab registered for CRU there is no functionality to it other than it appearing on the side bar. This will be needed in the future for the constant change of steel price. A new database table will most likely be needed or at the very least a column added to one of the existing tables that we can easily access (line 293)
+
 
 instaquote.tpl
 -	Changed the included tpl file from single_shape.tpl to the new template findAPan.tpl (line 17). This was done for  the instantquote.tpl file within the module as well as the one in the killarney metals themes folder (srp-web\themes\killarneymetals\modules\instantquote\views\templates\front)
