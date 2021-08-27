@@ -1,3 +1,53 @@
+.contact-form input[type=text], .contact-form select{
+  width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+/* The Modal (background) */
+.contactModal {
+   /* Stay in place */
+   position: fixed;
+    z-index: 100; /* Sit on top */
+    padding-top: 200px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+
+/* Modal Content/Box */
+.contact-modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 50px;
+  border: 1px solid black;
+  width: 80%;
+
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 #warnings {
     margin: 15px;
 }
@@ -121,7 +171,7 @@ li {
   background-color: #00000042;
 
 }
-
+/*
 .content {
 
 	padding: 0 18px;
@@ -245,6 +295,7 @@ canvas {
 .tab button.active {
   background-color: black;
 }
+
 /* Style tab links */
 .tablink {
   background-color: #555;

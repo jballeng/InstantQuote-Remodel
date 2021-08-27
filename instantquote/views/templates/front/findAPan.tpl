@@ -312,17 +312,22 @@
 </div>
 <script>
 slideIndex = 1;
+
 </script>
 
 		<div id="right" class="right-column">
 
 			<div id="tabs" style="display:none">
+
 				<div class="tab">
 					<button class="tablinks" id="defaultOpen" onclick="openTab(event, 'suggested')" style="color:white">Suggested Products</button>
-					<button class="tablinks" onclick="openTab(event, 'custom')" style="color:white">Custom Quote</button>
+					<button class="tablinks" id="custom-quote"  style="color:white">Custom Quote</button>
 					<button class="tablinks" onclick="openTab(event, 'faq')" style="color:white">FAQ</button>
 				</div>
+
 				<div id="custom" class="tabcontent">
+
+
 					<div class="clr"> </div>
 					<div class="section_mob_center">
 					<div class="final-price fl final-price-custom">
@@ -346,8 +351,9 @@ slideIndex = 1;
 					<!-- <input type="button" id="add_material"  value="Get Price" name="add_material"> -->
 					<div id="spanstockcheck" style="font-size: 12px;font-weight: bold;height: 4px;"></div>
 
-					<input type="button" id="addtocart"  class="exclusive_large btn" value="Add to Cart" name="addtocart" style="display:none">
-
+					<button  id="addtocart"  class="btn btn-secondary py-2  btn-spin" name="addtocart" type="button" style="display:none">
+                <i class="fto-glyph icon_btn"></i><span>Add to cart</span>
+            </button>
 
 					</span>
 					</div>
@@ -357,7 +363,54 @@ slideIndex = 1;
 						<canvas id="myCanvas" class="myCanvas" width="1000" height="1000" style="top:0">
 							<p>canvas not supported boooo </p>
 						</canvas>
+						<div id="contact-modal" class="contactModal" style="display:none">
+							<div class="contact-modal-content">
+								<span class="close">&times;</span>
+								<h3>Contact Form</h3>
+								<div class="contact-form">
+  								<form>
+										<h5>In the event of any issues that come up with your custom pan,
+											we require the following basic information.</h5><br>
 
+										<label for="business-personal">Are you purchasing for personal or business needs</label>
+    								<select id="business-personal" name="business-personal">
+											<option value="none" selected disabled hidden>Please Select</option>
+      								<option value="business">Business</option>
+      								<option value="personal">Personal</option>
+    								</select>
+										<label for="fname">First Name</label>
+    								<input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    								<label for="lname">Last Name</label>
+    								<input type="text" id="lname" name="lastname" placeholder="Your last name..">
+    								<input type="submit" value="Submit">
+  							</form>
+							</div>
+							</div>
+						</div>
+							<script>
+							var modal = document.getElementById("contact-modal");
+							var contactOpen = document.getElementById("custom-quote");
+							var close = document.getElementsByClassName("close")[0];
+							contactOpen.onclick = function(){
+								openTab(event, 'custom');
+							}
+							contactOpen.addEventListener("click", function(){
+								modal.style.display = "block";
+							});
+							close.onclick = function(){
+							  modal.style.display = "none";
+								openTab(event, 'suggested');
+								document.getElementById("defaultOpen").classList.add("active");
+							}
+							window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+							</script>
+						</div>
 
 				</div>
 				<div id="faq" class="tabcontent">
@@ -368,7 +421,7 @@ slideIndex = 1;
 				<img id="flPan" src="http://localhost/srp-web/modules/instantquote/images/productimages/flPan.png" width="250" height="250" style="display: none">
 					<img id="panD" src="http://localhost/srp-web/modules/instantquote/images/productimages/pan.png" width="250" height="250" style="display: none">
 					<img id="km" src="http://localhost/srp-web/modules/instantquote/images/productimages/km2.png" width="1000" height="1000" style="display:none">
-					<img id="pow" src="http://localhost/srp-web/modules/instantquote/images/productimages/powdercoat.png" style="display:none">
+
 				<div id="suggested" class="tabcontent">
 					<div id="iq_suggested_product" class="px-3 pt-3">
 					</div>
