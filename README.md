@@ -1,3 +1,5 @@
+All edits to .tpl and .css files will need to be added into the srp-web themes folder for the instantquote module.
+
 # InstantQuote-Remodel
 Below is a brief screen recording of new module functionality and style.
 https://www.loom.com/share/14f7fc5b950549758378065f190e4195
