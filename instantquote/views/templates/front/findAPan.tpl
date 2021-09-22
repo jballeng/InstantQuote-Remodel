@@ -82,10 +82,10 @@
 			</div>
 
 			<div id="img1" style="float:right">
-				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/flat.png" id="flatPic" style="display:none" width="600" height="500">
-				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/frontHole.png" id="frontHole" style="display:none" width="600" height="500">
-				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/front.png" id="frontPic" style="display:none"width="600" height="500">
-				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/holePan.png" id="holePan" style="display:none" width="600" height="400">
+				<img src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/flat.png" id="flatPic" style="display:none" width="600" height="500">
+				<img src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/frontHole.png" id="frontHole" style="display:none" width="600" height="500">
+				<img src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/front.png" id="frontPic" style="display:none"width="600" height="500">
+				<img src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/holePan.png" id="holePan" style="display:none" width="600" height="400">
 		</div>
 	</div>
 	<script>
@@ -180,10 +180,10 @@
 
 
 <div style="float:right; padding-left:150px; padding-bottom:150px; display:inline">
-<img src="http://localhost/srp-web/modules/instantquote/images/productimages/flat.png" id="flatPic2" style="display:none" width="600" height="500">
-<img src="http://localhost/srp-web/modules/instantquote/images/productimages/front.png" id="frontPic2" style="display:none" width="600" height="500">
-<img src="http://localhost/srp-web/modules/instantquote/images/productimages/frontHole.png" id="frontHole2" style="display:none" width="600" height="500">
-<img src="http://localhost/srp-web/modules/instantquote/images/productimages/holePan.png" id="holePan2" style="display:none" width="600" height="400">
+<img src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/flat.png" id="flatPic2" style="display:none" width="600" height="500">
+<img src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/front.png" id="frontPic2" style="display:none" width="600" height="500">
+<img src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/frontHole.png" id="frontHole2" style="display:none" width="600" height="500">
+<img src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/holePan.png" id="holePan2" style="display:none" width="600" height="400">
 </div>
 			</div>
 			<script>
@@ -422,9 +422,9 @@ slideIndex = 1;
 
 				</div>
 
-				<img id="flPan" src="http://localhost/srp-web/modules/instantquote/images/productimages/flPan.png" width="250" height="250" style="display: none">
-					<img id="panD" src="http://localhost/srp-web/modules/instantquote/images/productimages/pan.png" width="250" height="250" style="display: none">
-					<img id="km" src="http://localhost/srp-web/modules/instantquote/images/productimages/km2.png" width="1000" height="1000" style="display:none">
+				<img id="flPan" src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/flPan.png" width="250" height="250" style="display: none">
+					<img id="panD" src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/pan.png" width="250" height="250" style="display: none">
+					<img id="km" src="http://srpdemo.confianzit.org/modules/instantquote/images/productimages/km2.png" width="1000" height="1000" style="display:none">
 
 				<div id="suggested" class="tabcontent">
 					<div id="iq_suggested_product" class="px-3 pt-3">
