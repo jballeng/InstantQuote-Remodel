@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <div id="jb_wrap">
 			<h1>Find Your Pan</h1>
-<div class="swiper-container">
+			<center>
+<div id="jb_breadcrumb" class="jb_breadcrumb">
+	<a id="default" class="jb_breadcrumbItem" onclick="currentSlide(1)">Material</a>
+	<a class="jb_breadcrumbItem" onclick="currentSlide(2)">Design</a>
+	<a class="jb_breadcrumbItem" onclick="currentSlide(3)">Dimensions</a>
+	<a class="jb_breadcrumbItem" onclick="currentSlide(4)">Add Ons</a>
+</div>
+<br><br>
+
+
+</center>
+<div id="swiperContainerDiv" class="swiper-container">
 
 			<form action="" id="material_type_form"  onchange="" class="std" name="material_type_form" method="post">
 				<div id="material_swiper" name="material_swiper" class="swiper">
@@ -9,7 +20,7 @@
 				<p>Please select the material type and gauge before moving on to the next section</p>
 
 
-<div style="float:left">
+<div id="materialDiv" style="float:left">
 
 	<h3>Material Type</h3>
 
@@ -29,7 +40,7 @@
 
 </div>
 
-<div style="float:right; font-size:22px; padding-left:75px">
+<div id="materialSizeDiv" style="float:right; font-size:22px; padding-left:75px">
 	<h3>Material Thickness
 		<div class="jb_tooltip">?
 		<span class="jb_tooltiptext">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum."</span>
@@ -43,7 +54,7 @@
 <br><br>
 
 <label for="material_qty">Quantity</label><br>
-<input type="text" id="material_qty" name="material_qty" size="12" maxlength="7" value="1">
+<input type="text" id="material_qty" name="material_qty" size="12" maxlength="3" value="1" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
 </div>
 			</div>
 
@@ -54,7 +65,7 @@
 				<span class="jb_tooltiptext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum.</span>
 				</div>
 			</h3>
-			<div style="float:left; padding-right:75px; padding-bottom:50px">
+			<div id="panDesign" style="float:left; padding-right:75px;">
 				<h3 style="font-size:22px">Front Load or Flat Pan</h3>
 				<label for="flatPan">Flat</label>
 				<input type="radio" id="flatPan" name="pan" onclick="showFront()"><br>
@@ -70,7 +81,7 @@
 
 			</div>
 
-			<div style="float:right">
+			<div id="img1" style="float:right">
 				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/flat.png" id="flatPic" style="display:none" width="600" height="500">
 				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/frontHole.png" id="frontHole" style="display:none" width="600" height="500">
 				<img src="http://localhost/srp-web/modules/instantquote/images/productimages/front.png" id="frontPic" style="display:none"width="600" height="500">
@@ -109,13 +120,13 @@
 				<div class="wlbox" id="lwh" style="float:left">
 					{foreach from=$shapeInputsData item=inputshape}
 					{$inputshape.display_name}<br>
-					<input type="text" class="AttributeInput {str_replace(",", " ",$inputshape.properties)}" id="attribute_{$inputshape.param}" size="10" maxlength="10" value="{if isset($fieldDetails[$inputshape.param])}{$fieldDetails[$inputshape.param]}{/if}" name="{$inputshape.param}">
+					<input type="text" class="AttributeInput {str_replace(",", " ",$inputshape.properties)}" id="attribute_{$inputshape.param}" size="10" maxlength="7" value="{if isset($fieldDetails[$inputshape.param])}{$fieldDetails[$inputshape.param]}{/if}" name="{$inputshape.param}" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')">
 					{/foreach}
 
 
 
 					<label for="front_height" id="front" style="display: none">Front Height</label><br>
-					<input type="number" id="front_height" name="front_height" style="display: none">
+					<input type="text" id="front_height" name="front_height" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')" style="display: none">
 					<div id="holes" style="display: none">
 					<label for="holeLocation" id="holeLabel">Hole Location</label><br>
 					<select name="holeLocation" id="holeLocation" style="width:75px">
@@ -127,11 +138,11 @@
 						<option id="bottom" value="bottom">E</option>
 					</select>
 					<label for="distance" id="distance_label">Distance From</label><br>
-					<input type="number" id="distance" name="distance">
+					<input type="text" id="distance" name="distance" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')">
 					<label for="distance2" id="distance2_label" style="display: none">Distance From Flange A</label><br>
-						<input type="number" id="distance2" name="distance2" style="display: none"><br>
+						<input type="text" id="distance2" name="distance2" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')" style="display: none"><br>
 					<label for="diameter" id="diam_label" >Hole Diameter:</label><br>
-					<input type="number" id="diameter" name="diameter">
+					<input type="text" id="diameter" name="diameter" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')">
 				</div>
 				</div>
 
@@ -188,8 +199,8 @@
 					document.getElementById("frontHole2").style.display = "none";
 					document.getElementById("holePan").style.display = "none";
 					document.getElementById("holePan2").style.display = "none";
-					document.getElementById("flatPic").style.display = "inline";
-					document.getElementById("flatPic2").style.display = "inline";
+					document.getElementById("flatPic").style.display = "inline-block";
+					document.getElementById("flatPic2").style.display = "inline-block";
 					if(yes.checked == true){
 						document.getElementById("frontPic").style.display = "none";
 						document.getElementById("frontPic2").style.display = "none";
@@ -198,8 +209,8 @@
 						document.getElementById("flatPic2").style.display = "none";
 						document.getElementById("flatPic2").style.display = "none";
 						document.getElementById("flatPic").style.display = "none";
-						document.getElementById("holePan").style.display = "inline";
-						document.getElementById("holePan2").style.display = "inline";
+						document.getElementById("holePan").style.display = "inline-block";
+						document.getElementById("holePan2").style.display = "inline-block";
 					}else{
 						document.getElementById("frontPic").style.display = "none";
 						document.getElementById("frontPic2").style.display = "none";
@@ -208,8 +219,8 @@
 						document.getElementById("flatPic2").style.display = "none";
 						document.getElementById("holePan").style.display = "none";
 						document.getElementById("holePan2").style.display = "none";
-						document.getElementById("flatPic").style.display = "inline";
-						document.getElementById("flatPic2").style.display = "inline";
+						document.getElementById("flatPic").style.display = "inline-block";
+						document.getElementById("flatPic2").style.display = "inline-block";
 					}
 				}
 				if(front.checked == true){
@@ -294,21 +305,11 @@
 			<div id="warnings"></div>
 			</div>
 		</div>
-			<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-			<a class="next" onclick="plusSlides(1)">&#10095;</a>
+			<a class="prev" id="prev" onclick="plusSlides(-1)">&#10094;</a>
+			<a class="next" id="next" onclick="plusSlides(1)">&#10095;</a>
 
-			<center>
-<div class="jb_breadcrumb">
-	<a id="default" class="jb_breadcrumbItem" onclick="currentSlide(1)">Material</a>
-	<a class="jb_breadcrumbItem" onclick="currentSlide(2)">Design</a>
-	<a class="jb_breadcrumbItem" onclick="currentSlide(3)">Dimensions</a>
-	<a class="jb_breadcrumbItem" onclick="currentSlide(4)">Add Ons</a>
-</div>
-<br><br>
 
 </form>
-</center>
-
 </div>
 <script>
 slideIndex = 1;
@@ -379,10 +380,13 @@ slideIndex = 1;
       								<option value="personal">Personal</option>
     								</select>
 										<label for="fname">First Name</label>
-    								<input type="text" id="fname" name="firstname" placeholder="Your name..">
+    								<input type="text" id="fname" name="firstname" placeholder="Your name.." maxlength="20" onkeyup="this.value = this.value.replace(/[^a-z, A-Z, -]/, '')">
 
     								<label for="lname">Last Name</label>
-    								<input type="text" id="lname" name="lastname" placeholder="Your last name..">
+    								<input type="text" id="lname" name="lastname" placeholder="Your last name.." maxlength="20" onkeyup="this.value = this.value.replace(/[^a-z, A-Z, -]/, '')">
+
+										<label for="contactEmail">Email Address</label>
+										<input type="email" id="contactEmail" placeholder="Email Address..">
     								<input type="submit" value="Submit">
   							</form>
 							</div>

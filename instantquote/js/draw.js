@@ -16,6 +16,16 @@ function showSlides(n) {
   for (i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
   }
+  if(slideIndex == 1){
+    document.getElementById("prev").style.display = "none";
+  }else{
+    document.getElementById("prev").style.display = "inline";
+  }
+  if(slideIndex == 4){
+    document.getElementById("next").style.display = "none";
+  }else{
+    document.getElementById("next").style.display = "inline";
+  }
   for (i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", "");
   }
@@ -524,7 +534,252 @@ function download(){
   link.href = document.getElementById("myCanvas").toDataURL();
   return link.click();
 }
+/*
+function sheetCost(length, width, height, thickness, material, quantity){
+  var hemWidth = 0.5;
+  var sheet;
+  var cru;
+  if(thickness == "14GA" && material == "Galvanized Steel"){
+    thickness = 0.0785;
+  }
+  if(thickness == "18GA" && material == "Galvanized Steel"){
+    thickness = 0.0516;
+  }
+  if(thickness == "20GA" && material == "Galvanized Steel"){
+    thickness = 0.0396;
+  }
+  if(thickness == "14GA" && material == "CRS"){
+    thickness = .0747;
+  }
+  if(thickness == "18GA" && material == "CRS"){
+    thickness = .0478;
+  }
+  if(thickness == "20GA" && material == "CRS"){
+    thickness = .0359;
+  }
+  if(thickness == "14GA" && material == "PCRS"){
+    thickness = 0.0747;
+  }
+  if(thickness == "18GA" && material == "PCRS"){
+    thickness = 0.0478;
+  }
+  if(thickness == "20GA" && material == "PCRS"){
+    thickness = 0.0359;
+  }
+  if(thickness == "14GA" && material == "Stainless Steel"){
+    thickness = 0.07812;
+  }
+  if(thickness == "18GA" && material == "Stainless Steel"){
+    thickness = 0.050;
+  }
+  if(thickness == "20GA" && material == "Stainless Steel"){
+    thickness = 0.0396;
+  }
 
+  //BL is the blank or true length needed for sheet sizes
+  var bl = (2*height + length + 2*hemWidth)+1;
+  //BW is the blank or true width needed for sheet sizes
+  var bw = (2*height + width + 2*hemWidth)+1;
+
+  switch(material){
+    case "Galvanized Steel":
+      if(bl <= 24 && bw <= 24){
+        sheet = 24*24*thickness*0.284;
+
+      }
+      if(bl > 24 && bl <=48 && bw <= 24){
+        sheet = 48*24*thickness*0.284;
+
+      }
+      if(bl > 24 && bl <=48 && bw > 24 && bw <= 48){
+        sheet = 48*48*thickness*0.284;
+
+      }
+      if(bl > 48 && bl <= 120 && bw > 24 && bw <= 48){
+        sheet = 120*48*thickness*0.284;
+
+      }
+      if(bl > 48 && bl <= 120 && bw > 48 && bw <= 60){
+        sheet = 120*60*thickness*0.284;
+
+      }
+
+      break;
+    case "CRS":
+      if(bl <= 24 && bw <= 24){
+        sheet = 24*24*thickness*0.284;
+
+      }
+      if(bl > 24 && bl <=48 && bw <= 24){
+        sheet = 48*24*thickness*0.284;
+
+      }
+      if(bl > 24 && bl <=48 && bw > 24 && bw <= 48){
+        sheet = 48*48*thickness*0.284;
+
+      }
+      if(bl > 48 && bl <= 120 && bw > 24 && bw <= 48){
+        sheet = 120*48*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120x48";
+      }
+      if(bl > 48 && bl <= 120 && bw > 48 && bw <= 60){
+        sheet = 120*60*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120x60";
+      }
+      break;
+    case "PCRS":
+      if(bl <= 24 && bw <= 24){
+        sheet = 24*24*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 24X24";
+      }
+      if(bl > 24 && bl <=48 && bw <= 24){
+        sheet = 48*24*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 48X24";
+      }
+      if(bl > 24 && bl <=48 && bw > 24 && bw <= 48){
+        sheet = 48*48*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 48X48";
+      }
+      if(bl > 48 && bl <= 120 && bw > 24 && bw <= 48){
+        sheet = 120*48*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120x48";
+      }
+      if(bl > 48 && bl <= 120 && bw > 48 && bw <= 60){
+        sheet = 120*60*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120x60";
+      }
+      break;
+    case "Stainless Steel":
+      if(bl <= 36 && bw <= 30){
+        sheet = 36*30*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 36X30";
+      }
+      else if(bl > 36 && bl <= 40 && bw <= 36){
+        sheet = 40*36*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 40X36";
+      }
+      else if(bl > 40 && bl <= 60 && bw <= 36){
+        sheet = 60*36*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 60X36";
+      }
+      else if(bl > 60 && bl <= 120 && bw <= 36){
+        sheet = 120*36*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120X36";
+      }
+      else if(bl > 40 && bl <= 48 && bw > 36 && bw <= 48){
+        sheet = 48*48*thickness*0.284;
+        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 48X48";
+      }
+      break;
+  }
+
+  if(material == "Galvanized Steel"){
+    cru = 1914;
+  }
+  if(material == "CRS" || material == "PCRS"){
+    cru = 1919;
+  }
+  if(material == "Stainless Steel"){
+    cru = 10000;
+  }
+  var priceLb = cru/2000;
+  var extra = 0;
+  if(bl > 90){
+    extra = 25*quantity;
+  }
+
+  material_cost = (sheet * (priceLb * 1.25) * 1.3) + extra;
+
+  return material_cost;
+}
+function paint(material, height, length, width, quantity){
+  //BL is the blank or true length needed for sheet sizes
+  var hemWidth = 0.5;
+  var bl = (2*height + length + 2*hemWidth)+1;
+  //BW is the blank or true width needed for sheet sizes
+  var bw = (2*height + width + 2*hemWidth)+1;
+  var paint = 0;
+  if(bl <= 24 && bw <= 24 && material == "PCRS"){
+    paint = 16.25*quantity;
+
+  }
+  if(bl > 24 && bl <=48 && bw <= 24 && material == "PCRS"){
+    paint = 32.50*quantity;
+
+  }
+  if(bl > 24 && bl <=48 && bw > 24 && bw <= 48 && material == "PCRS"){
+    paint = 65*quantity;
+
+  }
+  if(bl > 48 && bl <= 120 && bw > 24 && bw <= 48 && material == "PCRS"){
+    paint = 130*quantity;
+  }
+  if(bl > 48 && bl <= 120 && bw > 48 && bw <= 60 && material == "PCRS"){
+    paint = 150*quantity;
+  }
+  return paint;
+}
+
+function manufacturingCost(quantity, length, height){
+  var cost;
+  //BL is the blank or true length needed for sheet sizes
+  var hemWidth = 0.5;
+  var bl = (2*height + length + 2*hemWidth)+1;
+  if(bl<=48){
+    if(quantity == 1){
+      cost = 148.68;
+    }
+    if(quantity > 1 && quantity < 5){
+      cost = 86.28;
+    }
+    if(quantity >= 5 && quantity < 10){
+      cost = 48.85;
+    }
+    if(quantity >= 10 && quantity < 25){
+      cost = 36.37;
+    }
+    if(quantity >= 25 && quantity < 50){
+      cost = 28.88;
+    }
+    if(quantity >= 50 && quantity < 75){
+      cost = 25.74;
+    }
+    if(quantity >= 75 && quantity < 100){
+      cost = 24.93;
+    }
+    if(quantity >= 100){
+      cost = 24.12;
+    }
+  }else{
+    if(quantity == 1){
+      cost = 164.43;
+    }
+    if(quantity > 1 && quantity < 5){
+      cost = 102.03;
+    }
+    if(quantity >= 5 && quantity < 10){
+      cost = 64.60;
+    }
+    if(quantity >= 10 && quantity < 25){
+      cost = 52.12;
+    }
+    if(quantity >= 25 && quantity < 50){
+      cost = 44.63;
+    }
+    if(quantity >= 50 && quantity < 75){
+      cost = 41.25;
+    }
+    if(quantity >= 75 && quantity < 100){
+      cost = 40.45;
+    }
+    if(quantity >= 100){
+      cost = 39.48;
+    }
+  }
+  return cost;
+
+}
+*/
 //Takes the values from manufacturing cost and material cost and creates the final cost
 function finalCost(){
 
