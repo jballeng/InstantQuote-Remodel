@@ -91,59 +91,56 @@ function draw(width, length, height, gauge, material)
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   var label;
+   
 
-  if(gauge == "14" || gauge == "12" || gauge == "19"){
-    label = "14G";
-  }
-  if(gauge == "15" || gauge == "13" || gauge == "18"){
-    label = "18G";
-  }
-  if(gauge == "16" || gauge == "11" || gauge == "17"){
-    label = "20G";
-  }
+  
 
   if(material == "1"){
     material = "Stainless Steel";
     if(gauge == "14"){
       gauge = "14S";
+      label = '14G';
     }
     if(gauge == "15"){
       gauge = "18S";
+      label = '18G';
     }
     if(gauge == "16"){
       gauge = "20S";
+      label = '20G';
     }
   }
   if(material == "2"){
     material = "Steel(RAW)";
     if(gauge == "7"){
-      gauge == "14C";
+      gauge = "14C";
+      label = '14G';
     }
     if(gauge == "10"){
       gauge = "18C";
+      label = '18G';
     }
     if(gauge == "9"){
       gauge = "20C";
+      label = '20G';
     }
   }
   if(material == "3"){
     material = "Galvanized Steel";
-  }
-  if(material == "4"){
-    material = "Aluminum";
-    if(gauge == "19"){
-      gauge = "30A";
+    if(gauge == "12"){
+      gauge = "14G";
+      label = '14G';
     }
-    if(gauge == "18"){
-      gauge = "60A";
+    if(gauge == "13"){
+      gauge = "18G";
+      label = '18G';
     }
-    if(gauge == "17"){
-      gauge = "90A";
+    if(gauge == "11"){
+      gauge = "20G";
+      label = '20G';
     }
   }
-  if(material == "5"){
-    material = "Gloss White Steel(RAW)";
-  }
+  
   var sku = "KM-" + length + "-" + width + "-" + height + "-" + gauge;
   if(document.getElementById("yesHole").checked == true && document.getElementById("frontPan").checked == true){
     ctx.beginPath();
