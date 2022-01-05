@@ -44,9 +44,9 @@ public $moduleName;
 
         $sqlClass = "SELECT price_engine_path,id_iq_shape,shape_image,display_name,title,note FROM " . _DB_PREFIX_ . "iq_shapes WHERE store_id = $storeId {$sql_single} AND is_active = 1";
         $shapeClassData = Db::getInstance()->executeS($sqlClass);
-        $sqlClass2 = "SELECT id_product, procure_method FROM " . _DB_PREFIX_ . "product WHERE store_id = $storeId {$sql_single} AND id_product > 0";
+        $sqlClass2 = "SELECT id_product, procure_method FROM " . _DB_PREFIX_ . "product WHERE id_shop_default = $storeId {$sql_single} AND id_product > 0";
         $shapeCount = count($shapeClassData);
-        $item = Db::getInstance()->executeS($sqlClass2);
+        $item = Db::getInstance()->execute($sqlClass2);
         $item2 = $item['id_product'];
 
         if ($shapeCount == 1) {
@@ -86,7 +86,11 @@ public $moduleName;
         }/**/
 
         $this->registerStylesheet('module-'.$this->moduleName,'/modules/'.$this->moduleName.'/css/'.$this->moduleName.'.css', ['media' => 'all', 'priority' => 50]);
+
+
         $this->context->controller->registerJavascript('module-'.$this->moduleName.'-price', '/modules/'.$this->moduleName.'/js/front.js', ['position' => 'bottom', 'priority' => 0]);
+
+        $this->context->controller->registerJavascript('module-'.$this->moduleName.'-customer-quote', '/modules/'.$this->moduleName.'/js/customer-quote.js', ['position' => 'bottom', 'priority' => 0]);
 
         $this->context->smarty->assign('isSingleShape', $isSingleShape);
         $this->context->smarty->assign('shapeImage', $shapeImage);

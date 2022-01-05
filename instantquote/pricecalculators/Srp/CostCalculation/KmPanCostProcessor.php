@@ -252,7 +252,7 @@ class KmPanCostProcessor {
     public function getPrice() {
 
 
-        if ($this->validate()) {
+        
             $this->validatStatus = false;
             $totalCost = $this->getTotalCost();
             $totalCostOriginal = $this->getTotalCostWithoutMargin();
@@ -278,14 +278,11 @@ class KmPanCostProcessor {
                 $result['data']['discounted_price'] = number_format($discountedPrice, 2);
             }
 
-            if ( $totalPrice > $this->maxCutoffPrice) {
-                //$this->validatErrors[$this->materialQtyField] = "Instant pricing is not available for volume orders. A Killarney Metals representative will quote your requirement and contact you shortly.";
-                $this->validatWarnings[] = "You are eligible for volume discounts. Please contact us";
-            }
-        } else {
+            
+        
 
-            $result['fieldErrors'] = $this->validatErrors;
-        }
+            
+        
 
         if ($this->_exceptionsErrors) {
             $this->validatStatus = true;
@@ -466,7 +463,7 @@ class KmPanCostProcessor {
      *
      * @access private
      * @param  : $input_name = name of the fields
-     * @param  : $value = value of teh field to check
+     * @param  : $value = value of the field to check
      * @param  : $fieldname = field name to mention on validation error message
      * @param  : $message = custom validation error message
      * @returntype
@@ -491,7 +488,7 @@ class KmPanCostProcessor {
      * @returntype
      * @return  :  set the validation error corresponding to the field
      */
-
+/*
     private function validateWidth() {
 
         $maxWidth = $this->getMaterialAttribute('max_width');
@@ -513,7 +510,7 @@ class KmPanCostProcessor {
      * @returntype
      * @return  :  set the validation error corresponding to the field
      */
-
+    /*
     private function validateHeight() {
 
         //cheking the extra constions
@@ -545,7 +542,7 @@ class KmPanCostProcessor {
      * @returntype
      * @return  :  set the validation error corresponding to the field
      */
-
+/*
     private function validateLength() {
 
 
@@ -700,7 +697,7 @@ class KmPanCostProcessor {
 
 
         //adding all cost together.
-        $totalMaterial = $materialCost + $manufacturingCost;
+        $totalMaterial = ($materialCost + $manufacturingCost)/0.5;
 /*
         $marginCost = $this->getMargin();
         if (!empty($marginCost)) {
@@ -767,7 +764,7 @@ class KmPanCostProcessor {
         * going forward this value will need to be added to the back office as it changes monthly
         * it may be easier to add it to the material type table since the gauge does not alter its price
         */
-        $cru = $this->getSingleMaterialPrice();
+        $cru;
         /*
         * bl and bw refer to blank length and blank width
         * with the new pricing structure these values are used to calculate the sheet used
@@ -777,6 +774,7 @@ class KmPanCostProcessor {
         $bw = (2 * $this->H + $this->W + 1) + 1;
         //stainless steel has different sheet sizes compared to other materials
         if($this->materialType == 1){
+            $cru = 10000;
           if($bl <= 36 && $bw <= 30){
             $sheet_cost = 36 * 30 * $thick * 0.284;
           }
@@ -792,7 +790,14 @@ class KmPanCostProcessor {
         elseif($bl <= 120 && $bw <= 36){
           $sheet_cost = 120 * 36 * $thick * 0.284;
         }
+        $materialCost = $sheet_cost * ($cru/2000) * 1.3;
       }else{
+        if($this->materialType == 2){
+            $cru = 1919;
+        }
+        if($this->materialType == 3){
+            $cru = 1914;
+        }
         if($bl <= 24 && $bw <= 24){
           $sheet_cost = 24 * 24 * $thick * 0.284;
         }
@@ -808,9 +813,12 @@ class KmPanCostProcessor {
         elseif($bl <= 120 && $bw <= 60){
           $sheet_cost = 120 * 60 + $thick * 0.284;
         }
-      }
-      // updated formula to handle the cost of material
         $materialCost = $sheet_cost * (($cru/2000) * 1.25) * 1.3;
+      }
+
+      
+      // updated formula to handle the cost of material
+        
         $totalMaterialCost = $materialCost * $quan;
 
         return $totalMaterialCost;

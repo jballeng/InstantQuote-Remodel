@@ -1,6 +1,23 @@
 
 window.onload = document.getElementById("default").click();
 var slideIndex = 1;
+
+$('#next').on( "click", function() {
+  var currentTab = slideIndex;
+  var tabIndex = $("#next").data('tab-index');
+  flag = validateCustomFields(currentTab);
+  if(flag){
+    resetErrorFields();
+    plusSlides(tabIndex);
+  }
+});
+
+$('#prev').on( "click", function() {
+  resetErrorFields();
+  var tabIndex = $("#prev").data('tab-index');
+  plusSlides(tabIndex);
+});
+
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
@@ -50,6 +67,7 @@ function showMe(){
 }
 //Shows the front load options when selected
 function showFront(){
+  $("#js-pan-error").html("");
   if(document.getElementById("frontPan").checked == true){
     document.getElementById("front").style.display = "inline";
     document.getElementById("front_height").style.display = "inline";
@@ -66,10 +84,12 @@ function showFront(){
 }
 
 //Drawing function for pans accepting inputs in final function
-function draw(width, length, height, gauge, material){
+function draw(width, length, height, gauge, material)
+{
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   var label;
 
   if(gauge == "14" || gauge == "12" || gauge == "19"){
@@ -488,11 +508,21 @@ function drawHeight(x, y){
 }
 
 function download(){
-  var height = parseFloat(document.forms["material_type_form"]["hit"].value);
+	var length = parseFloat(document.forms["material_type_form"]["attribute_L"].value);
+  var width = parseFloat(document.forms["material_type_form"]["attribute_W"].value);
+  var height = parseFloat(document.forms["material_type_form"]["attribute_H"].value);
+  var distance = parseFloat(document.forms["material_type_form"]["distance"].value);
+  var distance2 = parseFloat(document.forms["material_type_form"]["distance2"].value);
+  var gauge = document.forms["material_type_form"]["material_size_id"].value;
+  var material = document.forms["material_type_form"]["material_type"].value;
+  var thickness = document.forms["material_type_form"]["material_size_id"].value;
+  var quantity = document.forms["material_type_form"]["material_qty"].value;
+
+  /*var height = parseFloat(document.forms["material_type_form"]["hit"].value);
   var length = parseFloat(document.forms["material_type_form"]["lng"].value);
   var width = parseFloat(document.forms["material_type_form"]["wid"].value);
   var gauge = document.forms["material_type_form"]["thickness"].value;
-  var material = document.forms["material_type_form"]["material"].value;
+  var material = document.forms["material_type_form"]["material"].value;*/
   if(material == "Stainless Steel" && gauge == "14GA"){
     gauge = "14S";
   }
@@ -529,257 +559,17 @@ function download(){
   if(material == "Aluminum" && gauge == "20GA"){
     gauge = "20A";
   }
-  var link = document.createElement('a');
-  link.download = "KM-" + length + "-" + width + "-" + height + "-" + gauge + ".jpeg";
-  link.href = document.getElementById("myCanvas").toDataURL();
-  return link.click();
-}
-/*
-function sheetCost(length, width, height, thickness, material, quantity){
-  var hemWidth = 0.5;
-  var sheet;
-  var cru;
-  if(thickness == "14GA" && material == "Galvanized Steel"){
-    thickness = 0.0785;
-  }
-  if(thickness == "18GA" && material == "Galvanized Steel"){
-    thickness = 0.0516;
-  }
-  if(thickness == "20GA" && material == "Galvanized Steel"){
-    thickness = 0.0396;
-  }
-  if(thickness == "14GA" && material == "CRS"){
-    thickness = .0747;
-  }
-  if(thickness == "18GA" && material == "CRS"){
-    thickness = .0478;
-  }
-  if(thickness == "20GA" && material == "CRS"){
-    thickness = .0359;
-  }
-  if(thickness == "14GA" && material == "PCRS"){
-    thickness = 0.0747;
-  }
-  if(thickness == "18GA" && material == "PCRS"){
-    thickness = 0.0478;
-  }
-  if(thickness == "20GA" && material == "PCRS"){
-    thickness = 0.0359;
-  }
-  if(thickness == "14GA" && material == "Stainless Steel"){
-    thickness = 0.07812;
-  }
-  if(thickness == "18GA" && material == "Stainless Steel"){
-    thickness = 0.050;
-  }
-  if(thickness == "20GA" && material == "Stainless Steel"){
-    thickness = 0.0396;
-  }
 
-  //BL is the blank or true length needed for sheet sizes
-  var bl = (2*height + length + 2*hemWidth)+1;
-  //BW is the blank or true width needed for sheet sizes
-  var bw = (2*height + width + 2*hemWidth)+1;
-
-  switch(material){
-    case "Galvanized Steel":
-      if(bl <= 24 && bw <= 24){
-        sheet = 24*24*thickness*0.284;
-
-      }
-      if(bl > 24 && bl <=48 && bw <= 24){
-        sheet = 48*24*thickness*0.284;
-
-      }
-      if(bl > 24 && bl <=48 && bw > 24 && bw <= 48){
-        sheet = 48*48*thickness*0.284;
-
-      }
-      if(bl > 48 && bl <= 120 && bw > 24 && bw <= 48){
-        sheet = 120*48*thickness*0.284;
-
-      }
-      if(bl > 48 && bl <= 120 && bw > 48 && bw <= 60){
-        sheet = 120*60*thickness*0.284;
-
-      }
-
-      break;
-    case "CRS":
-      if(bl <= 24 && bw <= 24){
-        sheet = 24*24*thickness*0.284;
-
-      }
-      if(bl > 24 && bl <=48 && bw <= 24){
-        sheet = 48*24*thickness*0.284;
-
-      }
-      if(bl > 24 && bl <=48 && bw > 24 && bw <= 48){
-        sheet = 48*48*thickness*0.284;
-
-      }
-      if(bl > 48 && bl <= 120 && bw > 24 && bw <= 48){
-        sheet = 120*48*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120x48";
-      }
-      if(bl > 48 && bl <= 120 && bw > 48 && bw <= 60){
-        sheet = 120*60*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120x60";
-      }
-      break;
-    case "PCRS":
-      if(bl <= 24 && bw <= 24){
-        sheet = 24*24*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 24X24";
-      }
-      if(bl > 24 && bl <=48 && bw <= 24){
-        sheet = 48*24*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 48X24";
-      }
-      if(bl > 24 && bl <=48 && bw > 24 && bw <= 48){
-        sheet = 48*48*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 48X48";
-      }
-      if(bl > 48 && bl <= 120 && bw > 24 && bw <= 48){
-        sheet = 120*48*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120x48";
-      }
-      if(bl > 48 && bl <= 120 && bw > 48 && bw <= 60){
-        sheet = 120*60*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120x60";
-      }
-      break;
-    case "Stainless Steel":
-      if(bl <= 36 && bw <= 30){
-        sheet = 36*30*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 36X30";
-      }
-      else if(bl > 36 && bl <= 40 && bw <= 36){
-        sheet = 40*36*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 40X36";
-      }
-      else if(bl > 40 && bl <= 60 && bw <= 36){
-        sheet = 60*36*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 60X36";
-      }
-      else if(bl > 60 && bl <= 120 && bw <= 36){
-        sheet = 120*36*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 120X36";
-      }
-      else if(bl > 40 && bl <= 48 && bw > 36 && bw <= 48){
-        sheet = 48*48*thickness*0.284;
-        //document.getElementById("sheetSize").innerHTML = "Sheet Size Used: 48X48";
-      }
-      break;
-  }
-
-  if(material == "Galvanized Steel"){
-    cru = 1914;
-  }
-  if(material == "CRS" || material == "PCRS"){
-    cru = 1919;
-  }
-  if(material == "Stainless Steel"){
-    cru = 10000;
-  }
-  var priceLb = cru/2000;
-  var extra = 0;
-  if(bl > 90){
-    extra = 25*quantity;
-  }
-
-  material_cost = (sheet * (priceLb * 1.25) * 1.3) + extra;
-
-  return material_cost;
-}
-function paint(material, height, length, width, quantity){
-  //BL is the blank or true length needed for sheet sizes
-  var hemWidth = 0.5;
-  var bl = (2*height + length + 2*hemWidth)+1;
-  //BW is the blank or true width needed for sheet sizes
-  var bw = (2*height + width + 2*hemWidth)+1;
-  var paint = 0;
-  if(bl <= 24 && bw <= 24 && material == "PCRS"){
-    paint = 16.25*quantity;
-
-  }
-  if(bl > 24 && bl <=48 && bw <= 24 && material == "PCRS"){
-    paint = 32.50*quantity;
-
-  }
-  if(bl > 24 && bl <=48 && bw > 24 && bw <= 48 && material == "PCRS"){
-    paint = 65*quantity;
-
-  }
-  if(bl > 48 && bl <= 120 && bw > 24 && bw <= 48 && material == "PCRS"){
-    paint = 130*quantity;
-  }
-  if(bl > 48 && bl <= 120 && bw > 48 && bw <= 60 && material == "PCRS"){
-    paint = 150*quantity;
-  }
-  return paint;
+  var imageFileName = "KM-" + length + "-" + width + "-" + height + "-" + gauge + ".pdf";
+  $("#imageFileName").val(imageFileName);
+  var imageData = document.getElementById("myCanvas").toDataURL("image/png");
+  var pdf = new jsPDF('l','px',[600, 600]);
+  var converted = pdf.addImage(imageData,'png',20,20, 500, 500);
+  pdfData = btoa(pdf.output());
+  $('#imageData').val(pdfData);
 }
 
-function manufacturingCost(quantity, length, height){
-  var cost;
-  //BL is the blank or true length needed for sheet sizes
-  var hemWidth = 0.5;
-  var bl = (2*height + length + 2*hemWidth)+1;
-  if(bl<=48){
-    if(quantity == 1){
-      cost = 148.68;
-    }
-    if(quantity > 1 && quantity < 5){
-      cost = 86.28;
-    }
-    if(quantity >= 5 && quantity < 10){
-      cost = 48.85;
-    }
-    if(quantity >= 10 && quantity < 25){
-      cost = 36.37;
-    }
-    if(quantity >= 25 && quantity < 50){
-      cost = 28.88;
-    }
-    if(quantity >= 50 && quantity < 75){
-      cost = 25.74;
-    }
-    if(quantity >= 75 && quantity < 100){
-      cost = 24.93;
-    }
-    if(quantity >= 100){
-      cost = 24.12;
-    }
-  }else{
-    if(quantity == 1){
-      cost = 164.43;
-    }
-    if(quantity > 1 && quantity < 5){
-      cost = 102.03;
-    }
-    if(quantity >= 5 && quantity < 10){
-      cost = 64.60;
-    }
-    if(quantity >= 10 && quantity < 25){
-      cost = 52.12;
-    }
-    if(quantity >= 25 && quantity < 50){
-      cost = 44.63;
-    }
-    if(quantity >= 50 && quantity < 75){
-      cost = 41.25;
-    }
-    if(quantity >= 75 && quantity < 100){
-      cost = 40.45;
-    }
-    if(quantity >= 100){
-      cost = 39.48;
-    }
-  }
-  return cost;
 
-}
-*/
 //Takes the values from manufacturing cost and material cost and creates the final cost
 function finalCost(){
 
@@ -806,10 +596,190 @@ function finalCost(){
   var w = width * 15;
   var h = height * 15;
   var frontHeight = parseFloat(document.forms["material_type_form"]["front_height"].value);
-      document.getElementById("jb_wrap").style.display = "none";
-      document.getElementById("tabs").style.display = "block";
-      document.getElementById("defaultOpen").click();
+    document.getElementById("jb_wrap").style.display = "none";
+    document.getElementById("tabs").style.display = "block";
+    document.getElementById("defaultOpen").click();
     draw(width, length, height, gauge, material, distance2);
     drawHeight(height, frontHeight);
     drawHole(d1, d2, distance, d4, d3, diameter, d7, d9, distance2);
+    getPrice();
+    download();
+}
+
+function validateCustomFields(currentTab)
+{
+  let width = parseFloat($('#attribute_W').val());
+  let height = parseFloat($('#attribute_H').val());
+  let length = parseFloat($('#attribute_L').val());
+  const maxWidth = 120;
+  const maxLength = 120;
+  const maxHeight = 8;
+  let widthLimit = (width + (2 * (height)) + 1);
+  let lengthLimit = (length + (2 * (height)) + 1);
+  
+  resetErrorFields();
+  var flag = true;
+  if(currentTab == 1){
+    if ($('input[name="material_type"]:checked').length == 0) {
+      $("#js-material-type-error").html("Please select material type").css('color', 'red');
+      flag = false;
+    }
+    if($("#material_size_id").val() == ""){
+      
+      $("#js-material-size-error").html("Please select material thickness").css('color', 'red');
+      flag = false;
+    }
+    if($("#material_qty").val() == "" || $("#material_qty").val() == 0){
+      $("#js-material-qty-error").html("Please enter quantity").css('color', 'red');
+      flag = false;
+    }
+    return flag;
+  }
+  if(currentTab == 2){
+    if ($('input[name="pan"]:checked').length == 0) {
+      $("#js-pan-error").html("Please select pan type").css('color', 'red');
+      flag = false;
+    }
+    return flag;
+  }
+  if(currentTab == 3){
+    if($('#attribute_L:visible').length != 0) {
+      if($("#attribute_L").val() == "" || $("#attribute_L").val() == 0){
+        $( "<small id='js-length-error' class='js-error'></small>" ).insertAfter("#attribute_L");
+        $("#js-length-error").html("Please enter pan length").css('color', 'red');
+        flag = false;
+      }
+      if(lengthLimit > maxLength){
+        $( "<small id='js-length-error' class='js-error'></small>" ).insertAfter("#attribute_L");
+        $("#js-length-error").html("The Pan is Too Large").css('color', 'red');
+        flag = false;
+      }
+    }
+    if($('#attribute_W:visible').length != 0) {
+      if($("#attribute_W").val() == "" || $("#attribute_W").val() == 0){
+        $( "<small id='js-width-error' class='js-error'></small>" ).insertAfter("#attribute_W");
+        $("#js-width-error").html("Please enter pan width").css('color', 'red');
+        flag = false;
+      }
+      if(widthLimit > maxWidth){
+        $( "<small id='js-width-error' class='js-error'></small>" ).insertAfter("#attribute_W");
+        $("#js-width-error").html("The Pan is Too Large").css('color', 'red');
+        flag = false;
+      }
+    }
+    if($('#attribute_H:visible').length != 0) {
+      if($("#attribute_H").val() == "" || $("#attribute_H").val() == 0){
+        $( "<small id='js-height-error' class='js-error'></small>" ).insertAfter("#attribute_H");
+        $("#js-height-error").html("Please enter pan height").css('color', 'red');
+        flag = false;
+      }
+      else if($('#attribute_H').val() > 0 && parseFloat($('#attribute_H').val()) > parseFloat($('#attribute_L').val())){
+        $( "<small id='js-height-error' class='js-error'></small>" ).insertAfter("#attribute_H");
+        $("#js-height-error").html("Pan height may not exceed pan length").css('color', 'red');
+        flag = false;
+      }
+      else if($('#attribute_H').val() > 0 && parseFloat($('#attribute_H').val()) > parseFloat($('#attribute_W').val())){
+        
+        $( "<small id='js-height-error' class='js-error'></small>" ).insertAfter("#attribute_H");
+        $("#js-height-error").html("Pan height may not exceed pan width").css('color', 'red');
+        flag = false;
+      }
+    }
+    if($('#front_height:visible').length != 0) {
+      if($("#front_height").val() == "" || $("#front_height").val() == 0){
+        $( "<small id='js-fornt-height-error' class='js-error'></small>" ).insertAfter("#front_height");
+        $("#js-fornt-height-error").html("Please enter front height").css('color', 'red');
+        flag = false;
+      }
+    }
+    if($('#holeLocation:visible').length != 0) {
+      if($("#holeLocation").val() == "" || $("#holeLocation").val() == null){
+        $( "<small id='js-hole-location-error' class='js-error'></small>" ).insertAfter("#holeLocation");
+        $("#js-hole-location-error").html("Please select hole location").css('color', 'red');
+        flag = false;
+      }
+    }
+    if($('#distance:visible').length != 0) {
+      if($("#distance").val() == "" || $("#distance").val() == 0){
+        $( "<small id='js-hole-distance-error' class='js-error'></small>" ).insertAfter("#distance");
+        $("#js-hole-distance-error").html("Please enter distance").css('color', 'red');
+        flag = false;
+      }
+      if($('#holeLocation').val() == 'upper' || $('#holeLocation').val() == 'lower'){
+        if($('#distance').val() > 0 && parseFloat($('#distance').val()) > parseFloat(($('#attribute_W').val() - 0.22))){
+          $( "<small id='js-hole-distance-error' class='js-error'></small>" ).insertAfter("#distance");
+          $("#js-hole-distance-error").html("Hole location is too close to Flange B").css('color', 'red');
+          flag = false;
+        }
+      }
+      if($('#holeLocation').val() == 'right' || $('#holeLocation').val() == 'left'){
+        if($('#distance').val() > 0 && parseFloat($('#distance').val()) > parseFloat(($('#attribute_L').val() - 0.22))){
+          $( "<small id='js-hole-distance-error' class='js-error'></small>" ).insertAfter("#distance");
+          $("#js-hole-distance-error").html("Hole location is too close to Flange C").css('color', 'red');
+          flag = false;
+        }
+      }
+    }
+   
+    if($('#distance2:visible').length != 0) {
+      if($("#distance2").val() == "" || $("#distance2").val() == 0){
+        $( "<small id='js-hole-distance2-error' class='js-error'></small>" ).insertAfter("#distance2");
+        $("#js-hole-distance2-error").html("Please enter distance").css('color', 'red');
+        flag = false;
+      }
+      if($('#holeLocation').val() == 'bottom'){
+        if($('#distance').val() > 0 && parseFloat($('#distance').val()) > parseFloat(($('#attribute_W').val() - 0.22))){
+          $( "<small id='js-hole-distance-error' class='js-error'></small>" ).insertAfter("#distance");
+          $("#js-hole-distance-error").html("Hole location is too close to Flange B").css('color', 'red');
+          flag = false;
+        }
+        if($('#distance2').val() > 0 && parseFloat($('#distance2').val()) > parseFloat(($('#attribute_L').val() - 0.22))){
+          $( "<small id='js-hole-distance2-error' class='js-error'></small>" ).insertAfter("#distance2");
+          $("#js-hole-distance2-error").html("Hole location is too close to Flange C").css('color', 'red');
+          flag = false;
+        } 
+      }
+    }
+    if($('#diameter:visible').length != 0) {
+      if($("#diameter").val() == "" || $("#diameter").val() == 0){
+        $( "<small id='js-hole-diameter-error' class='js-error'></small>" ).insertAfter("#diameter");
+        $("#js-hole-diameter-error").html("Please enter diameter").css('color', 'red');
+        flag = false;
+      }
+      if($('#diameter').val() > 0 && parseFloat($('#diameter').val()) > parseFloat(($('#attribute_H').val() - 0.9))){
+        $( "<small id='js-hole-diameter-error' class='js-error'></small>" ).insertAfter("#diameter");
+        $("#js-hole-diameter-error").html("Hole diameter is too large").css('color', 'red');
+        flag = false;
+      }
+    }
+    return flag;
+  }
+}
+
+function resetErrorFields()
+{
+  $("#js-material-type-error").html("");
+  $("#js-material-size-error").html("");
+  $("#js-material-qty-error").html("");
+  $("#js-pan-error").html("");
+
+  if($('#js-length-error').length != 0){
+    $("#js-length-error").html("");
+    $("#js-length-error").remove();
+  }
+  
+  if($('#js-width-error').length != 0){
+    $("#js-width-error").html("");
+    $("#js-width-error").remove();
+  }
+  if($('#js-height-error').length != 0){
+    $("#js-height-error").html("");
+    $("#js-height-error").remove();
+  }
+
+  $("#js-fornt-height-error").html("");
+  $("#js-hole-location-error").html("");
+  $("#js-hole-distance-error").html("");
+  $("#js-hole-distance2-error").html("");
+  $("#js-hole-diameter-error").html("");
 }

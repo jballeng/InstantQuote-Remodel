@@ -1,10 +1,12 @@
 <?php
 
-require _PS_MODULE_DIR_.'instantquote/pricecalculators/autoload.php';
+require _PS_MODULE_DIR_ . 'instantquote/pricecalculators/autoload.php';
 
-class instantquotePriceEngineModuleFrontController extends ModuleFrontControllerCore {
+class instantquotePriceEngineModuleFrontController extends ModuleFrontControllerCore
+{
 
-    public function initContent() {
+    public function initContent()
+    {
         parent::initContent();
 
         $validate['status'] = "error";
@@ -18,10 +20,9 @@ class instantquotePriceEngineModuleFrontController extends ModuleFrontController
 
                 $sqlClass = "SELECT price_engine_path,id_iq_shape FROM " . _DB_PREFIX_ . "iq_shapes WHERE id_iq_shape = $shapeId AND is_active = 1";
                 $shapeClassData = Db::getInstance()->getRow($sqlClass);
-                $sqlClass2 = "SELECT id_product, procure_method FROM " . _DB_PREFIX_ . "product WHERE store_id = $storeId {$sql_single} AND id_product > 0";
-                $item = Db::getInstance()->executeS($sqlClass2);
+
                 $shapeClass = $shapeClassData['price_engine_path'];
-                $item2 = $item['id_product'];
+
                 if (!empty($shapeClass)) {
                     $post_param = $_POST;
                     $meterial_data = new KmPanCostProcessor($post_param);
@@ -42,7 +43,7 @@ class instantquotePriceEngineModuleFrontController extends ModuleFrontController
                     $sqlType = "SELECT thickness_order FROM " . _DB_PREFIX_ . "iq_material_type WHERE id_iq_material_type = $material_type_id";
                     $typeResult = Db::getInstance()->getRow($sqlType);
 
-                    $orderby = ($typeResult['thickness_order'] == 'ASC' || $typeResult['thickness_order'] == 'DESC' ) ? $typeResult['thickness_order'] : 'ASC';
+                    $orderby = ($typeResult['thickness_order'] == 'ASC' || $typeResult['thickness_order'] == 'DESC') ? $typeResult['thickness_order'] : 'ASC';
                     $sql = "SELECT id_iq_material_size,display_name
                         FROM " . _DB_PREFIX_ . "iq_material_size T1
                         JOIN " . _DB_PREFIX_ . "iq_material_type T2
@@ -151,7 +152,8 @@ class instantquotePriceEngineModuleFrontController extends ModuleFrontController
      * shabeeb
      *
      *       */
-    function is_empty($value, $fieldname = "This", $message = "") {
+    function is_empty($value, $fieldname = "This", $message = "")
+    {
 
         if (!empty($value)) {
             return "";
@@ -161,5 +163,4 @@ class instantquotePriceEngineModuleFrontController extends ModuleFrontController
         else
             return $message;
     }
-
 }

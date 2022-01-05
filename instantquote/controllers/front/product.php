@@ -3,9 +3,11 @@
 require 'modules/instantquote/pricecalculators/autoload.php';
 require_once _PS_MODULE_DIR_ . 'instantquote/config.php';
 
-class InstantquoteproductModuleFrontController extends ModuleFrontControllerCore {
+class InstantquoteproductModuleFrontController extends ModuleFrontControllerCore 
+{
 
-    public function initContent() {
+    public function initContent() 
+    {
         parent::initContent();
         $validate['status'] = "error";
         $validate['data'] = array();
@@ -13,15 +15,19 @@ class InstantquoteproductModuleFrontController extends ModuleFrontControllerCore
         $this->ajax = true;
         $storeId = $this->context->shop->id;
 
-        if ($this->ajax) { //special variable to check if the call is ajax
+        if ($this->ajax) {
+            //special variable to check if the call is ajax
             // if ($post_methode == 'price_engine') {
             //         $sku = "KM-36-36-4141C1";
+            
             $sku = !empty($_POST['sku']) ? $_POST['sku'] : "";
             $shapeName = !empty($_POST['shapeName']) ? $_POST['shapeName'] : "";
             $qty = !empty($_POST['qty']) ? $_POST['qty'] : 0;
             $shapeId = !empty($_POST['shapeId']) ? (int) $_POST['shapeId'] : 0;
+            $imageFileName = !empty($_POST['imageFileName']) ? $_POST['imageFileName'] : 0;
+            $imageData = !empty($_POST['imageData']) ? $_POST['imageData'] : NULL;
             $productWeight = !empty($_POST['productWeight']) ? $_POST['productWeight'] : 0;
-
+            $materialType = !empty($_POST['material']) ? $_POST['material'] : NULL;
             //new changes ..taking from db
             $sqlClass = "SELECT price_engine_path,id_iq_shape,shape_image,display_name,title,note FROM " . _DB_PREFIX_ . "iq_shapes WHERE store_id = $storeId AND id_iq_shape = $shapeId  AND is_active = 1";
             $shapeClassData = Db::getInstance()->getRow($sqlClass);
@@ -35,38 +41,38 @@ class InstantquoteproductModuleFrontController extends ModuleFrontControllerCore
             $fieldDetails = $fieldData['data']['fields'];
             $priceData = $meterial_data->getPrice();
 
-
             $productLength = !empty($fieldDetails['L']) ? $fieldDetails['L'] : "";
             $productHeight = !empty($fieldDetails['H']) ? $fieldDetails['H'] : "";
             $productWidth = !empty($fieldDetails['W']) ? $fieldDetails['W'] : "";
             $productWeight = !empty($priceData['data']['weight']) ? $priceData['data']['weight'] : "";
             $odoo=new Odoo();
 
+            
             if (!empty($sku)) {
                 $sql = "SELECT id_product, id_category_default FROM " . _DB_PREFIX_ . "product WHERE reference = '$sku' ";
                 $product_data = Db::getInstance()->executeS($sql);
-
                 if (!empty($product_data)) {
+                    
                     $validate['status'] = "ok";
                     $productId = $product_data[0]['id_product'];
-                    $sqlUpdate = "UPDATE `ps_product` SET `weight`='{$productWeight}', `active`= 1 WHERE `id_product`='{$productId}';";
+                    $sqlUpdate = "UPDATE " . _DB_PREFIX_ . "product SET `weight`='{$productWeight}', `active`= 1 WHERE `id_product`='{$productId}';";
                     $productUpdate = Db::getInstance()->execute($sqlUpdate);
-                    $sqlUpdate2 = "UPDATE `ps_product_shop` SET `active`= 1 WHERE active = 0 AND `id_product`='{$productId}';";
+                    $sqlUpdate2 = "UPDATE " . _DB_PREFIX_ . "product_shop SET `active`= 1 WHERE active = 0 AND `id_product`='{$productId}';";
                     $productUpdate2 = Db::getInstance()->execute($sqlUpdate2);
 
-		    $product = new Product((int) $productId);
-		    $categoryProductData = $product->getWsCategories();
-		    if(empty($categoryProductData)) {
-	                 $product->setWsCategories(array($product_data[0]['id_category_default']));
-	            }
+                    $product = new Product((int) $productId);
+                    $categoryProductData = $product->getWsCategories();
+                    if(empty($categoryProductData)) {
+                        $product->setWsCategories(array($product_data[0]['id_category_default']));
+                    }
 
                     $attachments = Product::getAttachmentsStatic($this->context->language->id, $productId);
                     foreach ($attachments as $row) {
                         $attachmentId = $row['id_attachment'];
                         break;
                     }
-
-                    $this->syncProductToOdoo($productId, $attachmentId);
+                    if(!empty($attachmentId))
+                        $this->syncProductToOdoo($productId, $attachmentId);
 
                 } else {
                     $validate['status'] = "ok";
@@ -90,68 +96,50 @@ class InstantquoteproductModuleFrontController extends ModuleFrontControllerCore
                     $product->id_tax_rules_group = 0;//IQ_DEFAULT_TAXRULE;
                     //$product->price = $priceData['data']['orig_price'];
                     $product->id_category_default =Configuration::get('IQ_DEFAULT_CATEGORY');
+                    $product->material_type = $materialType;
 
-                  //  $sqltaxCheck = "SELECT id_tax_rules_group FROM " . _DB_PREFIX_ . "tax_rules_group WHERE id_tax_rules_group = " . IQ_DEFAULT_TAXRULE . ";";
-                  //  $taxCheck = Db::getInstance()->getRow($sqltaxCheck);
+                    //  $sqltaxCheck = "SELECT id_tax_rules_group FROM " . _DB_PREFIX_ . "tax_rules_group WHERE id_tax_rules_group = " . IQ_DEFAULT_TAXRULE . ";";
+                    //  $taxCheck = Db::getInstance()->getRow($sqltaxCheck);
 
-                 //   if (empty($taxCheck)) {
-                 //        $validate['status'] = "error";
-                 //       goto end;
-                 //   }
+                    //   if (empty($taxCheck)) {
+                    //        $validate['status'] = "error";
+                    //       goto end;
+                    //   }
 
-                    $product->add();
-                    $product->setWsCategories(array($product->id_category_default));
-                    $productId = $product->id;
+                    // $product->add();
+                    // $product->setWsCategories(array($product->id_category_default));
+                    // $productId = $product->id;
 
-                    $sqlProductAttachment = "SELECT ds_product_atatchment FROM " . _DB_PREFIX_ . "iq_shapes WHERE id_iq_shape={$shapeId}";
+                    $imageFilePath = _PS_ROOT_DIR_ . "/download/" . $imageFileName;
+                    $bin = base64_decode($imageData, true);
+                    file_put_contents($imageFilePath, $bin);
+                    $uniqid = $imageFileName;
+                    $mime = mime_content_type($imageFilePath);
 
-                    //attachment
-                    $productAttachment = Db::getInstance()->getRow($sqlProductAttachment);
-                    $attachmentName = $productAttachment['ds_product_atatchment'];
-                    if (!empty($attachmentName)) {
-                        $attachmentpath = _PS_MODULE_DIR_ . "/instantquote/images/productattachment/" . $attachmentName;
-                        $uniqid = $attachmentName; //mime_content_type ($attachmentpath)
-                        $mime = mime_content_type($attachmentpath);
-
-                        $sqlAttachment = "SELECT id_attachment FROM " . _DB_PREFIX_ . "attachment WHERE `file_name` = '{$uniqid}';";
-                        $attachment = Db::getInstance()->getRow($sqlAttachment);
-
-                        if (empty($attachment['id_attachment'])) {
-
-                            $attachment = new Attachment();
-                            foreach (Language::getLanguages(false) as $language) {
-                                $attachment->name[(int) $language['id_lang']] = $uniqid;
-                                $attachment->description[(int) $language['id_lang']] = $uniqid;
-                            }
-                            $attachment->file = $uniqid;
-                            $attachment->mime = $mime;
-                            $attachment->file_name = $uniqid;
-                            $attachment->file_type = 'Drawing';
-                            $res = $attachment->add();
-
-                            $destinationPath = _PS_ROOT_DIR_ . "/download/" . $attachmentName;
-                            if (!copy($attachmentpath, $destinationPath)) {
-                                $validate['status'] = "error";
-                                $validate['data']['error'] = "Attachment is not copied";
-                            }
-                        } else {
-
-                            $attachment = new Attachment($attachment['id_attachment']);
+                    $sqlAttachment = "SELECT id_attachment FROM " . _DB_PREFIX_ . "attachment WHERE `file_name` = '{$uniqid}';";
+                    $attachment = Db::getInstance()->getRow($sqlAttachment);
+                    if (empty($attachment['id_attachment'])) {
+                        $attachment = new Attachment();
+                        foreach (Language::getLanguages(false) as $language) {
+                            $attachment->name[(int) $language['id_lang']] = $uniqid;
+                            $attachment->description[(int) $language['id_lang']] = $uniqid;
                         }
-                        $attachment->attachProduct($productId);
+                        $attachment->file = $uniqid;
+                        $attachment->mime = $mime;
+                        $attachment->file_name = $uniqid;
+                        $attachment->file_type = 'Drawing';
+                        $res = $attachment->add();
+
+                    } else {
+                        $attachment = new Attachment($attachment['id_attachment']);
                     }
-
-
                     $this->syncProductToOdoo($productId, $attachment->id);
-
                 }
             }
-
             $validate['data']['productId'] = $productId;
-
             end:
-              //  $validate['data'] = array();
-           // $validate['status'] = "error";
+            //  $validate['data'] = array();
+            // $validate['status'] = "error";
         }
         echo json_encode($validate);
     }
@@ -243,5 +231,4 @@ class InstantquoteproductModuleFrontController extends ModuleFrontControllerCore
         $self_api_key = $self_api_key[0]['key'];
         return $self_api_key;
     }
-
 }

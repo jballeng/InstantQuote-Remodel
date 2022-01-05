@@ -27,11 +27,13 @@
 if (!defined('_PS_VERSION_'))
     exit;
 
-class instantquote extends Module {
+class instantquote extends Module
+{
 
     protected $config_form = false;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->name = 'instantquote';
         $this->tab = 'front_office_features';
         $this->version = '2.1.1';
@@ -57,7 +59,8 @@ class instantquote extends Module {
      * Don't forget to create update methods if needed:
      * http://doc.prestashop.com/display/PS16/Enabling+the+Auto-Update
      */
-    public function install() {
+    public function install()
+    {
          Configuration::updateValue('IQ_DEFAULT_CATEGORY', $this->context->shop->id_category);
          include(dirname(__FILE__).'/sql/install.php');
         return parent::install() &&
@@ -66,7 +69,8 @@ class instantquote extends Module {
                 $this->registerHook('backOfficeHeader') &&
                 $this->registerHook('displayHeader');
     }
-    public function uninstall() {
+    public function uninstall()
+    {
         Configuration::deleteByName('IQ_DEFAULT_CATEGORY');
          include(dirname(__FILE__).'/sql/uninstall.php');
         return parent::uninstall() &&
@@ -76,7 +80,8 @@ class instantquote extends Module {
     /**
      * Load the configuration form
      */
-    public function getContent() {
+    public function getContent()
+    {
         /**
          * If values have been submitted in the form, process.
          */
@@ -92,7 +97,8 @@ class instantquote extends Module {
     /**
      * Create the form that will be displayed in the configuration of your module.
      */
-    protected function renderForm() {
+    protected function renderForm()
+    {
         $helper = new HelperForm();
 
         $helper->show_toolbar = false;
@@ -119,7 +125,8 @@ class instantquote extends Module {
     /**
      * Create the structure of your form.
      */
-    protected function getConfigForm() {
+    protected function getConfigForm()
+    {
 
         $selected_categories = array(Configuration::get('IQ_DEFAULT_CATEGORY'));
         if(empty($selected_categories)|| empty($selected_categories[0]))
@@ -154,7 +161,8 @@ class instantquote extends Module {
     /**
      * Set values for the inputs.
      */
-    protected function getConfigFormValues() {
+    protected function getConfigFormValues()
+    {
         return array(
             'instantquote_LIVE_MODE' => Configuration::get('instantquote_LIVE_MODE', true),
             'instantquote_ACCOUNT_EMAIL' => Configuration::get('instantquote_ACCOUNT_EMAIL', 'contact@prestashop.com'),
@@ -165,7 +173,8 @@ class instantquote extends Module {
     /**
      * Save form data.
      */
-    protected function _postProcess() {
+    protected function _postProcess()
+    {
         $form_values = $this->getConfigFormValues();
         if(!empty(Tools::getValue('id_category')))
             Configuration::updateValue('IQ_DEFAULT_CATEGORY', Tools::getValue('id_category'));
@@ -174,7 +183,8 @@ class instantquote extends Module {
     /**
      * Add the CSS & JavaScript files you want to be loaded in the BO.
      */
-    public function hookBackOfficeHeader() {
+    public function hookBackOfficeHeader()
+    {
         $this->context->controller->addJS($this->_path . 'js/back.js');
         $this->context->controller->addJS($this->_path . 'js/material.js');
         $this->context->controller->addJS($this->_path . 'js/jquery-ui.js');
@@ -185,13 +195,15 @@ class instantquote extends Module {
     /**
      * Add the CSS & JavaScript files you want to be added on the FO.
      */
-    public function hookHeader() {
+    public function hookHeader()
+    {
         $this->context->controller->addJS($this->_path . '/js/front.js');
         $this->context->controller->addCSS($this->_path . '/css/front.css');
 
     }
 
-    public function hookDisplayHeader() {
+    public function hookDisplayHeader()
+    {
         $this->context->controller->addCSS($this->_path . 'css/findAPan.css');
         $this->context->controller->addJS($this->_path . 'js/jquery.validate.js');
 	/* Place your code here. */
@@ -218,7 +230,8 @@ class instantquote extends Module {
      * Function to add Admin menus for Instant Quote while Install
      * @return boolean
      */
-     public function registerTab() {
+    public function registerTab()
+    {
          // Insert Parent Tab
          $data = array(
              'class_name' => 'AdminParentInstantQuote',
@@ -291,7 +304,8 @@ class instantquote extends Module {
      * Function to remove Admin menus for Instant Quote while Uninstall
      * @return boolean
      */
-    public function uninstallTab() {
+    public function uninstallTab()
+    {
         $idTab = Tab::getIdFromClassName('AdminParentInstantQuote');
         if ($idTab != 0) {
             $tab = new Tab($idTab);
