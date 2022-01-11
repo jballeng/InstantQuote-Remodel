@@ -694,10 +694,10 @@ class KmPanCostProcessor {
         $labourCost = $this->getLabourCost();
         $setUpCost = $this->getSetUpCost();
         $aditionalCost = ($this->L >= $this->_maxLength) ? $this->_aditionalCost : 0;
-
+        $quantity = $this->materialQty
 
         //adding all cost together.
-        $totalMaterial = ($materialCost + $manufacturingCost)/0.5;
+        $totalMaterial = (($materialCost + $manufacturingCost)/0.5)/$quantity;
 /*
         $marginCost = $this->getMargin();
         if (!empty($marginCost)) {
@@ -725,14 +725,15 @@ class KmPanCostProcessor {
 
     private function getTotalCostWithoutMargin() {
 
-
         $materialCost = $this->getMaterialCost();
+        $manufacturingCost = $this->getManufacturingCost();
+        
         $labourCost = $this->getLabourCost();
         $setUpCost = $this->getSetUpCost();
 
            $aditionalCost = ($this->L >= $this->_maxLength) ? $this->_aditionalCost : 0;
         //adding all cost together.
-        $totalMaterial = $materialCost + $labourCost + $setUpCost + $aditionalCost;
+        $totalMaterial = $materialCost + $manufacturingCost;
 
 
         $total = \Tools::ps_round($totalMaterial, 2);
@@ -793,10 +794,10 @@ class KmPanCostProcessor {
         $materialCost = $sheet_cost * ($cru/2000) * 1.3;
       }else{
         if($this->materialType == 2){
-            $cru = 1919;
+            $cru = 2103;
         }
         if($this->materialType == 3){
-            $cru = 1914;
+            $cru = 2156;
         }
         if($bl <= 24 && $bw <= 24){
           $sheet_cost = 24 * 24 * $thick * 0.284;

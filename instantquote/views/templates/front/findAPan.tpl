@@ -42,9 +42,6 @@
 
 <div id="materialSizeDiv" style="float:right; font-size:22px; padding-left:75px">
 	<h3>Material Thickness
-		<div class="jb_tooltip">?
-		<span class="jb_tooltiptext">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum."</span>
-		</div>
 	</h3>
 	<br>
 	<select id="material_size_id" name="material_size">
@@ -60,11 +57,7 @@
 
 
 			<div class="swiper">
-			<h3>Pan Design
-				<div class="jb_tooltip">?
-				<span class="jb_tooltiptext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum.</span>
-				</div>
-			</h3>
+			<h3>Pan Design</h3>
 			<div id="panDesign" style="float:left; padding-right:75px;">
 				<h3 style="font-size:22px">Front Load or Flat Pan</h3>
 				<label for="flatPan">Flat</label>
@@ -110,11 +103,7 @@
 
 		<div class="swiper">
 
-				<h3>Dimensions
-					<div class="jb_tooltip">?
-					<span class="jb_tooltiptext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum.</span>
-					</div>
-				</h3>
+				<h3>Dimensions</h3>
 
 
 				<div class="wlbox" id="lwh" style="float:left">
@@ -266,12 +255,7 @@
 			</script>
 			<div id="swiper" class="swiper">
 <div class="lastStep">
-			<h3>Add Ons
-				<div class="jb_tooltip">?
-				<span class="jb_tooltiptext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum.</span>
-				</div>
-
-			</h3>
+			<h3>Add Ons</h3>
 
 				<input type="checkbox" id="DPF1" value="5.97">
 				<label for="DPF1">Drain Pan Fitting - 1" NPT-PVC</label><br><br>
