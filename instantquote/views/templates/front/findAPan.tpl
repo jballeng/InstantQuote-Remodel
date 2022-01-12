@@ -42,40 +42,28 @@
                     </select>
                     <small id="js-material-size-error" class="js-error"></small>
                     <br><br>
-                    <h4>Quantity</h4><br>
+<br><br>
+
+<label for="material_qty">Quantity</label><br>
                     <input type="text" id="material_qty" name="material_qty" size="12" maxlength="3" value="1" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
                     <small id="js-material-qty-error" class="js-error"></small>
                 </div>
             </div>
             <div class="swiper">
-                <h3>
-                    Pan Design
-                    <div class="jb_tooltip">?
-                        <span class="jb_tooltiptext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum.</span>
-                    </div>
-                </h3>
-                <div id="panDesign" style="">
+			<h3>Pan Design</h3>
+			<div id="panDesign" style="float:left; padding-right:75px;">
                     <h3 style="font-size:22px">Front Load or Flat Pan</h3>
-                    <label for="flatPan">
-                    <input type="radio" id="flatPan" name="pan" onclick="showFront()">
-                    Flat</label>
-                    <br>
-                    <label for="frontPan">
+				<label for="flatPan">Flat</label>
+				<input type="radio" id="flatPan" name="pan" onclick="showFront()"><br>
+				<label for="frontPan">Front Load</label>
                     <input type="radio" id="frontPan" name="pan" onclick="showFront()">
-                    Front Load</label>
-                    <br>
-                    <small id="js-pan-error" class="js-error"></small>
-                    <br>
-                    <br>
-
+				<br><br>
+<small id="js-pan-error" class="js-error"></small>
                     <h3 style="font-size:22px">Drain Hole?</h3>
-                    <label for="yesHole" style="font-size:22px">
-                    <input type="radio" id="yesHole" name="holes" onclick="showMe()">
-                    Yes</label>
-                    <br>
-                    <label for="noHole" style="font-size:22px">
+				<label for="yesHole" style="font-size:22px">Yes</label>
+				<input type="radio" id="yesHole" name="holes" onclick="showMe()"><br>
+				<label for="noHole" style="font-size:22px">No</label>
                     <input type="radio" id="noHole" name="holes" onclick = "showMe()" checked>
-                    No</label>
                     <br><br>
                 </div>
                 <div id="img1" style="float:right">
@@ -104,13 +92,8 @@
                 
             </script>
             <div class="swiper">
-                <h3>
-                    Dimensions
-                    <div class="jb_tooltip">?
-                        <span class="jb_tooltiptext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies sem ac nisl efficitur auctor. In ligula erat, eleifend bibendum risus at, bibendum varius nisl. Nam nec eros a nunc fringilla scelerisque. Nulla facilisi. Aenean nunc elit, consequat et leo ut, facilisis elementum nisl. Cras ultricies enim id est consectetur molestie. Mauris et nisl lobortis, sodales nisi ut, accumsan ipsum.</span>
-                    </div>
-                </h3>
-                <div class="wlbox" id="lwh" style="">
+				<h3>Dimensions</h3>
+                <div class="wlbox" id="lwh" style="float:left">
                     {foreach from=$shapeInputsData item=inputshape}
                     {$inputshape.display_name}<br>
                     <input type="text" class="form-control AttributeInput {str_replace(",", " ",$inputshape.properties)}" id="attribute_{$inputshape.param}" size="10" maxlength="7" value="{if isset($fieldDetails[$inputshape.param])}{$fieldDetails[$inputshape.param]}{/if}" name="{$inputshape.param}" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')">
@@ -120,7 +103,7 @@
                     <div id="holes" style="display: none">
                         <label for="holeLocation" id="holeLabel">Hole Location</label><br>
                         <select name="holeLocation" id="holeLocation" style="width:75px">
-                            <option value="" selected disabled hidden>Please Select</option>
+						<option value="none" selected disabled hidden>Please Select</option>
                             <option id="upper" value="upper">A</option>
                             <option id="right" value="right">B</option>
                             <option id="lower" value="lower">C</option>
