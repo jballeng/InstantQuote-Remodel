@@ -106,9 +106,9 @@ class InstantquoteproductModuleFrontController extends ModuleFrontControllerCore
                     //       goto end;
                     //   }
 
-                    // $product->add();
-                    // $product->setWsCategories(array($product->id_category_default));
-                    // $productId = $product->id;
+                    $product->add();
+                    $product->setWsCategories(array($product->id_category_default));
+                    $productId = $product->id;
 
                     $imageFilePath = _PS_ROOT_DIR_ . "/download/" . $imageFileName;
                     $bin = base64_decode($imageData, true);
@@ -133,11 +133,12 @@ class InstantquoteproductModuleFrontController extends ModuleFrontControllerCore
                     } else {
                         $attachment = new Attachment($attachment['id_attachment']);
                     }
+                    $attachment->attachProduct($productId);
                     $this->syncProductToOdoo($productId, $attachment->id);
                 }
             }
             $validate['data']['productId'] = $productId;
-            end:
+            //end:
             //  $validate['data'] = array();
             // $validate['status'] = "error";
         }
@@ -149,6 +150,10 @@ class InstantquoteproductModuleFrontController extends ModuleFrontControllerCore
         $opt['resource'] = 'products';
         $opt['id'] = $productId;
         $odoo = new Odoo();
+        $erp_connection_params = unserialize(Configuration::get('ERP_CONNECTION_PARAMS'));
+        if(empty($erp_connection_params)){
+            return;
+        }
 
         $product_data =   $odoo->getDataFromSelfAPI($opt, $self_api_key);
         //attachments

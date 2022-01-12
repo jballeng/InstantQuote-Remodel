@@ -46,6 +46,8 @@ $(function () {
 			var contact_email = $("#contact_email").val();
 			var company_name = $("#company_name").val();
 			var contact_number = $("#contact_number").val();
+			var drawingFileName = $("#drawingImageFileName").val();
+			var drawingFileData = $("#drawingImageData").val();
 
 			$.ajax({
 				url: base_url + "module/instantquote/customerQuote",
@@ -53,12 +55,16 @@ $(function () {
                 data: {
       				action : 'saveCustomerQuote',
       				ajax : true,
+					processData: false,
+    				contentType: 'application/octet-stream',
                 	business_personal: business_personal,
                 	first_name: first_name,
                 	last_name: last_name,
                 	contact_email: contact_email,
                 	company_name: company_name,
-                	contact_number: contact_number
+                	contact_number: contact_number,
+					drawingFileName: drawingFileName,
+					drawingFileData: drawingFileData
                 },
 				success: function (result) {
 					$("#js-customer-contact-submit").attr('disabled', false);

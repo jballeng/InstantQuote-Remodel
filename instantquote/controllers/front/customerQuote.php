@@ -15,12 +15,16 @@ class instantquoteCustomerQuoteModuleFrontController extends ModuleFrontControll
         $contact_number = trim(Tools::getValue('contact_number'));
         $contact_email = trim(Tools::getValue('contact_email'));
         $business_personal = trim(Tools::getValue('business_personal'));
+        $drawingData['name'] = $drawingData['basename'] = trim(Tools::getValue('drawingFileName'));
+        $imageData = base64_decode($_REQUEST['drawingFileData']);
+        $drawingData['content'] = base64_encode($imageData);
         $rfqDetails=array(
             'first_name' => $first_name,
             'last_name' =>$last_name,
             'company_name' =>$company_name,
             'contact_number' => $contact_number,
             'contact_email' =>$contact_email,
+            'attachments' => array($drawingData)
         );
         $mail_data = array(
             '{first_name}' => $first_name,
