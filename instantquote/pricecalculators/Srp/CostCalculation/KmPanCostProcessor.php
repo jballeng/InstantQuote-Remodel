@@ -694,7 +694,7 @@ class KmPanCostProcessor {
         $labourCost = $this->getLabourCost();
         $setUpCost = $this->getSetUpCost();
         $aditionalCost = ($this->L >= $this->_maxLength) ? $this->_aditionalCost : 0;
-        $quantity = $this->materialQty
+        $quantity = $this->materialQty;
 
         //adding all cost together.
         $totalMaterial = (($materialCost + $manufacturingCost)/0.5)/$quantity;
