@@ -13,7 +13,8 @@
 
 //namespace Srp\CostCalculation;
 
-class KmPanCostProcessor {
+class KmPanCostProcessor
+{
     /*
      * Shape id of material
      * @param type : int
@@ -176,7 +177,7 @@ class KmPanCostProcessor {
      * */
     private $_aditionalCost = 30;
 
-     /*
+    /*
      * max length to set additional cost
      * @param type : int
      *
@@ -202,7 +203,8 @@ class KmPanCostProcessor {
      * @return will set the parameter
      */
 
-    public function __construct($params = array()) {
+    public function __construct($params = array())
+    {
 
         if (isset($params['sku'])) {
 
@@ -234,8 +236,6 @@ class KmPanCostProcessor {
                 // $this->_swapFields[$this->heigthField] = $this->lengthField;
             }
         }
-
-
     }
 
     /*
@@ -249,10 +249,9 @@ class KmPanCostProcessor {
      * @return validation error or price details
      */
 
-    public function getPrice() {
-
-
-        
+    public function getPrice()
+    {
+        if ($this->validate()) {
             $this->validatStatus = false;
             $totalCost = $this->getTotalCost();
             $totalCostOriginal = $this->getTotalCostWithoutMargin();
@@ -266,7 +265,7 @@ class KmPanCostProcessor {
             //$result['data']['price'] =  \Tools::ps_round($costReturn, 2);
             $result['data']['price'] = number_format($costReturn, 2);
             $result['data']['orig_price'] = (float) round($costReturn, 2);
-            $result['data']['stock'] = ((isset($stockMethod['methode']) && $stockMethod['methode'] == 'IN_STOCK') && (isset($stockMethod['quantity']) && $stockMethod['quantity'] > 0 )) ? "In Stock" : "";
+            $result['data']['stock'] = ((isset($stockMethod['methode']) && $stockMethod['methode'] == 'IN_STOCK') && (isset($stockMethod['quantity']) && $stockMethod['quantity'] > 0)) ? "In Stock" : "";
             $result['data']['weight'] = (float) $this->getWeight();
             $result['data']['priceWithoutMargin'] = (float) $totalCostOriginal;
             $totalPrice = $result['data']['price'] * $this->materialQty;
@@ -277,12 +276,9 @@ class KmPanCostProcessor {
             if ($discountedPrice < $result['data']['orig_price']) {
                 $result['data']['discounted_price'] = number_format($discountedPrice, 2);
             }
-
-            
-        
-
-            
-        
+        } else {
+            $result['fieldErrors'] = $this->validatErrors;
+        }
 
         if ($this->_exceptionsErrors) {
             $this->validatStatus = true;
@@ -307,13 +303,14 @@ class KmPanCostProcessor {
      * @return validation error or price details
      */
 
-    public function getWeight() {
+    public function getWeight()
+    {
 
 
         $thickness = $maxWidth = $this->getMaterialAttribute('thickness');
         $density = $this->getDensity();
         $packingMaterial = $this->getPackingData(); // + 2*(Width*(Height+0.5)
-        $weight = (($this->L * $this->W) + 2 * ($this->L * ($this->H + 0.5)) + 2 * ($this->W * ($this->H + 0.5)) ) * $thickness * $density + $packingMaterial;
+        $weight = (($this->L * $this->W) + 2 * ($this->L * ($this->H + 0.5)) + 2 * ($this->W * ($this->H + 0.5))) * $thickness * $density + $packingMaterial;
 
         //  $weight = 25;
         return $weight;
@@ -330,7 +327,8 @@ class KmPanCostProcessor {
      * @return sku of product
      */
 
-    public function getSku() {
+    public function getSku()
+    {
 
 
         //  KM-36-36-4-18G
@@ -352,7 +350,8 @@ class KmPanCostProcessor {
      * @return
      */
 
-    public function getFieldValues() {
+    public function getFieldValues()
+    {
         $fieldsData = array();
 
         //if ($this->validate()) {
@@ -399,7 +398,8 @@ class KmPanCostProcessor {
      * @return bool
      */
 
-    private function validate() {
+    private function validate()
+    {
 
         $this->isEmpty($this->lengthField, $this->L);
         $this->isEmpty($this->widthField, $this->W);
@@ -421,7 +421,8 @@ class KmPanCostProcessor {
             $this->W = (float) $this->W;
             $this->H = (float) $this->H;
 
-/*
+
+            /*
             $this->validateWidth();
             $this->validateHeight();
             $this->validateLength();
@@ -449,7 +450,8 @@ class KmPanCostProcessor {
      * @return  :  set the validation error corresponding to the field
      */
 
-    private function isEmpty($input_name, $value, $fieldname = "This", $message = "") {
+    private function isEmpty($input_name, $value, $fieldname = "This", $message = "")
+    {
         if (empty($value)) {
             if (empty($message))
                 $this->validatErrors[$input_name] = $fieldname . " field is required";
@@ -471,7 +473,8 @@ class KmPanCostProcessor {
      * @return  :  set the validation error corresponding to the field
      */
 
-    private function isNumeric($input_name, $value, $fieldname = "This", $message = "") {
+    private function isNumeric($input_name, $value, $fieldname = "This", $message = "")
+    {
         if (!is_numeric($value)) {
             if (empty($message))
                 $this->validatErrors[$input_name] = $fieldname . " field should contain numbers only";
@@ -489,7 +492,8 @@ class KmPanCostProcessor {
      * @returntype
      * @return  :  set the validation error corresponding to the field
      */
-/*
+
+    /*
     private function validateWidth() {
 
         $maxWidth = $this->getMaterialAttribute('max_width');
@@ -500,7 +504,7 @@ class KmPanCostProcessor {
         }
 
         return false;
-    }
+    }*/
 
     /*
      * Validation methode to check the height calulation of field
@@ -511,6 +515,7 @@ class KmPanCostProcessor {
      * @returntype
      * @return  :  set the validation error corresponding to the field
      */
+
     /*
     private function validateHeight() {
 
@@ -532,7 +537,7 @@ class KmPanCostProcessor {
 
 
         return false;
-    }
+    }*/
 
     /*
      * Validation methode to check the Length calulation of field
@@ -543,7 +548,8 @@ class KmPanCostProcessor {
      * @returntype
      * @return  :  set the validation error corresponding to the field
      */
-/*
+
+    /*
     private function validateLength() {
 
 
@@ -557,7 +563,7 @@ class KmPanCostProcessor {
 
 
         return false;
-    }
+    }*/
 
     /*
      * Validation methode to check the qty of material needed
@@ -569,15 +575,16 @@ class KmPanCostProcessor {
      * @return  :  set the validation error corresponding to the field
      */
 
-    private function validateQuantity() {
+    private function validateQuantity()
+    {
 
         if (!is_numeric($this->materialQty)) {
             $this->validatErrors[$this->materialQtyField] = "Quantity Needed field should be number";
         }
-//        if (( $this->materialQty > 10)) {
-//            //$this->validatErrors[$this->materialQtyField] = "Instant pricing is not available for volume orders. A Killarney Metals representative will quote your requirement and contact you shortly.";
-//            $this->validatWarnings[] = "Instant pricing is not available for volume orders. A Killarney Metals representative will quote your requirement and contact you shortly.";
-//        }
+        //        if (( $this->materialQty > 10)) {
+        //            //$this->validatErrors[$this->materialQtyField] = "Instant pricing is not available for volume orders. A Killarney Metals representative will quote your requirement and contact you shortly.";
+        //            $this->validatWarnings[] = "Instant pricing is not available for volume orders. A Killarney Metals representative will quote your requirement and contact you shortly.";
+        //        }
         return false;
     }
 
@@ -592,7 +599,8 @@ class KmPanCostProcessor {
      * @return set all constants
      */
 
-    private function getAllConstants() {
+    private function getAllConstants()
+    {
         static $constants = array();
         //$constants = array();
         if (empty($constants)) {
@@ -617,7 +625,8 @@ class KmPanCostProcessor {
      * @return value of the constant
      */
 
-    private function getConstant($key) {
+    private function getConstant($key)
+    {
         $constants = $this->getAllConstants();
         if (isset($constants[$key])) {
             return $constants[$key];
@@ -638,7 +647,8 @@ class KmPanCostProcessor {
      * @return set all constants
      */
 
-    private function getMaterialData() {
+    private function getMaterialData()
+    {
         static $materialSize = array();
         // $materialSize = array();
         if (empty($materialSize[$this->materialSize])) {
@@ -666,7 +676,8 @@ class KmPanCostProcessor {
      * @return value of the constant
      */
 
-    private function getMaterialAttribute($key) {
+    private function getMaterialAttribute($key)
+    {
         $materialSize = $this->getMaterialData();
         if (isset($materialSize[$key])) {
             return $materialSize[$key];
@@ -687,7 +698,8 @@ class KmPanCostProcessor {
      * @return validation error or price details
      */
 
-    private function getTotalCost() {
+    private function getTotalCost()
+    {
 
 
         $materialCost = $this->getMaterialCost();
@@ -695,11 +707,12 @@ class KmPanCostProcessor {
         $labourCost = $this->getLabourCost();
         $setUpCost = $this->getSetUpCost();
         $aditionalCost = ($this->L >= $this->_maxLength) ? $this->_aditionalCost : 0;
+
         $quan = $this->materialQty;
 
         //adding all cost together.
-        $totalMaterial = (($materialCost + $manufacturingCost)/0.5)/$quan;
-/*
+        $totalMaterial = (($materialCost + $manufacturingCost) / 0.5) / $quan;
+        /*
         $marginCost = $this->getMargin();
         if (!empty($marginCost)) {
             $total = ($totalMaterial / (1 - $marginCost));
@@ -724,15 +737,16 @@ class KmPanCostProcessor {
      * @return validation error or price details
      */
 
-    private function getTotalCostWithoutMargin() {
+    private function getTotalCostWithoutMargin()
+    {
 
         $materialCost = $this->getMaterialCost();
         $manufacturingCost = $this->getManufacturingCost();
-        
+
         $labourCost = $this->getLabourCost();
         $setUpCost = $this->getSetUpCost();
 
-           $aditionalCost = ($this->L >= $this->_maxLength) ? $this->_aditionalCost : 0;
+        $aditionalCost = ($this->L >= $this->_maxLength) ? $this->_aditionalCost : 0;
         //adding all cost together.
         $totalMaterial = $materialCost + $manufacturingCost;
 
@@ -752,12 +766,13 @@ class KmPanCostProcessor {
      * @return material cost
      */
 
-     /*
+    /*
      * Material cost function has been updated due to a change in our pricing formula
      * notes below detail the changes and what the significant values are
      * minor changes to database and back office will be required
      */
-    private function getMaterialCost() {
+    private function getMaterialCost()
+    {
         $quan = $this->materialQty;
         $thick = $this->getMaterialAttribute('thickness');
         /*
@@ -775,52 +790,41 @@ class KmPanCostProcessor {
         $bl = (2 * $this->H + $this->L + 1) + 1;
         $bw = (2 * $this->H + $this->W + 1) + 1;
         //stainless steel has different sheet sizes compared to other materials
-        if($this->materialType == 1){
+        if ($this->materialType == 1) {
             $cru = 10000;
-          if($bl <= 36 && $bw <= 30){
-            $sheet_cost = 36 * 30 * $thick * 0.284;
-          }
-          elseif($bl <= 40 && $bw <= 36){
-            $sheet_cost = 40 * 36 * $thick * 0.284;
-          }
-          elseif($bl <= 48 && $bw <= 48){
-            $sheet_cost = 48 * 48 * $thick * 0.284;
-          }
-        elseif($bl <= 60 && $bw <= 36){
-          $sheet_cost = 60 * 36 * $thick * 0.284;
+            if ($bl <= 36 && $bw <= 30) {
+                $sheet_cost = 36 * 30 * $thick * 0.284;
+            } elseif ($bl <= 40 && $bw <= 36) {
+                $sheet_cost = 40 * 36 * $thick * 0.284;
+            } elseif ($bl <= 48 && $bw <= 48) {
+                $sheet_cost = 48 * 48 * $thick * 0.284;
+            } elseif ($bl <= 60 && $bw <= 36) {
+                $sheet_cost = 60 * 36 * $thick * 0.284;
+            } elseif ($bl <= 120 && $bw <= 36) {
+                $sheet_cost = 120 * 36 * $thick * 0.284;
+            }
+            $materialCost = $sheet_cost * ($cru / 2000) * 1.3;
+        } else {
+            if ($this->materialType == 2) {
+                $cru = 2103;
+            }
+            if ($this->materialType == 3) {
+                $cru = 2156;
+            }
+            if ($bl <= 24 && $bw <= 24) {
+                $sheet_cost = 24 * 24 * $thick * 0.284;
+            } elseif ($bl <= 48 && $bw <= 24) {
+                $sheet_cost = 48 * 24 * $thick * 0.284;
+            } elseif ($bl <= 48 && $bw <= 48) {
+                $sheet_cost = 48 * 48 * $thick * 0.284;
+            } elseif ($bl <= 120 && $bw <= 48) {
+                $sheet_cost = 120 * 48 * $thick * 0.284;
+            } elseif ($bl <= 120 && $bw <= 60) {
+                $sheet_cost = 120 * 60 + $thick * 0.284;
+            }
+            $materialCost = $sheet_cost * (($cru / 2000) * 1.25) * 1.3;
         }
-        elseif($bl <= 120 && $bw <= 36){
-          $sheet_cost = 120 * 36 * $thick * 0.284;
-        }
-        $materialCost = $sheet_cost * ($cru/2000) * 1.3;
-      }else{
-        if($this->materialType == 2){
-            $cru = 2103;
-        }
-        if($this->materialType == 3){
-            $cru = 2156;
-        }
-        if($bl <= 24 && $bw <= 24){
-          $sheet_cost = 24 * 24 * $thick * 0.284;
-        }
-        elseif($bl <=48 && $bw <= 24){
-          $sheet_cost = 48 * 24 * $thick * 0.284;
-        }
-        elseif($bl <=48 && $bw <= 48){
-          $sheet_cost = 48 * 48 * $thick * 0.284;
-        }
-        elseif($bl <= 120 && $bw <= 48){
-          $sheet_cost = 120 * 48 * $thick * 0.284;
-        }
-        elseif($bl <= 120 && $bw <= 60){
-          $sheet_cost = 120 * 60 + $thick * 0.284;
-        }
-        $materialCost = $sheet_cost * (($cru/2000) * 1.25) * 1.3;
-      }
-
-      
-      // updated formula to handle the cost of material
-        
+        // updated formula to handle the cost of material
         $totalMaterialCost = $materialCost * $quan;
 
         return $totalMaterialCost;
@@ -835,62 +839,49 @@ class KmPanCostProcessor {
     * if not this can be easily adjusted
     */
 
-    private function getManufacturingCost(){
-      $bl = (2 * $this->H + $this->L + 1) + 1;
-      $quantity = $this->materialQty;
-      if($bl <= 48){
-        if($quantity == 1){
-          $cost = 148.68;
+    private function getManufacturingCost()
+    {
+        $bl = (2 * $this->H + $this->L + 1) + 1;
+        $quantity = $this->materialQty;
+        if ($bl <= 48) {
+            if ($quantity == 1) {
+                $cost = 148.68;
+            } elseif ($quantity > 1 && $quantity < 5) {
+                $cost = 86.28;
+            } elseif ($quantity < 10) {
+                $cost = 48.85;
+            } elseif ($quantity < 25) {
+                $cost = 36.37;
+            } elseif ($quantity < 50) {
+                $cost = 28.88;
+            } elseif ($quantity < 75) {
+                $cost = 25.74;
+            } elseif ($quantity < 100) {
+                $cost = 24.93;
+            } elseif ($quantity >= 100) {
+                $cost = 24.12;
+            }
+        } else {
+            if ($quantity == 1) {
+                $cost = 164.43;
+            } elseif ($quantity > 1 && $quantity < 5) {
+                $cost = 102.03;
+            } elseif ($quantity < 10) {
+                $cost = 64.60;
+            } elseif ($quantity < 25) {
+                $cost = 52.12;
+            } elseif ($quantity < 50) {
+                $cost = 44.63;
+            } elseif ($quantity < 75) {
+                $cost = 41.25;
+            } elseif ($quantity < 100) {
+                $cost = 40.45;
+            } elseif ($quantity >= 100) {
+                $cost = 39.48;
+            }
         }
-        elseif($quantity > 1 && $quantity < 5){
-          $cost = 86.28;
-        }
-        elseif($quantity < 10){
-          $cost = 48.85;
-        }
-        elseif($quantity < 25){
-          $cost = 36.37;
-        }
-        elseif($quantity < 50){
-          $cost = 28.88;
-        }
-        elseif($quantity < 75){
-          $cost = 25.74;
-        }
-        elseif($quantity < 100){
-          $cost = 24.93;
-        }
-        elseif($quantity >= 100){
-          $cost = 24.12;
-        }
-      }else{
-        if($quantity == 1){
-          $cost = 164.43;
-        }
-        elseif($quantity > 1 && $quantity < 5){
-          $cost = 102.03;
-        }
-        elseif($quantity < 10){
-          $cost = 64.60;
-        }
-        elseif($quantity < 25){
-          $cost = 52.12;
-        }
-        elseif($quantity < 50){
-          $cost = 44.63;
-        }
-        elseif($quantity < 75){
-          $cost = 41.25;
-        }
-        elseif($quantity < 100){
-          $cost = 40.45;
-        }
-        elseif($quantity >= 100){
-          $cost = 39.48;
-        }
-      }
-      $total_cost = $cost * $quantity;
-      return $total_cost;
+        $total_cost = $cost * $quantity;
+        return $total_cost;
     }
 
 
@@ -905,7 +896,8 @@ class KmPanCostProcessor {
      * @return material margin value
      */
 
-    private function getProductPriceBySKU($sku = "") {
+    private function getProductPriceBySKU($sku = "")
+    {
 
         if (!empty($sku)) {
             $sql = "SELECT id_product,price FROM " . _DB_PREFIX_ . "product WHERE reference = '$sku' and is_iq_genarated = 0 ";
@@ -931,7 +923,8 @@ class KmPanCostProcessor {
      * @return material margin value
      */
 
-    private function getProductStock($sku = "") {
+    private function getProductStock($sku = "")
+    {
         $procure_method = array();
         if (!empty($sku)) {
             $sql = "SELECT p.id_product,procure_method,s.quantity  FROM " . _DB_PREFIX_ . "product p LEFT JOIN " . _DB_PREFIX_ . "stock_available s  ON p.id_product = s.id_product  WHERE reference = '$sku' ";
@@ -958,7 +951,8 @@ class KmPanCostProcessor {
      * @return material cost  for a volum area
      */
 
-    private function getSingleMaterialPrice() {
+    private function getSingleMaterialPrice()
+    {
         $materialPrice = $this->getMaterialAttribute('price');
         return $materialPrice;
     }
@@ -974,7 +968,8 @@ class KmPanCostProcessor {
      * @return Labour cost
      */
 
-    private function getLabourCost() {
+    private function getLabourCost()
+    {
         $laboutConst = $this->getConstant('KM_PAN_LABOUR_CONST');
         $weldConst = $this->getConstant('KM_PAN_WELD_CONST');
 
@@ -993,7 +988,8 @@ class KmPanCostProcessor {
      * @return Setup cost
      */
 
-    private function getSetUpCost() {
+    private function getSetUpCost()
+    {
 
         $setupConstant = $this->getConstant('KM_PAN_SETUP_CONST');
         $setupcost = $setupConstant / $this->materialQty;
@@ -1011,7 +1007,8 @@ class KmPanCostProcessor {
      * @return material margin value
      */
 
-    private function getMargin() {
+    private function getMargin()
+    {
 
 
 
@@ -1041,7 +1038,8 @@ class KmPanCostProcessor {
      * @returntype bool
      */
 
-    private function setInternalError($reason, $key = "") {
+    private function setInternalError($reason, $key = "")
+    {
 
         $this->_exceptionsErrors = true;
         empty($key) ? $this->_exceptionReason[] = $reason : $this->_exceptionReason[$key] = $reason;
@@ -1060,7 +1058,8 @@ class KmPanCostProcessor {
      * @return array of all internal errors or internal error with key
      */
 
-    public function getInternalError($key = "") {
+    public function getInternalError($key = "")
+    {
 
         $this->_exceptionsErrors = true;
         $result = empty($key) ? $this->_exceptionReason : $this->_exceptionReason[$key];
@@ -1078,7 +1077,8 @@ class KmPanCostProcessor {
      * @returntype array
      */
 
-    private function extractSKU($sku) {
+    private function extractSKU($sku)
+    {
 
         if (!empty($sku)) {
             //$sku = $this->_skuPrefix . $this->_skuSep . $this->L . $this->_skuSep . $this->W . $this->_skuSep . $this->H . $this->_skuSep . $measurement;
@@ -1098,7 +1098,8 @@ class KmPanCostProcessor {
      * @returntype array
      */
 
-    private function setSkuValues($sku, $qty) {
+    private function setSkuValues($sku, $qty)
+    {
 
         if (!empty($sku)) {
             $skuArray = $this->extractSKU($sku);
@@ -1107,8 +1108,7 @@ class KmPanCostProcessor {
             $this->W = isset($skuArray[2]) ? trim($skuArray[2]) : "";
             $this->H = isset($skuArray[3]) ? trim($skuArray[3]) : "";
 
-            if(isset($skuArray[4]))
-            {
+            if (isset($skuArray[4])) {
                 $materialIDList = $this->getMaterialIds(trim($skuArray[4]));
 
                 $this->materialType = $materialIDList['material_type_id'] ? trim($materialIDList['material_type_id']) : ""; //$params['material_type']; //$material_type;
@@ -1131,7 +1131,8 @@ class KmPanCostProcessor {
      * @return set all constants
      */
 
-    private function getMaterialIds($measurement) {
+    private function getMaterialIds($measurement)
+    {
         static $materialIDList = array();
         //$materialIDList = array();
         if (empty($materialIDList[$measurement])) {
@@ -1156,7 +1157,8 @@ class KmPanCostProcessor {
      * @return set all constants
      */
 
-    private function getPackingData() {
+    private function getPackingData()
+    {
 
         $sql = "SELECT  packing_material FROM  " . _DB_PREFIX_ . "iq_shapes WHERE id_iq_shape = " . $this->shapeId . " AND is_active = 1 ";
         $materialData = \Db::getInstance()->getRow($sql);
@@ -1175,12 +1177,12 @@ class KmPanCostProcessor {
      * @return set all constants
      */
 
-    private function getDensity() {
+    private function getDensity()
+    {
 
         $sql = "SELECT  density FROM  " . _DB_PREFIX_ . "iq_material_type WHERE id_iq_material_type = " . $this->materialType . " AND is_active = 1 ";
         $materialData = \Db::getInstance()->getRow($sql);
         $density = (float) $materialData['density'];
         return $density;
     }
-
 }
