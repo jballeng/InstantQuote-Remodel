@@ -421,11 +421,12 @@ class KmPanCostProcessor {
             $this->W = (float) $this->W;
             $this->H = (float) $this->H;
 
-
+/*
             $this->validateWidth();
             $this->validateHeight();
             $this->validateLength();
             $this->validateQuantity();
+            */
 
             if (empty($this->validatErrors)) {
                 return true;
@@ -694,10 +695,10 @@ class KmPanCostProcessor {
         $labourCost = $this->getLabourCost();
         $setUpCost = $this->getSetUpCost();
         $aditionalCost = ($this->L >= $this->_maxLength) ? $this->_aditionalCost : 0;
-        $quantity = $this->materialQty;
+        $quan = $this->materialQty;
 
         //adding all cost together.
-        $totalMaterial = (($materialCost + $manufacturingCost)/0.5)/$quantity;
+        $totalMaterial = (($materialCost + $manufacturingCost)/0.5)/$quan;
 /*
         $marginCost = $this->getMargin();
         if (!empty($marginCost)) {
@@ -765,7 +766,7 @@ class KmPanCostProcessor {
         * going forward this value will need to be added to the back office as it changes monthly
         * it may be easier to add it to the material type table since the gauge does not alter its price
         */
-        $cru;
+        $cru = 0;
         /*
         * bl and bw refer to blank length and blank width
         * with the new pricing structure these values are used to calculate the sheet used
