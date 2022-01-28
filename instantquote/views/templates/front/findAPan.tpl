@@ -6,7 +6,7 @@
             <a id="default" class="jb_breadcrumbItem" onclick="currentSlide(1)">Material</a>
             <a class="jb_breadcrumbItem" onclick="currentSlide(2)">Design</a>
             <a class="jb_breadcrumbItem" onclick="currentSlide(3)">Dimensions</a>
-            <a class="jb_breadcrumbItem" onclick="currentSlide(4)">Add Ons</a>
+            {* <a class="jb_breadcrumbItem" onclick="currentSlide(4)">Add Ons</a> *}
         </div>
         <br><br>
     </center>
@@ -106,7 +106,7 @@
                 <div class="wlbox" id="lwh" style="">
                     {foreach from=$shapeInputsData item=inputshape}
                     {$inputshape.display_name}<br>
-                    <input type="text" class="form-control AttributeInput {str_replace(",", " ",$inputshape.properties)}" id="attribute_{$inputshape.param}" size="10" maxlength="7" value="{if isset($fieldDetails[$inputshape.param])}{$fieldDetails[$inputshape.param]}{/if}" name="{$inputshape.param}" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
+                    <input type="text" class="form-control AttributeInput {str_replace(",", " ",$inputshape.properties)}" id="attribute_{$inputshape.param}" size="10" maxlength="7" value="{if isset($fieldDetails[$inputshape.param])}{$fieldDetails[$inputshape.param]}{/if}" name="{$inputshape.param}" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')">
                     {/foreach}
                     <label for="front_height" id="front" style="display: none">Front Height</label><br>
                     <input type="text" class="form-control" id="front_height" name="front_height" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" style="display: none" >
@@ -121,11 +121,11 @@
                             <option id="bottom" value="bottom">E</option>
                         </select>
                         <label for="distance" id="distance_label">Distance From</label><br>
-                        <input type="text" class="form-control" id="distance" name="distance" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
+                        <input type="text" class="form-control" id="distance" name="distance" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')">
                         <label for="distance2" id="distance2_label" style="display: none">Distance From Flange A</label>
-                        <input type="text" class="form-control" id="distance2" name="distance2" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" style="display: none">
+                        <input type="text" class="form-control" id="distance2" name="distance2" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')" style="display: none">
                         <label for="diameter" id="diam_label" >Hole Diameter:</label>
-                        <input type="text" class="form-control" id="diameter" name="diameter" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
+                        <input type="text" class="form-control" id="diameter" name="diameter" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')">
                     </div>
                 </div>
                 <script>
@@ -243,7 +243,7 @@
                 
                 
             </script>
-            <div id="swiper" class="swiper">
+            {* <div id="swiper" class="swiper">
                 <div class="lastStep">
                     <h3 style="margin-bottom:40px">
                         Add Ons
@@ -272,7 +272,7 @@
                 <div class="findPan">
                     <button class="btn" type="button" id="submit"onclick="finalCost()">Find Your Pan</button><br>
                 </div>
-            </div>
+            </div>*}
             <div class="iq-cart-section">
                 <span class="button_sec">
                 <input type="hidden" id="ajax"  value="true" name="ajax">
@@ -287,6 +287,7 @@
             <div class="swiper-controls">
                 <a class="prev" id="prev"  data-tab-index="-1">Previous</a>
                 <a class="next" id="next"  data-tab-index="1">Next</a>
+                <a class="prev find-pan-btn" id="submit" onclick="finalCost()" style="margin-right:0px; display:none;">Find Your Pan</a>
             </div>
     </div>
     
@@ -302,7 +303,7 @@
             <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'suggested')"
                 style="color:white">Suggested Products</button>
             <button class="tablinks" id="custom-quote"  style="color:white">Custom Quote</button>
-            <button class="tablinks" onclick="openTab(event, 'faq')" style="color:white">FAQ</button>
+            {* <button class="tablinks" onclick="openTab(event, 'faq')" style="color:white">FAQ</button> *}
         </div>
         <div id="custom" class="tabcontent">
             {include file='module:instantquote/views/templates/front/price-engine.tpl'}
@@ -353,7 +354,9 @@
                                 </div>
                             </div>                            
 
-                            <div class="form-group text-left mb-0">      
+                            <div class="form-group text-left pt-3 mb-0">
+                                <input type="hidden" id="drawingImageFileName" value="" name="imageFileName">
+                                <input type="hidden" id="drawingImageData" value="" name="imageData">
                                 <button type="submit" class="btn btn-primary" id="js-customer-contact-submit">Submit</button>
                             </div>
                         </form>

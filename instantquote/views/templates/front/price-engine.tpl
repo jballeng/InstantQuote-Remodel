@@ -25,7 +25,7 @@
             <button id="addtocart" class="btn btn-secondary py-2  btn-spin" name="addtocart" type="button"
                 style="display:none">
                 <i class="fto-glyph icon_btn"></i><span>Add to cart</span>
-            </button><br>
+            </button><br><br>
             <span>
             Disclaimer: By adding to cart and making purchase you have approved all specifications shown below and the part will be sent to production. Custom parts are not returnable. 
             </span><br>
