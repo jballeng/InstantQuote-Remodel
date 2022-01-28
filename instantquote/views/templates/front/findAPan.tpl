@@ -109,7 +109,7 @@
                     <input type="text" class="form-control AttributeInput {str_replace(",", " ",$inputshape.properties)}" id="attribute_{$inputshape.param}" size="10" maxlength="7" value="{if isset($fieldDetails[$inputshape.param])}{$fieldDetails[$inputshape.param]}{/if}" name="{$inputshape.param}" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')">
                     {/foreach}
                     <label for="front_height" id="front" style="display: none">Front Height</label><br>
-                    <input type="text" class="form-control" id="front_height" name="front_height" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" style="display: none" >
+                    <input type="text" class="form-control" id="front_height" name="front_height" maxlength="7" onkeyup="this.value = this.value.replace(/[^0-9, .]/, '')" style="display: none" >
                     <div id="holes" style="display: none">
                         <label for="holeLocation" id="holeLabel">Hole Location</label><br>
                         <select name="holeLocation" id="holeLocation" style="width:75px">
