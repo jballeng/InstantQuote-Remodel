@@ -4,9 +4,9 @@
     <center>
         <div id="jb_breadcrumb" class="jb_breadcrumb">
             <a id="default" class="jb_breadcrumbItem" onclick="currentSlide(1)">Material</a>
-            <a class="jb_breadcrumbItem" onclick="currentSlide(2)">Design</a>
-            <a class="jb_breadcrumbItem" onclick="currentSlide(3)">Dimensions</a>
-            {* <a class="jb_breadcrumbItem" onclick="currentSlide(4)">Add Ons</a> *}
+            <a class="jb_breadcrumbItem" onclick="">Design</a>
+            <a class="jb_breadcrumbItem" onclick="">Dimensions</a>
+           
         </div>
         <br><br>
     </center>

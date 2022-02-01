@@ -399,7 +399,7 @@ function getPrice() {
           $("#display_price").addClass("old_price");
         }
         $("#display_price").html("$" + result_data.price);
-        console.log("Final Price: " + result_data.price);
+        
 
         $("#addtocart").show();
         $("#spanFinalPrice").show();

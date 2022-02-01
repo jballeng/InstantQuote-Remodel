@@ -73,13 +73,13 @@ function showFront(){
   if(document.getElementById("frontPan").checked == true){
     document.getElementById("front").style.display = "inline";
     document.getElementById("front_height").style.display = "inline";
-    document.getElementById("bottom").style.display = "none";
+    document.getElementById("lower").style.display = "none";
     document.getElementById("left").style.display = "none";
     document.getElementById("right").style.display = "none";
   }else{
     document.getElementById("front").style.display = "none";
     document.getElementById("front_height").style.display = "none";
-    document.getElementById("bottom").style.display = "inline";
+    document.getElementById("lower").style.display = "inline";
     document.getElementById("left").style.display = "inline";
     document.getElementById("right").style.display = "inline";
   }
