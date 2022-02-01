@@ -941,6 +941,16 @@ function validateCustomFields(currentTab)
         $("#js-fornt-height-error").html("Please enter front height").css('color', 'red');
         flag = false;
       }
+      else if(parseFloat($('#front_height').val()) < 0.8 || parseFloat($('#front_height').val() > 8)){
+        $( "<small id='js-height-error' class='js-error'></small>" ).insertAfter("#front_height");
+        $("#js-fornt-height-error").html("Max pan height: 8 inches. Minimum pan height: 0.8 inches").css('color', 'red');
+        flag = false;
+      }
+      else if(parseFloat($('#front_height').val()) >= parseFloat($('#attribute_H').val())){
+        $( "<small id='js-height-error' class='js-error'></small>" ).insertAfter("#front_height");
+        $("#js-fornt-height-error").html("The front side of a front load pan can not be greater than or equal to the back height").css('color', 'red');
+        flag = false;
+      }
     }
     if($('#holeLocation:visible').length != 0) {
       if($("#holeLocation").val() == "" || $("#holeLocation").val() == null){
