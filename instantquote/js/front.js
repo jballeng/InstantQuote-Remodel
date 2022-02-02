@@ -399,8 +399,12 @@ function getPrice() {
           $("#display_price").addClass("old_price");
         }
         $("#display_price").html("$" + result_data.price);
+        let width = parseFloat($('#attribute_W').val());
+        let height = parseFloat($('#attribute_H').val());
+        let length = parseFloat($('#attribute_L').val());
+        let bl = (2 * height + length + 1) + 1;
+        let bw = (2 * height + width + 1) + 1;
         
-
         $("#addtocart").show();
         $("#spanFinalPrice").show();
         $("#spansku").show();

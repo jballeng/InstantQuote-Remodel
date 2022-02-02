@@ -791,7 +791,7 @@ class KmPanCostProcessor
         $bw = (2 * $this->H + $this->W + 1) + 1;
         //stainless steel has different sheet sizes compared to other materials
         if ($this->materialType == 1) {
-            $cru = 10000;
+            $cru = 11000;
             if ($bl <= 36 && $bw <= 30) {
                 $sheet_cost = 36 * 30 * $thick * 0.284;
             } elseif ($bl <= 40 && $bw <= 36) {
@@ -820,7 +820,7 @@ class KmPanCostProcessor
             } elseif ($bl <= 120 && $bw <= 48) {
                 $sheet_cost = 120 * 48 * $thick * 0.284;
             } elseif ($bl <= 120 && $bw <= 60) {
-                $sheet_cost = 120 * 60 + $thick * 0.284;
+                $sheet_cost = 120 * 60 * $thick * 0.284;
             }
             $materialCost = $sheet_cost * (($cru / 2000) * 1.25) * 1.3;
         }
