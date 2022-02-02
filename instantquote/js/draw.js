@@ -512,7 +512,7 @@ function download(){
   var height = parseFloat(document.forms["material_type_form"]["attribute_H"].value);
   var distance = parseFloat(document.forms["material_type_form"]["distance"].value);
   var distance2 = parseFloat(document.forms["material_type_form"]["distance2"].value);
-  var gauge = document.forms["material_type_form"]["material_size_id"].value;
+  var gauge = $('#material_size_id :selected').attr('data-measurement');//document.forms["material_type_form"]["material_size_id"].attr('data');
   var material = document.forms["material_type_form"]["material_type"].value;
   var thickness = document.forms["material_type_form"]["material_size_id"].value;
   var quantity = document.forms["material_type_form"]["material_qty"].value;

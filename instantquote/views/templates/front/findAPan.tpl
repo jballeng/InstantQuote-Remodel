@@ -4,8 +4,8 @@
     <center>
         <div id="jb_breadcrumb" class="jb_breadcrumb">
             <a id="default" class="jb_breadcrumbItem" onclick="currentSlide(1)">Material</a>
-            <a class="jb_breadcrumbItem" onclick="">Design</a>
-            <a class="jb_breadcrumbItem" onclick="">Dimensions</a>
+            <a class="jb_breadcrumbItem" onclick="currentSlide(2)">Design</a>
+            <a class="jb_breadcrumbItem" onclick="currentSlide(3)">Dimensions</a>
            
         </div>
         <br><br>
@@ -39,8 +39,7 @@
                         <option value="">Please Select</option>
                     </select>
                     <small id="js-material-size-error" class="js-error"></small>
-                    <br><br>
-                    <h4>Quantity</h4><br>
+                    <h4>Quantity</h4>
                     <input type="text" id="material_qty" name="material_qty" size="12" maxlength="3" value="1" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
                     <small id="js-material-qty-error" class="js-error"></small>
                 </div>
