@@ -786,6 +786,7 @@ function validatePanDetails()
   let height = parseFloat($('#attribute_H').val());
   let length = parseFloat($('#attribute_L').val());
   let frontHeight = parseFloat($('#front_height').val());
+  let material = document.forms["material_type_form"]["material_type"].value;
   const maxWidth = 60;
   const maxLength = 120;
   const maxHeight = 8;
@@ -819,7 +820,14 @@ function validatePanDetails()
         $("#js-width-error").html("Width is too large").css('color', 'red');
         flag = false;
       }
+      if(material == 1 && widthLimit > 48){
+        $( "<small id='js-width-error' class='js-error'></small>" ).insertAfter("#attribute_W");
+        $("#js-width-error").html("Width is too large").css('color', 'red');
+        flag = false;
+      }
+      
     }
+    
     if($('#attribute_H:visible').length != 0) {
       if($("#attribute_H").val() == "" || $("#attribute_H").val() == 0){
         $( "<small id='js-height-error' class='js-error'></small>" ).insertAfter("#attribute_H");

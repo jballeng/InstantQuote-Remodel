@@ -802,6 +802,8 @@ class KmPanCostProcessor
                 $sheet_cost = 60 * 36 * $thick * 0.284;
             } elseif ($bl <= 120 && $bw <= 36) {
                 $sheet_cost = 120 * 36 * $thick * 0.284;
+            }elseif($bl <= 120 && $bw <= 48){
+                $sheet_cost = 120 * 48 * $thick * 0.284;
             }
             $materialCost = $sheet_cost * ($cru / 2000) * 1.3;
         } else {
