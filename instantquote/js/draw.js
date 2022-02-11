@@ -506,6 +506,8 @@ function download(){
   var height = parseFloat(document.forms["material_type_form"]["attribute_H"].value);
   var distance = parseFloat(document.forms["material_type_form"]["distance"].value);
   var distance2 = parseFloat(document.forms["material_type_form"]["distance2"].value);
+  //var gauge = $('#material_size_id :selected').attr('data-measurement');//document.forms["material_type_form"]["material_size_id"].attr('data');
+  //var material = document.forms["material_type_form"]["material_type"].value;
   var gauge = document.forms["material_type_form"]["material_size_id"].value;
   var material = document.forms["material_type_form"]["material_type"].value;
   var thickness = document.forms["material_type_form"]["material_size_id"].value;
@@ -516,7 +518,44 @@ function download(){
   var width = parseFloat(document.forms["material_type_form"]["wid"].value);
   var gauge = document.forms["material_type_form"]["thickness"].value;
   var material = document.forms["material_type_form"]["material"].value;*/
-  if(material == "Stainless Steel" && gauge == "14GA"){
+  if(material == "1"){
+    material = "Stainless Steel";
+    if(gauge == "14"){
+      gauge = "14S";
+    }
+    if(gauge == "15"){
+      gauge = "18S";
+    }
+    if(gauge == "16"){
+      gauge = "20S";
+    }
+  }
+  if(material == "2"){
+    material = "Steel(RAW)";
+    if(gauge == "7"){
+      gauge = "14C";
+    }
+    if(gauge == "10"){
+      gauge = "18C";
+    }
+    if(gauge == "9"){
+      gauge = "20C";
+    }
+  }
+  if(material == "3"){
+    material = "Galvanized Steel";
+    if(gauge == "12"){
+      gauge = "14G";
+    }
+    if(gauge == "13"){
+      gauge = "18G";
+    }
+    if(gauge == "11"){
+      gauge = "20G";
+    }
+  }
+
+  /*if(material == "Stainless Steel" && gauge == "14GA"){
     gauge = "14S";
   }
   if(material == "Stainless Steel" && gauge == "18GA"){
@@ -551,7 +590,7 @@ function download(){
   }
   if(material == "Aluminum" && gauge == "20GA"){
     gauge = "20A";
-  }
+  }*/
 
   var imageFileName = "KM-" + length + "-" + width + "-" + height + "-" + gauge + ".pdf";
   $("#imageFileName").val(imageFileName);
@@ -597,7 +636,7 @@ function finalCost(){
   var frontHeight = parseFloat(document.forms["material_type_form"]["front_height"].value);
     document.getElementById("jb_wrap").style.display = "none";
     document.getElementById("tabs").style.display = "block";
-    document.getElementById("suggested").style.display = 'block';
+    document.getElementById("defaultOpen").click();
     draw(width, length, height, gauge, material, distance2);
     drawHeight(height, frontHeight);
     drawHole(d1, d2, distance, d4, d3, diameter, d7, d9, distance2);
@@ -651,6 +690,11 @@ function validateCustomFields(currentTab)
         flag = false;
       }
      
+      if(lengthLimit > maxLength){
+        $( "<small id='js-length-error' class='js-error'></small>" ).insertAfter("#attribute_L");
+        $("#js-length-error").html("The Pan is Too Large").css('color', 'red');
+        flag = false;
+      }
     }
     if($('#attribute_W:visible').length != 0) {
       if($("#attribute_W").val() == "" || $("#attribute_W").val() == 0){
@@ -660,6 +704,11 @@ function validateCustomFields(currentTab)
         flag = false;
       }
       
+      if(widthLimit > maxWidth){
+        $( "<small id='js-width-error' class='js-error'></small>" ).insertAfter("#attribute_W");
+        $("#js-width-error").html("The Pan is Too Large").css('color', 'red');
+        flag = false;
+      }
     }
     if($('#attribute_H:visible').length != 0) {
       if($("#attribute_H").val() == "" || $("#attribute_H").val() == 0){
@@ -687,6 +736,16 @@ function validateCustomFields(currentTab)
         flag = false;
       }
     
+      else if(parseFloat($('#front_height').val()) < 0.8 || parseFloat($('#front_height').val() > 8)){
+        $( "<small id='js-height-error' class='js-error'></small>" ).insertAfter("#front_height");
+        $("#js-fornt-height-error").html("Max pan height: 8 inches. Minimum pan height: 0.8 inches").css('color', 'red');
+        flag = false;
+      }
+      else if(parseFloat($('#front_height').val()) >= parseFloat($('#attribute_H').val())){
+        $( "<small id='js-height-error' class='js-error'></small>" ).insertAfter("#front_height");
+        $("#js-fornt-height-error").html("The front side of a front load pan can not be greater than or equal to the back height").css('color', 'red');
+        flag = false;
+      }
     }
     if($('#holeLocation:visible').length != 0) {
       if($("#holeLocation").val() == "" || $("#holeLocation").val() == null){
