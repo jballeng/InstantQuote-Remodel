@@ -387,7 +387,7 @@ function getPrice() {
         }
       } else {
         var result_data = obj.data;
-
+        var quantity = $("#material_qty").val();
         $("#spanskuValue").html(result_data.sku);
         $("#spanstockcheck").html(result_data.stock);
         $("#productWeight").val(result_data.weight);
@@ -398,7 +398,7 @@ function getPrice() {
             .html("$" + result_data.discounted_price);
           $("#display_price").addClass("old_price");
         }
-        $("#display_price").html("$" + result_data.price);
+        $("#display_price").html("$" + (result_data.price/quantity).toFixed(2));
         let width = parseFloat($('#attribute_W').val());
         let height = parseFloat($('#attribute_H').val());
         let length = parseFloat($('#attribute_L').val());

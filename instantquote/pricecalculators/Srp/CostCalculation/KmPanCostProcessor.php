@@ -711,7 +711,7 @@ class KmPanCostProcessor
         $quan = $this->materialQty;
 
         //adding all cost together.
-        $totalMaterial = (($materialCost + $manufacturingCost) / 0.5) / $quan;
+        $totalMaterial = (($materialCost + $manufacturingCost) / 0.5);
         /*
         $marginCost = $this->getMargin();
         if (!empty($marginCost)) {
