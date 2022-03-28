@@ -10,6 +10,7 @@
         </div>
         <br><br>
     </center>
+    <span id='request-quote-iq' style='font-size:20px'>Don't see the options you desire? Click <a href='https://killarneymetals.com/request-quote'>here</a> to request additional customization</span>
     <div id="swiperContainerDiv" class="swiper-container">
         <form action="" id="material_type_form"  onchange="" class="std" name="material_type_form" method="post">
             <div id="material_swiper" name="material_swiper" class="swiper">
@@ -40,7 +41,7 @@
                     </select>
                     <small id="js-material-size-error" class="js-error"></small>
                     <h4>Quantity</h4>
-                    <input type="text" id="material_qty" name="material_qty" size="12" maxlength="3" value="1" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
+                    <input type="text" id="material_qty" name="material_qty" size="12" maxlength="3" value="" onkeyup="this.value = this.value.replace(/[^0-9]/, '')">
                     <small id="js-material-qty-error" class="js-error"></small>
                 </div>
             </div>
@@ -50,10 +51,10 @@
                     
                 </h3>
                 <div id="panDesign" style="">
-                    <h3 style="font-size:22px">Front Load or Flat Pan</h3>
+                    <h3 style="font-size:22px">Pan Style:</h3>
                     <label for="flatPan">
-                    <input type="radio" id="flatPan" name="pan" onclick="showFront()">
-                    Flat</label>
+                    <input type="radio" id="flatPan" name="pan" onclick="showFront()" checked>
+                    Standard</label>
                     <br>
                     <label for="frontPan">
                     <input type="radio" id="frontPan" name="pan" onclick="showFront()">
@@ -73,7 +74,7 @@
                     <br><br>
                 </div>
                 <div id="img1" style="float:right">
-                    <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/flat.png" id="flatPic" style="display:none" width="600" height="500">
+                    <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/flat.png" id="flatPic" style="" width="600" height="500">
                     <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/frontHole.png" id="frontHole" style="display:none" width="600" height="500">
                     <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/front.png" id="frontPic" style="display:none"width="600" height="500">
                     <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/holePan.png" id="holePan" style="display:none" width="600" height="400">
@@ -158,7 +159,7 @@
                     //document.getElementById("attribute_W").addEventListener("change", validateDimension);
                 </script>
                 <div style="float:right; padding-left:150px; padding-bottom:70px; display:inline" class="dimension-image">
-                    <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/flat.png" id="flatPic2" style="display:none" width="600" height="500">
+                    <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/flat.png" id="flatPic2" style="" width="600" height="500">
                     <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/front.png" id="frontPic2" style="display:none" width="600" height="500">
                     <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/frontHole.png" id="frontHole2" style="display:none" width="600" height="500">
                     <img src="{$smarty.const._PS_BASE_URL_}{$smarty.const.__PS_BASE_URI__}modules/instantquote/images/productimages/holePan.png" id="holePan2" style="display:none" width="600" height="400">
@@ -242,36 +243,7 @@
                 
                 
             </script>
-            {* <div id="swiper" class="swiper">
-                <div class="lastStep">
-                    <h3 style="margin-bottom:40px">
-                        Add Ons
-                        
-                    </h3>
-                    <div class="form-group">                       
-                        <label for="DPF1" class="form-check-label"> <input type="checkbox" id="DPF1" value="5.97"> Drain Pan Fitting - 1" NPT-PVC</label>
-                    </div>
-                    <div class="form-group">                          
-                        <label for="DPF2" class="form-check-label"><input type="checkbox" id="DPF2" value="9.69"> Drain Pan Fitting - 3/4" NPT-PVC</label>
-                    </div>
-                    <div class="form-group"> 
-                        <label for="DPF3" class="form-check-label"><input type="checkbox" id="DPF3"  value="9.69"> Drain Pan Fitting 1-1/4" NPT-PVC</label>
-                    </div>
-
-                    <div class="form-group"> 
-                        <label for="leakAlert" class="form-check-label"><input type="checkbox" id="leakAlert" value="34.99"> Leak Alert Device - Wifi Water Alarm</label>
-                    </div>
-                    <div class="form-group">                         
-                        <label for="holeKit" class="form-check-label"> <input type="checkbox" id="holeKit" value="34.78"> Drain Pan Hole Drill Kit</label>
-                    </div>
-                    <div class="form-group"> 
-                        <label for="avPad" class="form-check-label"><input type="checkbox" id="avPad" value="49.49">  Anti-Vibration Pad with Adhesive - 30" x 32"</label>
-                    </div>
-                </div>
-                <div class="findPan">
-                    <button class="btn" type="button" id="submit"onclick="finalCost()">Find Your Pan</button><br>
-                </div>
-            </div>*}
+            
             <div class="iq-cart-section">
                 <span class="button_sec">
                 <input type="hidden" id="ajax"  value="true" name="ajax">
@@ -427,4 +399,3 @@
     let context = canvas.getContext("2d");
 </script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
-

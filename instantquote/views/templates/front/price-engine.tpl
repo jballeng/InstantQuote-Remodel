@@ -27,7 +27,7 @@
                 <i class="fto-glyph icon_btn"></i><span>Add to cart</span>
             </button><br><br>
             <span>
-            Disclaimer: By adding to cart and making purchase you have approved all specifications shown below and the part will be sent to production. Custom parts are not returnable. 
+            Note: By adding to cart and making purchase you have approved all specifications shown below and the part will be sent to production. Custom parts are not returnable. 
             </span><br>
             <input type="hidden" id="ajax" value="true" name="ajax">
             <input type="hidden" id="shapeId" value="{$shapeClassData.id_iq_shape}" name="shapeId">
