@@ -328,6 +328,8 @@
                             <div class="form-group text-left pt-3 mb-0">
                                 <input type="hidden" id="drawingImageFileName" value="" name="imageFileName">
                                 <input type="hidden" id="drawingImageData" value="" name="imageData">
+                                <input type="hidden" id="iqQuantity" value="" name="iqQuantity">
+                                <input type="hidden" id="iqPrice" value="" name="iqPrice">
                                 <button type="submit" class="btn btn-primary" id="js-customer-contact-submit">Submit</button>
                             </div>
                         </form>
@@ -342,7 +344,12 @@
                 	openTab(event, 'custom');
                 }
                 contactOpen.addEventListener("click", function(){
+                    userCookie = getCookie("request-quote");                    
+                    if(userCookie != '' && userCookie == 'true') {
+                	    modal.style.display = "none";                        
+                    } else {
                 	modal.style.display = "block";
+                    }
                 });
                 close.onclick = function(){
                     modal.style.display = "none";

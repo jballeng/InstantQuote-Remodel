@@ -409,6 +409,7 @@ function getPrice() {
         let bl = (2 * height + length + 1) + 1;
         let bw = (2 * height + width + 1) + 1;
         
+        $("#iqPrice").val(result_data.price);
         $("#addtocart").show();
         $("#spanFinalPrice").show();
         $("#spansku").show();
