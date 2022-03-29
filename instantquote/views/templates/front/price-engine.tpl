@@ -26,6 +26,8 @@
                 style="display:none">
                 <i class="fto-glyph icon_btn"></i><span>Add to cart</span>
             </button><br><br>
+            <p id='quantityMessage' style=''>Check out or discounts for higher volume purchases</p>
+            <p id='discount5' style=''></p>
             <span>
             Note: By adding to cart and making purchase you have approved all specifications shown below and the part will be sent to production. Custom parts are not returnable. 
             </span><br>
