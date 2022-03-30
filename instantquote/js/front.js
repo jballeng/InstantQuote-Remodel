@@ -323,10 +323,10 @@ function initializeSwiperSuggestedProd() {
 function bulkPricing(){
   //$('#material_qty').val(5);
   var quantity = $("#material_qty").val();
-  console.log(quantity);
+  
   $('#material_qty').val(5);
   quantity = $('#material_qty').val();
-  console.log(quantity);
+ 
   var l = $("#attribute_L").val();
   var h = $("#attribute_H").val();
   var w = $("#attribute_W").val();
@@ -335,7 +335,7 @@ function bulkPricing(){
   
   var formdata = $("#material_type_form").serialize();
   
-  //var formObject = JSON.parse(JSON.stringify(jQuery('#material_type_form').serializeArray()));
+  
   if (priceAjax != null) {
     priceAjax.abort();
   }
@@ -344,105 +344,30 @@ function bulkPricing(){
     type: "post",
     data: formdata,
     success: function (res) {
-      //$("#price_display_value").html("");
-      //$("#spanskuValue").html("");
-      //$("#addtocart").hide();
-      //$("#spanFinalPrice").hide();
-      //$("#spansku").hide();
-      //$(".error").remove();
-      //$("#warnings").html("");
+      
       obj = $.parseJSON(res);
       
       
       if (obj.warnings) {
-        //$.each(obj.warnings, function (index, item) {
-          //$("#warnings").append('<div class="warning">' + item + "</div>");
-        //});
+        
       }
 
       if (obj.commends) {
-        /*
-        $.each(obj.commends, function (index1, item1) {
-          if (item1.swap) {
-            $.each(item1.swap.arg, function (index, item) {
-              var indexVal = $('[name="' + index + '"]').val();
-              var itemVal = $('[name="' + item + '"]').val();
-              $('[name="' + index + '"]').val(itemVal);
-              $('[name="' + item + '"]').val(indexVal);
-
-              var hasFocusindex = $('[name="' + index + '"]').is(":focus");
-              var hasFocusitem = $('[name="' + item + '"]').is(":focus");
-
-              if (hasFocusindex || hasFocusitem) {
-                if (hasFocusindex) $('[name="' + item + '"]').focus();
-                else if (hasFocusitem) $('[name="' + index + '"]').focus();
-              }
-            });
-          }
-        });
-        */
+        
       }
 
       if (obj.isError == true) {
-        /*
-        document.getElementById("jb_wrap").style.display = "block";
-        document.getElementById("tabs").style.display = "none";
-        var slides = document.getElementsByClassName("swiper");
-        currentSlide(3);
-        if (obj.fieldErrors) {
-          $.each(obj.fieldErrors, function (index, item) {
-            $('[name="' + index + '"]').after(
-              '<div class="error">' + item + "</div>"
-            );
-          });
-        }
-
-        if (obj.errors) {
-          $.each(obj.errors, function (index, item) {
-            $("#extraerrors").append('<div class="error">' + item + "</div>");
-          });
-        }
-        */
+       
       } else {
         var result_data = obj.data;
         var totalPrice = result_data.price;
         totalPrice = totalPrice.replace(/,/g, '');
         totalPrice = parseFloat(totalPrice);
-        totalPrice = (totalPrice/quantity).toFixed(2);
+        totalPrice = (totalPrice).toFixed(2);
         //$("<p id='quantityMessage' style=''>Check out or discounts for higher volume purchases</p>").insertAfter("#addtocart");
         //$("<p id='discount5' style=''></p>").insertAfter("#quantityMessage");
         $('#discount5').html('5 pans: $' + totalPrice + '/per pan');
-        /*
        
-        var quantity = parseFloat($("#material_qty").val());
-        
-        $("#spanskuValue").html(result_data.sku);
-        $("#spanstockcheck").html(result_data.stock);
-        $("#productWeight").val(result_data.weight);
-
-        if (result_data.discounted_price) {
-          $("#discounted_display_price")
-            .removeClass("hide")
-            .html("$" + result_data.discounted_price);
-          $("#display_price").addClass("old_price");
-        }
-        
-        bulkPricing();
-        
-        $("#display_price").html("$" + totalPrice);
-        $("<span id='per-pan' style=''>/per pan</span>").insertAfter("#display_price");
-        let width = parseFloat($('#attribute_W').val());
-        let height = parseFloat($('#attribute_H').val());
-        let length = parseFloat($('#attribute_L').val());
-        let bl = (2 * height + length + 1) + 1;
-        let bw = (2 * height + width + 1) + 1;
-        var crmPrice = parseFloat(result_data.price * quantity);
-        
-        $("#iqPrice").val(result_data.price);
-        $("#addtocart").show();
-        $("#spanFinalPrice").show();
-        $("#spansku").show();
-        */
       }
     },
   });
